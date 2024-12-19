@@ -68,6 +68,12 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+        .partnership-logo {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
         .membership-toggle {
             margin: 20px 0;
         }
@@ -87,9 +93,27 @@
             color: white;
             text-align: center;
             padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+        }
+        footer .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        footer .logos img {
+            width: 40px;
+            height: auto;
+        }
+        .social-media {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .social-media img {
+            width: 40px;
+            height: auto;
         }
     </style>
 </head>
@@ -102,6 +126,8 @@
         <ul>
             <li><a href="#about">About Us</a></li>
             <li><a href="#membership">Membership</a></li>
+            <li><a href="#partnerships">Partnerships</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -120,13 +146,54 @@
                 <a href="https://forms.gle/tNt66rtUzpYbxuUC7" target="_blank">Register as a Member</a>
             </div>
         </section>
+        <section id="partnerships">
+            <h2>Partnerships</h2>
+            <p>KEPhSA</p>
+            <img src="kephsa.jpg" alt="KEPhSA Logo" class="partnership-logo">
+            <p>IPSF</p>
+            <img src="ipsf.jpg" alt="IPSF Logo" class="partnership-logo">
+            <p>IPSF Afro</p>
+            <img src="afro.jpg" alt="IPSF Afro Logo" class="partnership-logo">
+        </section>
+        <section id="newsletter">
+            <h2>Newsletter</h2>
+            <p>Stay informed about our latest updates and activities. Sign up for our newsletter!</p>
+            <form action="#" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p><a href="2024%20report.pdf" target="_blank">Download 2024 Report</a></p>
+            <p><a href="constitution.pdf" target="_blank">Download Constitution</a></p>
+        </section>
+        <section id="leaders">
+            <h2>Our 2025 Leaders</h2>
+            <div class="image-section">
+                <img src="leaders.jpg" alt="2024 Leaders">
+            </div>
+        </section>
         <section id="contact">
             <h2>Contact</h2>
             <p>Email: kephsa.research.hub@gmail.com</p>
+            <div class="social-media">
+                <a href="https://www.instagram.com/kephsa_kenya?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                    <img src="instagram_logo.png" alt="Instagram">
+                </a>
+                <a href="https://www.linkedin.com/company/kephsa-research-hub" target="_blank">
+                    <img src="linked.png" alt="LinkedIn">
+                </a>
+                <a href="https://twitter.com/kephsarh" target="_blank">
+                    <img src="twitter.png" alt="Twitter">
+                </a>
+            </div>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 KEPhSA Research Hub. All rights reserved.</p>
+        <p>&copy; 2024/2025 KEPhSA Research Hub. All rights reserved.</p>
+        <div class="logos">
+            <img src="kephsa.jpg" alt="KEPhSA Logo">
+            <img src="afro.jpg" alt="IPSF Afro Logo">
+            <img src="ipsf.jpg" alt="IPSF Logo">
+        </div>
     </footer>
 </body>
 </html>
