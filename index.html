@@ -11,12 +11,14 @@
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
+            overflow-x: hidden;
         }
         header {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
             text-align: center;
             color: white;
+            animation: fadeIn 2s ease;
         }
         header img {
             width: 100px;
@@ -43,13 +45,31 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s ease;
         }
         nav ul li a:hover {
-            text-decoration: underline;
+            color: #f4f4f9;
+        }
+        .toggle-button {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin: 20px auto;
+            display: block;
+            text-align: center;
+        }
+        .toggle-button:hover {
+            background-color: #003f8c;
+            transform: scale(1.1);
         }
         main {
             padding: 40px;
             text-align: center;
+            animation: slideIn 1.5s ease;
         }
         main h2 {
             margin-bottom: 20px;
@@ -57,22 +77,26 @@
         main p {
             margin: 10px 0;
         }
-        .image-section {
-            margin: 40px 0;
-            text-align: center;
-        }
         .image-section img {
             width: 80%;
             max-width: 600px;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .image-section img:hover {
+            transform: scale(1.05);
         }
         .partnership-logo {
             width: 100px;
             height: auto;
             display: block;
             margin: 10px auto;
+            transition: transform 0.3s ease;
+        }
+        .partnership-logo:hover {
+            transform: rotate(10deg);
         }
         .membership-toggle {
             margin: 20px 0;
@@ -84,9 +108,11 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .membership-toggle a:hover {
             background-color: #003f8c;
+            transform: scale(1.1);
         }
         footer {
             background-color: rgba(0, 0, 0, 0.7);
@@ -104,6 +130,10 @@
         footer .logos img {
             width: 40px;
             height: auto;
+            transition: transform 0.3s ease;
+        }
+        footer .logos img:hover {
+            transform: scale(1.2);
         }
         .social-media {
             margin-top: 10px;
@@ -114,6 +144,19 @@
         .social-media img {
             width: 40px;
             height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .social-media img:hover {
+            transform: rotate(360deg);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -124,7 +167,7 @@
     </header>
     <nav>
         <ul>
-            <li><a href="#about">About Us</a></li>
+            <li><a href="about.html">About Us</a></li>
             <li><a href="#membership">Membership</a></li>
             <li><a href="#partnerships">Partnerships</a></li>
             <li><a href="#newsletter">Newsletter</a></li>
@@ -135,6 +178,8 @@
         <section id="about">
             <h2>About Us</h2>
             <p>Welcome to the KEPhSA Research Hub, where we empower and inspire the next generation of pharmacy students to excel in research and healthcare advancements.</p>
+            <button class="toggle-button" onclick="location.href='privacy.html'">Privacy Policy</button>
+            <button class="toggle-button" onclick="location.href='media.html'">Media and Publications</button>
         </section>
         <section class="image-section">
             <img src="research.jpg" alt="Research Hub">
@@ -162,33 +207,19 @@
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit">Sign Up</button>
             </form>
-            <p><a href="2024%20report.pdf" target="_blank">Download 2024 Report</a></p>
-            <p><a href="constitution.pdf" target="_blank">Download Constitution</a></p>
-        </section>
-        <section id="leaders">
-            <h2>Our 2025 Leaders</h2>
-            <div class="image-section">
-                <img src="leaders.jpg" alt="2024 Leaders">
-            </div>
         </section>
         <section id="contact">
             <h2>Contact</h2>
             <p>Email: kephsa.research.hub@gmail.com</p>
             <div class="social-media">
-                <a href="https://www.instagram.com/kephsaresearchhub?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
-                    <img src="instagram_logo.png" alt="Instagram">
-                </a>
-                <a href="https://www.linkedin.com/company/kephsa-research-hub" target="_blank">
-                    <img src="linked.png" alt="LinkedIn">
-                </a>
-                <a href="https://twitter.com/kephsarh" target="_blank">
-                    <img src="twitter.png" alt="Twitter">
-                </a>
+                <img src="ig.png" alt="Instagram" onclick="window.open('https://www.instagram.com/kephsa_kenya', '_blank')">
+                <img src="linked.png" alt="LinkedIn" onclick="window.open('https://www.linkedin.com/company/kephsa-research-hub', '_blank')">
+                <img src="twitter.png" alt="Twitter" onclick="window.open('https://twitter.com/kephsarh', '_blank')">
             </div>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024/2025 KEPhSA Research Hub. All rights reserved.</p>
+        <p>&copy; 2024 KEPhSA Research Hub. All rights reserved.</p>
         <div class="logos">
             <img src="kephsa.jpg" alt="KEPhSA Logo">
             <img src="afro.jpg" alt="IPSF Afro Logo">
