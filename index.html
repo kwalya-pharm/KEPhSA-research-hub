@@ -21,7 +21,7 @@
             animation: fadeIn 2s ease;
         }
         header img {
-            width: 100px;
+            width: 80px;
             height: auto;
         }
         header h1 {
@@ -29,17 +29,17 @@
         }
         nav {
             background: rgba(0, 0, 0, 0.8);
-            overflow: hidden;
         }
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
         }
         nav ul li {
-            margin: 0 15px;
+            margin: 5px 10px;
         }
         nav ul li a {
             color: white;
@@ -67,7 +67,7 @@
             transform: scale(1.1);
         }
         main {
-            padding: 40px;
+            padding: 20px;
             text-align: center;
             animation: slideIn 1.5s ease;
         }
@@ -78,7 +78,7 @@
             margin: 10px 0;
         }
         .image-section img {
-            width: 80%;
+            width: 100%;
             max-width: 600px;
             height: auto;
             border-radius: 10px;
@@ -89,7 +89,7 @@
             transform: scale(1.05);
         }
         .partnership-logo {
-            width: 100px;
+            width: 80px;
             height: auto;
             display: block;
             margin: 10px auto;
@@ -139,16 +139,31 @@
             margin-top: 10px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 10px;
         }
         .social-media img {
-            width: 40px;
+            width: 30px;
             height: auto;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
         .social-media img:hover {
             transform: rotate(360deg);
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .image-section img {
+                width: 90%;
+            }
+            .social-media img {
+                width: 25px;
+            }
+            footer .logos img {
+                width: 30px;
+            }
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -167,7 +182,7 @@
     </header>
     <nav>
         <ul>
-            <li><a href="about.html">Meet our 2025 team</a></li>
+            <li><a href="about.html">About Us</a></li>
             <li><a href="#membership">Membership</a></li>
             <li><a href="#partnerships">Partnerships</a></li>
             <li><a href="#newsletter">Newsletter</a></li>
@@ -176,7 +191,7 @@
     </nav>
     <main>
         <section id="about">
-            <h2>Hello!</h2>
+            <h2>About Us</h2>
             <p>Welcome to the KEPhSA Research Hub, where we empower and inspire the next generation of pharmacy students to excel in research and healthcare advancements.</p>
             <button class="toggle-button" onclick="location.href='privacy.html'">Privacy Policy</button>
             <button class="toggle-button" onclick="location.href='media.html'">Media and Publications</button>
