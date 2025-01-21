@@ -14,7 +14,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=(...)"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Open Sans, Poppins;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
@@ -22,7 +22,7 @@
             overflow-x: hidden;
         }
         header {
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #0b004e;
             padding: 20px;
             text-align: center;
             color: white;
@@ -59,7 +59,7 @@
             color: #f4f4f9;
         }
         .toggle-button {
-            background-color: #0056b3;
+            background-color: #0b004e;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -84,6 +84,58 @@
         }
         main p {
             margin: 10px 0;
+			            margin: 10px 0;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .leaders-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .leader-card {
+            text-align: center;
+            max-width: 220px;
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .leader-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .downloads {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .downloads a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 25px;
+            color: white;
+            background-color: #0b004e;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .image-section img {
             width: 100%;
@@ -123,7 +175,7 @@
             transform: scale(1.1);
         }
         footer {
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #0b004e;
             color: white;
             text-align: center;
             padding: 10px 0;
@@ -195,29 +247,67 @@
     <main>
         <section id="about">
             <h2>Homepage</h2>
-            <p>Welcome to the KEPhSA Research Hub, where we empower and inspire the next generation of pharmacy students to excel in research and healthcare advancements. Click the buttons below to explore more about us.</p>
-            <button class="toggle-button" onclick="location.href='privacy.html'">Privacy Policy</button>
-            <button class="toggle-button" onclick="location.href='about.html'">About Us</button>
-            <button class="toggle-button" onclick="location.href='media.html'">Media and Publications</button>
+The KEPhSA Research Hub is dedicated to empowering and inspiring pharmacy students to excel in research and healthcare advancements. Founded in 2023, the hub provides a dynamic platform for collaboration, innovation, and mentorship among pharmacy students across Kenya.</p>
         </section>
         <section class="image-section">
             <img src="research.jpg" alt="Research Hub">
         </section>
+		<section id= "Our vision">
+			 <h2>Our vision</h2>
+Empower and inspire the next generation of pharmacy professionals by establishing a dynamic research hub.
         <section id="membership">
-            <h2>Membership</h2>
-            <p>Join us and become a part of a dynamic research community dedicated to innovation and excellence in pharmacy.</p>
-            <div class="membership-toggle">
-                <a href="https://forms.gle/tNt66rtUzpYbxuUC7" target="_blank">Register as a Member</a>
+		<section>
+		<section id= "Our mission">
+			 <h2>Our mission</h2>
+Provide pharmacy students with a platform to explore, experiment, and excel, ultimately shaping the future of healthcare through their research contributions.
+            <h2>Meet our team</h2>
+ <h2>Patron</h2>
+            <div class="leader-card">
+                <img src="patron.jpg" alt="Portrait of Prof. Ermias Terefe">
+                <p><strong>Prof. Ermias Terefe</strong></p>
+                <p>Program Leader and Assistant Professor of Pharmacology and Therapeutics at USIU-Africa.</p>
+                <p>Dr. Terefe is a distinguished consultant pharmacist, curriculum expert, and instructional designer with extensive contributions to pharmacy education and healthcare development.</p>
             </div>
         </section>
-        <section id="partnerships">
-            <h2>Partnerships</h2>
-            <p>KEPhSA</p>
-            <img src="kephsa.jpg" alt="KEPhSA Logo" class="partnership-logo">
-            <p>IPSF</p>
-            <img src="ipsf.jpg" alt="IPSF Logo" class="partnership-logo">
-            <p>IPSF Afro</p>
-            <img src="afro.jpg" alt="IPSF Afro Logo" class="partnership-logo">
+
+        <section>
+            <h2>KEPhSA Research Hub Leaders (2024-2025)</h2>
+            <div class="leaders-section">
+                <div class="leader-card">
+                    <img src="allen.jpg" alt="Portrait of Allen Gakii">
+                    <p><strong>Chairperson:</strong> Allen Gakii</p>
+                </div>
+                <div class="leader-card">
+                    <img src="sylvester.jpg" alt="Portrait of Sylvester Oyim">
+                    <p><strong>Vice Chairperson:</strong> Sylvester Oyim</p>
+                </div>
+                <div class="leader-card">
+                    <img src="nicole.jpg" alt="Portrait of Nicole Achieng'">
+                    <p><strong>Secretary:</strong> Nicole Achieng'</p>
+                </div>
+                <div class="leader-card">
+                    <img src="immaculate.jpg" alt="Portrait of Immaculate Barongo">
+                    <p><strong>Treasurer:</strong> Immaculate Barongo</p>
+                </div>
+                <div class="leader-card">
+                    <img src="samuel.jpg" alt="Portrait of Samuel Inshutiyimana">
+                    <p><strong>Project Lead:</strong> Samuel Inshutiyimana</p>
+                </div>
+                <div class="leader-card">
+                    <img src="morgan.jpg" alt="Portrait of Morgan Kwalya">
+                    <p><strong>Media and Publications Officer:</strong> Morgan Kwalya</p>
+                </div>
+                <div class="leader-card">
+                    <img src="liason.jpg" alt="Portrait of Lihanda Emmanuel">
+                    <p><strong>KEPhSA Liaison:</strong> Lihanda Emmanuel</p>
+                </div>
+            </div>
+			 <section class="downloads">
+            <h2>Downloads</h2>
+            <a href="constitution.pdf" download>Download Constitution</a>
+            <a href="2024 report.pdf" download>Download 2024 Report</a>
+			<a href="cervical.pdf" download>Download Cervical Cancer Awareness Brochure</a>
+        </section>
         </section>
         <section id="newsletter">
             <h2>Newsletter</h2>
@@ -225,11 +315,14 @@
             <form action="#" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit">Sign Up</button>
+				<button class="toggle-button" onclick="location.href='media.html'">Media and Publications</button>
             </form>
         </section>
         <section id="contact">
             <h2>Contact</h2>
             <p>Email: kephsa.research.hub@gmail.com</p>
+			<p>Phone: +254113236537</p>
+			<p>Location: Nairobi, Kenya</p>
             <div class="social-media">
                 <img src="ig.png" alt="Instagram" onclick="window.open('https://www.instagram.com/kephsa_kenya', '_blank')">
                 <img src="linked.png" alt="LinkedIn" onclick="window.open('https://www.linkedin.com/company/kephsa-research-hub', '_blank')">
