@@ -3,90 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KEPhSA Research Hub</title>
-    <!-- Link to the favicon -->
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
-<link rel="icon" href="/favicon.png" type="image/png">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.png" type="image/png">
+
+    <!-- Open Graph Metadata -->
     <meta property="og:image" content="https://kephsaresearchhub.co.ke/favicon.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="96">
     <meta property="og:image:height" content="96">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=(...)"></script>
+
+    <!-- Styles -->
     <style>
+        /* Base Styles */
         body {
-            font-family: Open Sans, Poppins;
+            font-family: 'Open Sans', 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
             overflow-x: hidden;
         }
+
         header {
             background-color: #0b004e;
-            padding: 20px;
-            text-align: center;
             color: white;
+            text-align: center;
+            padding: 20px;
             animation: fadeIn 2s ease;
         }
+
         header img {
             width: 80px;
             height: auto;
         }
+
         header h1 {
             margin: 10px 0 0;
         }
+
         nav {
-            background: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
         }
+
         nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+            list-style: none;
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
+            padding: 0;
+            margin: 0;
+            gap: 20px;
         }
+
         nav ul li {
-            margin: 5px 10px;
+            margin: 0;
         }
+
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s ease;
+            padding: 8px 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
         nav ul li a:hover {
-            color: #f4f4f9;
+            background-color: #ffffff33;
+            border-radius: 4px;
         }
-        .toggle-button {
-            background-color: #0b004e;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            margin: 20px auto;
-            display: block;
-            text-align: center;
-        }
-        .toggle-button:hover {
-            background-color: #003f8c;
-            transform: scale(1.1);
-        }
+
         main {
             padding: 20px;
             text-align: center;
-            animation: slideIn 1.5s ease;
         }
+
         main h2 {
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
+
         main p {
-            margin: 10px 0;
-			            margin: 10px 0;
             font-size: 1rem;
             color: #555;
+            line-height: 1.6;
+        }
+
+        .image-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-section img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .image-section img:hover {
+            transform: scale(1.05);
         }
 
         .leaders-section {
@@ -98,12 +117,12 @@
         }
 
         .leader-card {
-            text-align: center;
-            max-width: 220px;
             background: #ffffff;
             border: 1px solid #e9ecef;
             border-radius: 10px;
             padding: 15px;
+            max-width: 220px;
+            text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -121,7 +140,6 @@
         }
 
         .downloads {
-            text-align: center;
             margin: 30px 0;
         }
 
@@ -129,109 +147,62 @@
             display: inline-block;
             margin: 10px;
             padding: 12px 25px;
-            color: white;
             background-color: #0b004e;
-            text-decoration: none;
+            color: white;
             border-radius: 5px;
             font-weight: bold;
-            font-size: 1rem;
+            text-decoration: none;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
-        .image-section img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .image-section img:hover {
+
+        .downloads a:hover {
+            background-color: #003f8c;
             transform: scale(1.05);
         }
-        .partnership-logo {
-            width: 80px;
-            height: auto;
-            display: block;
-            margin: 10px auto;
-            transition: transform 0.3s ease;
-        }
-        .partnership-logo:hover {
-            transform: rotate(10deg);
-        }
-        .membership-toggle {
-            margin: 20px 0;
-        }
-        .membership-toggle a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #0056b3;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .membership-toggle a:hover {
-            background-color: #003f8c;
-            transform: scale(1.1);
-        }
+
         footer {
             background-color: #0b004e;
             color: white;
             text-align: center;
-            padding: 10px 0;
+            padding: 15px;
         }
+
         footer .logos {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             margin-top: 10px;
         }
+
         footer .logos img {
             width: 40px;
             height: auto;
             transition: transform 0.3s ease;
         }
+
         footer .logos img:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
-        .social-media {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .social-media img {
-            width: 30px;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .social-media img:hover {
-            transform: rotate(360deg);
-        }
+
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
-                gap: 5px;
+                gap: 10px;
             }
-            .image-section img {
-                width: 90%;
-            }
-            .social-media img {
-                width: 25px;
-            }
-            footer .logos img {
-                width: 30px;
+
+            .leaders-section {
+                flex-direction: column;
             }
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideIn {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -242,37 +213,37 @@
     </header>
     <nav>
         <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#vision">Vision</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
     <main>
         <section id="about">
             <h2>Homepage</h2>
-The KEPhSA Research Hub is dedicated to empowering and inspiring pharmacy students to excel in research and healthcare advancements. Founded in 2023, the hub provides a dynamic platform for collaboration, innovation, and mentorship among pharmacy students across Kenya.</p>
-        </section>
-        <section class="image-section">
-            <img src="research.jpg" alt="Research Hub">
-        </section>
-		<section id= "Our vision">
-			 <h2>Our vision</h2>
-Empower and inspire the next generation of pharmacy professionals by establishing a dynamic research hub.
-        <section id="membership">
-		<section>
-		<section id= "Our mission">
-			 <h2>Our mission</h2>
-Provide pharmacy students with a platform to explore, experiment, and excel, ultimately shaping the future of healthcare through their research contributions.
-            <h2>Meet our team</h2>
- <h2>Patron</h2>
-            <div class="leader-card">
-                <img src="patron.jpg" alt="Portrait of Prof. Ermias Terefe">
-                <p><strong>Prof. Ermias Terefe</strong></p>
-                <p>Program Leader and Assistant Professor of Pharmacology and Therapeutics at USIU-Africa.</p>
-                <p>Dr. Terefe is a distinguished consultant pharmacist, curriculum expert, and instructional designer with extensive contributions to pharmacy education and healthcare development.</p>
-            </div>
+            <p>The KEPhSA Research Hub is dedicated to empowering and inspiring pharmacy students to excel in research and healthcare advancements. Founded in 2023, the hub provides a dynamic platform for collaboration, innovation, and mentorship among pharmacy students across Kenya.</p>
         </section>
 
-        <section>
-            <h2>KEPhSA Research Hub Leaders (2024-2025)</h2>
+        <section id="vision">
+            <h2>Our Vision</h2>
+            <p>Empower and inspire the next generation of pharmacy professionals by establishing a dynamic research hub.</p>
+        </section>
+
+        <section id="mission">
+            <h2>Our Mission</h2>
+            <p>Provide pharmacy students with a platform to explore, experiment, and excel, ultimately shaping the future of healthcare through their research contributions.</p>
+        </section>
+
+        <section id="team">
+            <h2>Meet Our Team</h2>
             <div class="leaders-section">
+                <div class="leader-card">
+                    <img src="patron.jpg" alt="Portrait of Prof. Ermias Terefe">
+                    <p><strong>Patron:</strong> Prof. Ermias Terefe</p>
+                    <p>Program Leader and Assistant Professor of Pharmacology and Therapeutics at USIU-Africa.</p>
+                </div>
                 <div class="leader-card">
                     <img src="allen.jpg" alt="Portrait of Allen Gakii">
                     <p><strong>Chairperson:</strong> Allen Gakii</p>
@@ -285,7 +256,7 @@ Provide pharmacy students with a platform to explore, experiment, and excel, ult
                     <img src="nicole.jpg" alt="Portrait of Nicole Achieng'">
                     <p><strong>Secretary:</strong> Nicole Achieng'</p>
                 </div>
-                <div class="leader-card">
+				<div class="leader-card">
                     <img src="immaculate.jpg" alt="Portrait of Immaculate Barongo">
                     <p><strong>Treasurer:</strong> Immaculate Barongo</p>
                 </div>
