@@ -174,8 +174,24 @@
         .cervical-awareness-link:hover {
            background-color: #003f8c;
            transform: scale(1.05);
+         }
 
+         /* Specific image styles with reduced sizes */
+           #cervical-image, #w1-image, #w2-image {
+           width: 100%;
+           max-width: 300px; /* Set smaller max width */
+           aspect-ratio: auto; /* Maintain the image's natural aspect ratio */
+           object-fit: cover; /* Ensures the image fills the container */
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           transition: transform 0.3s ease;
+           margin: 10px auto; /* Center align and add spacing */
+         }
+
+         #cervical-image:hover, #w1-image:hover, #w2-image:hover {
+           transform: scale(1.05); /* Slight zoom effect on hover */
         }
+
         footer {
             background-color: #0b004e;
             color: white;
@@ -299,19 +315,22 @@
         </section>
         <section id="intro-research" class="image-section">
     <h3>Introduction to Research with Dr. Gareth Dyke</h3>
-    <img src="w1.jpg" alt="Introduction to Research with Dr. Gareth Dyke">
+    <img src="w1.jpg" alt="Introduction to Research with Dr. Gareth Dyke" id="w1-image">
     <p>We had an insightful introduction to research session with Dr. Gareth Dyke. The session covered foundational aspects of conducting impactful research.</p>
-        </section>
-        <section id="literature-review" class="image-section">
+</section>
+
+<section id="literature-review" class="image-section">
     <h3>Literature Review with Dr. Norhayati M. Farm</h3>
-    <img src="w2.jpg" alt="Literature Review with Dr. Norhayati M. Farm">
-    <p>Our second session, hosted by Dr. Norhayati M. Farm, explored the critical process of literature reviews in research, emphasizing best practices and methodologies.</p>
-        <section id="cervical-cancer-awareness" class="image-section">
+    <img src="w2.jpg" alt="Literature Review with Dr. Norhayati M. Farm" id="w2-image">
+    <p>Our second session, hosted by Dr. Norhayati M. Farm, explored the critical process of literature reviews in research, emphasizing best practices and methodologies.The webinar covered a wide range of crucial topics, including the importance and methodology of conducting literature reviews, identifying research gaps, and distinguishing between literature reviews and research articles. There were also practical tutorials focused on research tools and databases, such as PubMed, MeSH (Medical Subject Headings), and the PICO framework. Additionally, the session included techniques for effective searching using Boolean operators, as well as the integration of Mendeley software with Microsoft Word for citation management and referencing.</p>
+</section>
+
+<section id="cervical-cancer-awareness" class="image-section">
     <h3>Cervical Cancer Awareness</h3>
-    <img src="cervical.jpg" alt="Cervical Cancer Awareness">
+    <img src="cervical.jpg" alt="Cervical Cancer Awareness" id="cervical-image">
     <p>Cervical cancer is one of the most preventable types of cancer. Regular screenings, HPV vaccinations, and public awareness campaigns can significantly reduce its impact. Join us in spreading awareness and saving lives.</p>
     <a href="cervical.pdf" download class="cervical-awareness-link">Download Awareness Brochure</a>
-        </section>
+</section>
         <section id="newsletter">
             <h2>Newsletter</h2>
             <p>Stay informed about our latest updates and activities. Sign up for our newsletter!</p>
