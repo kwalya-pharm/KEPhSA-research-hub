@@ -28,8 +28,7 @@
         }
 
         header {
-            background-color: #0b004e;
-            color: white;
+             #003366; /* Deep Blue Background */
             text-align: center;
             padding: 20px;
             animation: fadeIn 2s ease;
@@ -138,6 +137,99 @@
             border-radius: 50%;
             margin-bottom: 10px;
         }
+        /* Full-page Background Image */
+body {
+    font-family: 'Open Sans', 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensure the background covers the entire viewport */
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Tile Effect for Content */
+main, header, nav, footer, section {
+    background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+    border-radius: 15px; /* Rounded corners for tiles */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* Limit the width of content tiles */
+}
+
+/* Make sure navigation tiles fit well */
+nav ul {
+    background: transparent; /* Remove default background for nav */
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    color: #0b004e; /* Keep text readable over white */
+}
+
+/* Header Styles */
+header {
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* Footer Styles */
+footer {
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px auto 0 auto;
+}
+
+/* Adjust tiles for responsiveness */
+@media (max-width: 768px) {
+    main, header, nav, footer, section {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+        /* Slider Images */
+.slider-image {
+    width: 100%;
+    max-width: 400px; /* Ensures the images are not too large */
+    aspect-ratio: 4 / 3; /* Maintains a consistent aspect ratio */
+    object-fit: cover; /* Ensures the image fits within the box without distortion */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px auto; /* Centers the image */
+    transition: transform 0.3s ease;
+}
+
+.slider-image:hover {
+    transform: scale(1.05); /* Adds a subtle zoom effect on hover */
+}
+
+/* Download Link (for cervical awareness) */
+.cervical-awareness-link {
+    display: inline-block;
+    margin: 15px 0 0;
+    padding: 12px 25px;
+    background-color: #0b004e;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cervical-awareness-link:hover {
+    background-color: #003f8c;
+    transform: scale(1.05);
+}
+
+
 
         .downloads {
             margin: 30px 0;
@@ -191,6 +283,76 @@
          #cervical-image:hover, #w1-image:hover, #w2-image:hover {
            transform: scale(1.05); /* Slight zoom effect on hover */
         }
+        /* Slider Container */
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Slider Items */
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-item {
+    flex: 0 0 100%;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 10px;
+}
+
+.slider-item img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slider-item h3 {
+    margin: 10px 0;
+    color: #0b004e;
+}
+
+.slider-item p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Navigation Buttons */
+button.prev,
+button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+
+button.prev:hover,
+button.next:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
 
         footer {
             background-color: #0b004e;
@@ -269,86 +431,81 @@
         </section>
 
         <section id="team">
-            <h2>Meet Our Team</h2>
-            <div class="leaders-section">
-                <div class="leader-card">
-                    <img src="patron.jpg" alt="Portrait of Prof. Ermias Terefe">
-                    <p><strong>Patron:</strong> Prof. Ermias Terefe</p>
-                    <p>Program Leader and Assistant Professor of Pharmacology and Therapeutics at USIU-Africa.</p>
-                </div>
-                <div class="leader-card">
-                    <img src="allen.jpg" alt="Portrait of Allen Gakii">
-                    <p><strong>Chairperson:</strong> Allen Gakii</p>
-                </div>
-                <div class="leader-card">
-                    <img src="sylvester.jpg" alt="Portrait of Sylvester Oyim">
-                    <p><strong>Vice Chairperson:</strong> Sylvester Oyim</p>
-                </div>
-                <div class="leader-card">
-                    <img src="nicole.jpg" alt="Portrait of Nicole Achieng'">
-                    <p><strong>Secretary:</strong> Nicole Achieng'</p>
-                </div>
-				<div class="leader-card">
-                    <img src="immaculate.jpg" alt="Portrait of Immaculate Barongo">
-                    <p><strong>Treasurer:</strong> Immaculate Barongo</p>
-                </div>
-                <div class="leader-card">
-                    <img src="samuel.jpg" alt="Portrait of Samuel Inshutiyimana">
-                    <p><strong>Project Lead:</strong> Samuel Inshutiyimana</p>
-                </div>
-                <div class="leader-card">
-                    <img src="morgan.jpg" alt="Portrait of Morgan Kwalya">
-                    <p><strong>Media and Publications Officer:</strong> Morgan Kwalya</p>
-                </div>
-                <div class="leader-card">
-                    <img src="liason.jpg" alt="Portrait of Lihanda Emmanuel">
-                    <p><strong>KEPhSA Liaison:</strong> Lihanda Emmanuel</p>
-                </div>
+    <h2>Meet Our Team</h2>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slider-item">
+                <img src="patron.jpg" alt="Portrait of Prof. Ermias Terefe">
+                <p><strong>Patron:</strong> Prof. Ermias Terefe</p>
+                <p>Program Leader and Assistant Professor of Pharmacology and Therapeutics at USIU-Africa.</p>
+            </div>
+            <div class="slider-item">
+                <img src="allen.jpg" alt="Portrait of Allen Gakii">
+                <p><strong>Chairperson:</strong> Allen Gakii</p>
+            </div>
+            <div class="slider-item">
+                <img src="sylvester.jpg" alt="Portrait of Sylvester Oyim">
+                <p><strong>Vice Chairperson:</strong> Sylvester Oyim</p>
+            </div>
+            <div class="slider-item">
+                <img src="nicole.jpg" alt="Portrait of Nicole Achieng'">
+                <p><strong>Secretary:</strong> Nicole Achieng'</p>
+            </div>
+            <div class="slider-item">
+                <img src="immaculate.jpg" alt="Portrait of Immaculate Barongo">
+                <p><strong>Treasurer:</strong> Immaculate Barongo</p>
+            </div>
+            <div class="slider-item">
+                <img src="samuel.jpg" alt="Portrait of Samuel Inshutiyimana">
+                <p><strong>Project Lead:</strong> Samuel Inshutiyimana</p>
+            </div>
+            <div class="slider-item">
+                <img src="morgan.jpg" alt="Portrait of Morgan Kwalya">
+                <p><strong>Media and Publications Officer:</strong> Morgan Kwalya</p>
+            </div>
+            <div class="slider-item">
+                <img src="liason.jpg" alt="Portrait of Lihanda Emmanuel">
+                <p><strong>KEPhSA Liaison:</strong> Lihanda Emmanuel</p>
+            </div>
+        </div>
+        <button class="prev">&laquo;</button>
+        <button class="next">&raquo;</button>
+    </div>
+</section>
+
             </div>
 			 <section class="downloads">
             <h2>Downloads</h2>
             <a href="constitution.pdf" download>Download Constitution</a>
             <a href="2024 report.pdf" download>Download 2024 Report</a>
         </section>
-        <section id="research-bootcamp">
+      <section id="research-bootcamp">
     <h2>Research Bootcamp Series</h2>
-        </section>
-        <section id="intro-research" class="image-section">
-    <h3>Introduction to Research with Dr. Gareth Dyke</h3>
-    <img src="w1.jpg" alt="Introduction to Research with Dr. Gareth Dyke" id="w1-image">
-    <p>We had an insightful introduction to research session with Dr. Gareth Dyke. The session covered foundational aspects of conducting impactful research.</p>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slider-item">
+                <h3>Introduction to Research with Dr. Gareth Dyke</h3>
+                <img src="w1.jpg" alt="Introduction to Research with Dr. Gareth Dyke" class="slider-image">
+                <p>We had an insightful introduction to research session with Dr. Gareth Dyke. The session covered foundational aspects of conducting impactful research.</p>
+            </div>
+            <div class="slider-item">
+                <h3>Literature Review with Dr. Norhayati M. Farm</h3>
+                <img src="w2.jpg" alt="Literature Review with Dr. Norhayati M. Farm" class="slider-image">
+                <p>Our second session, hosted by Dr. Norhayati M. Farm, explored the critical process of literature reviews in research, emphasizing best practices and methodologies. The webinar covered topics including effective search strategies, PubMed, MeSH, and Mendeley software for citation management.</p>
+            </div>
+            <div class="slider-item">
+                <h3>Cervical Cancer Awareness</h3>
+                <img src="cervical.jpg" alt="Cervical Cancer Awareness" class="slider-image">
+                <p>Cervical cancer is one of the most preventable types of cancer. Regular screenings, HPV vaccinations, and public awareness campaigns can significantly reduce its impact. Join us in spreading awareness and saving lives.</p>
+                <a href="cervical.pdf" download class="cervical-awareness-link">Download Awareness Brochure</a>
+            </div>
+        </div>
+        <button class="prev">&laquo;</button>
+        <button class="next">&raquo;</button>
+    </div>
 </section>
 
-<section id="literature-review" class="image-section">
-    <h3>Literature Review with Dr. Norhayati M. Farm</h3>
-    <img src="w2.jpg" alt="Literature Review with Dr. Norhayati M. Farm" id="w2-image">
-    <p>Our second session, hosted by Dr. Norhayati M. Farm, explored the critical process of literature reviews in research, emphasizing best practices and methodologies.The webinar covered a wide range of crucial topics, including the importance and methodology of conducting literature reviews, identifying research gaps, and distinguishing between literature reviews and research articles. There were also practical tutorials focused on research tools and databases, such as PubMed, MeSH (Medical Subject Headings), and the PICO framework. Additionally, the session included techniques for effective searching using Boolean operators, as well as the integration of Mendeley software with Microsoft Word for citation management and referencing.</p>
-</section>
-</section>
-<section id="sampling methods" class="image-section"> 
-    <h3>Sampling Methods with Dr Samuel Mbugua</h3>
-    <img src="w3.jpg" alt="Sampling methods" id="w3-image">
-    <p>The KEPHSA Research Hub hosted an insightful session on sampling methods in research, moderated by Nicole Achieng and led by Dr. Samuel Mbugua, an expert in public health and artificial intelligence in healthcare.
 
-Dr. Mbugua emphasized the importance of defining the target population and introduced key concepts such as elements, populations, sampling units, parameters, and statistics. He highlighted challenges in research, including non-response bias, and discussed how interviewers' skills and same-gender interviews can enhance data collection accuracy.
-
-The session explored probability and non-probability sampling techniques, with a focus on random, systematic, stratified, and cluster sampling. Dr. Mbugua addressed biases like recall and selection bias and stressed the role of larger sample sizes in heterogeneous populations. Ethical considerations in sampling were also discussed, reinforcing the necessity of valid research methodologies to uphold integrity.
-</p>
-</section>
-<section id="cervical-cancer-awareness" class="image-section">
-    <h3>Cervical Cancer Awareness</h3>
-    <img src="cervical.jpg" alt="Cervical Cancer Awareness" id="cervical-image">
-    <p>Cervical cancer is one of the most preventable types of cancer. Regular screenings, HPV vaccinations, and public awareness campaigns can significantly reduce its impact. Join us in spreading awareness and saving lives.</p>
-    <a href="cervical.pdf" download class="cervical-awareness-link">Download Awareness Brochure</a>
-</section>
-        <section id="newsletter">
-            <h2>Newsletter</h2>
-            <p>Stay informed about our latest updates and activities. Sign up for our newsletter!</p>
-            <form action="#" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit">Sign Up</button>
-            </form>
-        </section>
         <section id="contact">
             <h2>Contact</h2>
             <p>Email: kephsa.research.hub@gmail.com</p>
@@ -364,5 +521,56 @@ The session explored probability and non-probability sampling techniques, with a
             <img src="ipsf.jpg" alt="IPSF Logo">
         </div>
     </footer>
+<script>
+    const slider = document.querySelector('.slider');
+    const sliderItems = document.querySelectorAll('.slider-item');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    let currentIndex = 0;
+
+    function updateSlider() {
+        const width = sliderItems[0].clientWidth;
+        slider.style.transform = `translateX(${-currentIndex * width}px)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % sliderItems.length;
+        updateSlider();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + sliderItems.length) % sliderItems.length;
+        updateSlider();
+    });
+
+    window.addEventListener('resize', updateSlider); // Recalculate on window resize
+</script>
+<script>
+    const bootcampSlider = document.querySelector('#research-bootcamp .slider');
+    const bootcampSliderItems = document.querySelectorAll('#research-bootcamp .slider-item');
+    const bootcampPrevBtn = document.querySelector('#research-bootcamp .prev');
+    const bootcampNextBtn = document.querySelector('#research-bootcamp .next');
+
+    let bootcampIndex = 0;
+
+    function updateBootcampSlider() {
+        const width = bootcampSliderItems[0].clientWidth;
+        bootcampSlider.style.transform = `translateX(${-bootcampIndex * width}px)`;
+    }
+
+    bootcampNextBtn.addEventListener('click', () => {
+        bootcampIndex = (bootcampIndex + 1) % bootcampSliderItems.length;
+        updateBootcampSlider();
+    });
+
+    bootcampPrevBtn.addEventListener('click', () => {
+        bootcampIndex = (bootcampIndex - 1 + bootcampSliderItems.length) % bootcampSliderItems.length;
+        updateBootcampSlider();
+    });
+
+    window.addEventListener('resize', updateBootcampSlider); // Ensures the slider adjusts on resizing
+</script>
+
 </body>
 </html>
