@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KEPhSA Research Hub</title>
-
-    <!-- Favicon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <link rel="manifest" href="manifest.json">
+<!-- Favicon -->
     <link rel="icon" href="/favicon.png" type="image/png">
 
     <!-- Open Graph Metadata -->
@@ -14,563 +17,140 @@
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="96">
     <meta property="og:image:height" content="96">
-
-    <!-- Styles -->
-    <style>
-        /* Base Styles */
-        body {
-            font-family: 'Open Sans', 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        header {
-             #003366; /* Deep Blue Background */
-            text-align: center;
-            padding: 20px;
-            animation: fadeIn 2s ease;
-        }
-
-        header img {
-            width: 80px;
-            height: auto;
-        }
-
-        header h1 {
-            margin: 10px 0 0;
-        }
-
-        nav {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 10px 0;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-            margin: 0;
-            gap: 20px;
-        }
-
-        nav ul li {
-            margin: 0;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 16px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            background-color: #ffffff33;
-            border-radius: 4px;
-        }
-
-        main {
-            padding: 20px;
-            text-align: center;
-        }
-
-        main h2 {
-            margin: 20px 0;
-        }
-
-        main p {
-            font-size: 1rem;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .image-section {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .image-section img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .image-section img:hover {
-            transform: scale(1.05);
-        }
-
-        .leaders-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .leader-card {
-            background: #ffffff;
-            border: 1px solid #e9ecef;
-            border-radius: 10px;
-            padding: 15px;
-            max-width: 220px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .leader-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .leader-card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-        /* Full-page Background Image */
-body {
-    font-family: 'Open Sans', 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: url('background.jpg') no-repeat center center fixed;
-    background-size: cover; /* Ensure the background covers the entire viewport */
-    color: #333;
-    overflow-x: hidden;
-}
-
-/* Tile Effect for Content */
-main, header, nav, footer, section {
-    background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
-    border-radius: 15px; /* Rounded corners for tiles */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 1200px; /* Limit the width of content tiles */
-}
-
-/* Make sure navigation tiles fit well */
-nav ul {
-    background: transparent; /* Remove default background for nav */
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li a {
-    color: #0b004e; /* Keep text readable over white */
-}
-
-/* Header Styles */
-header {
-    background: rgba(255, 255, 255, 0.9);
-    text-align: center;
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
-}
-
-/* Footer Styles */
-footer {
-    background: rgba(255, 255, 255, 0.9);
-    text-align: center;
-    padding: 20px;
-    border-radius: 15px;
-    margin: 20px auto 0 auto;
-}
-
-/* Adjust tiles for responsiveness */
-@media (max-width: 768px) {
-    main, header, nav, footer, section {
-        margin: 10px;
-        padding: 15px;
-    }
-}
-
-        /* Slider Images */
-.slider-image {
-    width: 100%;
-    max-width: 400px; /* Ensures the images are not too large */
-    aspect-ratio: 4 / 3; /* Maintains a consistent aspect ratio */
-    object-fit: cover; /* Ensures the image fits within the box without distortion */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px auto; /* Centers the image */
-    transition: transform 0.3s ease;
-}
-
-.slider-image:hover {
-    transform: scale(1.05); /* Adds a subtle zoom effect on hover */
-}
-
-/* Download Link (for cervical awareness) */
-.cervical-awareness-link {
-    display: inline-block;
-    margin: 15px 0 0;
-    padding: 12px 25px;
-    background-color: #0b004e;
-    color: white;
-    border-radius: 5px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.cervical-awareness-link:hover {
-    background-color: #003f8c;
-    transform: scale(1.05);
-}
-
-
-
-        .downloads {
-            margin: 30px 0;
-        }
-
-        .downloads a {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 25px;
-            background-color: #0b004e;
-            color: white;
-            border-radius: 5px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .downloads a:hover {
-            background-color: #003f8c;
-            transform: scale(1.05);
-        }
-        .cervical-awareness-link {
-           display: inline-block;
-           margin: 10px;
-           padding: 12px 25px;
-           background-color: #0b004e;
-           color: white;
-           border-radius: 5px;
-           font-weight: bold;
-           text-decoration: none;
-           transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .cervical-awareness-link:hover {
-           background-color: #003f8c;
-           transform: scale(1.05);
-         }
-
-         /* Specific image styles with reduced sizes */
-           #cervical-image, #w1-image, #w2-image {
-           width: 100%;
-           max-width: 300px; /* Set smaller max width */
-           aspect-ratio: auto; /* Maintain the image's natural aspect ratio */
-           object-fit: cover; /* Ensures the image fills the container */
-           border-radius: 10px;
-           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-           transition: transform 0.3s ease;
-           margin: 10px auto; /* Center align and add spacing */
-         }
-
-         #cervical-image:hover, #w1-image:hover, #w2-image:hover {
-           transform: scale(1.05); /* Slight zoom effect on hover */
-        }
-        /* Slider Container */
-.slider-container {
-    position: relative;
-    overflow: hidden;
-    width: 90%;
-    max-width: 800px;
-    margin: 20px auto;
-}
-
-/* Slider Items */
-.slider {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slider-item {
-    flex: 0 0 100%;
-    text-align: center;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background: #fff;
-    border-radius: 10px;
-}
-
-.slider-item img {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.slider-item h3 {
-    margin: 10px 0;
-    color: #0b004e;
-}
-
-.slider-item p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-}
-
-/* Navigation Buttons */
-button.prev,
-button.next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-button.prev {
-    left: 10px;
-}
-
-button.next {
-    right: 10px;
-}
-
-button.prev:hover,
-button.next:hover {
-    background: rgba(0, 0, 0, 0.7);
-}
-
-        footer {
-            background-color: #0b004e;
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
-
-        footer .logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        footer .logos img {
-            width: 40px;
-            height: auto;
-            transition: transform 0.3s ease;
-        }
-
-        footer .logos img:hover {
-            transform: scale(1.1);
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .leaders-section {
-                flex-direction: column;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
 </head>
 <body>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle-btn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar">
+        <button class="close-btn"><i class="fas fa-times"></i></button> <!-- Close Button -->
+        <a href="membership.html"><i class="fas fa-user-plus"></i> Be a Member</a>
+        <a href="publications.html"><i class="fas fa-book"></i> Publications</a>
+        <a href="FAQ.html"><i class="fas fa-question-circle"></i> FAQ</a>
+        <a href="privacy-policy.html"><i class="fas fa-lock"></i> Privacy Policy</a>
+    </div>
+
+    <!-- Welcome Curtain Animation -->
+    <div class="curtain" id="curtain"></div>
+
     <header>
         <img src="logo.jpg" alt="KEPhSA Research Hub Logo">
-        <h1>KEPhSA Research Hub</h1>
+        <h1>Welcome to KEPhSA Research Hub</h1>
+        <p>Connecting Pharmacy Students with Research Opportunities</p>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#vision">Vision</a></li>
-            <li><a href="#mission">Mission</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+
     <main>
-        <section id="about">
-            <h2>Homepage</h2>
-            <p>The KEPhSA Research Hub is dedicated to empowering and inspiring pharmacy students to excel in research and healthcare advancements. Founded in 2023, the hub provides a dynamic platform for collaboration, innovation, and mentorship among pharmacy students across Kenya.</p>
-        </section>
-
-        <section id="vision">
-            <h2>Our Vision</h2>
-            <p>Empower and inspire the next generation of pharmacy professionals by establishing a dynamic research hub.</p>
-        </section>
-
-        <section id="mission">
-            <h2>Our Mission</h2>
+       <section class="intro-section fade-in">
+            <h2 id="typing-text"></h2>
+            <p>An affiliate of the Kenya Pharmaceutical Student's Organization (KEPhSA)</p>
+            <h3>VISION</h3>
+            <p>Empower and inspire the next generation of pharmacy students by establishing a dynamic research hub.</p>
+            <h3>MISSION</h3>
             <p>Provide pharmacy students with a platform to explore, experiment, and excel, ultimately shaping the future of healthcare through their research contributions.</p>
+            <h3>OBJECTIVES</h3>
+            <ul>
+                <li>Provide pharmacy students with access to research facilities and equipment.</li>
+                <li>Offer mentorship and guidance from experienced researchers.</li>
+                <li>Promote collaboration and networking among pharmacy students and researchers.</li>
+                <li>Contribute to the advancement of the pharmacy profession in Kenya.</li>
+            </ul>
         </section>
 
-        <section id="team">
-    <h2>Meet Our Team</h2>
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slider-item">
-                <img src="patron.jpg" alt="Portrait of Prof. Ermias Terefe">
-                <p><strong>Patron:</strong> Prof. Ermias Terefe</p>
-                <p>Program Leader and Assistant Professor of Pharmacology and Therapeutics at USIU-Africa.</p>
-            </div>
-            <div class="slider-item">
-                <img src="allen.jpg" alt="Portrait of Allen Gakii">
-                <p><strong>Chairperson:</strong> Allen Gakii</p>
-            </div>
-            <div class="slider-item">
-                <img src="sylvester.jpg" alt="Portrait of Sylvester Oyim">
-                <p><strong>Vice Chairperson:</strong> Sylvester Oyim</p>
-            </div>
-            <div class="slider-item">
-                <img src="nicole.jpg" alt="Portrait of Nicole Achieng'">
-                <p><strong>Secretary:</strong> Nicole Achieng'</p>
-            </div>
-            <div class="slider-item">
-                <img src="immaculate.jpg" alt="Portrait of Immaculate Barongo">
-                <p><strong>Treasurer:</strong> Immaculate Barongo</p>
-            </div>
-            <div class="slider-item">
-                <img src="samuel.jpg" alt="Portrait of Samuel Inshutiyimana">
-                <p><strong>Project Lead:</strong> Samuel Inshutiyimana</p>
-            </div>
-            <div class="slider-item">
-                <img src="morgan.jpg" alt="Portrait of Morgan Kwalya">
-                <p><strong>Media and Publications Officer:</strong> Morgan Kwalya</p>
-            </div>
-            <div class="slider-item">
-                <img src="liason.jpg" alt="Portrait of Lihanda Emmanuel">
-                <p><strong>KEPhSA Liaison:</strong> Lihanda Emmanuel</p>
-            </div>
+        <!-- New Membership Section -->
+        <section class="intro-section fade-in">
+            <h3>MEMBERSHIP</h3>
+            <h4>Requirements for Membership</h4>
+            <p>All pharmacy students from all local chapters are eligible to be members.</p>
+            <p>To become a full member, one:</p>
+            <ul>
+                <li>is required to pay a non-refundable registration fee of Ksh 200</li>
+                <li>should subscribe to the KEPhSARH annually</li>
+            </ul>
+            <h4>Members’ Rights and Responsibilities</h4>
+            <p>Every member shall have a right to:</p>
+            <ol>
+                <li>Attend any meeting of the Hub</li>
+                <li>Receive any information which it is competent for the executive team to give</li>
+                <li>Receive at the discretion of the Executive Committee such assistance in any matter as may be rendered in terms of this Constitution</li>
+                <li>Take part in any discussion on any matter at any general or special meeting</li>
+                <li>Write research-related articles for public/professional education</li>
+                <li>Attend specialized research trainings aimed at impacting research skills</li>
+                <li>Full Members shall be entitled to exercise the following additional rights, limited to Full members only:</li>
+                <ol>
+                    <li>To vote on any motion put to a General or Special Meeting of the Hub</li>
+                    <li>To nominate members of the Executive Committee or of Special Committees</li>
+                    <li>If qualified, to be nominated for and appointed to any office or committee of the Hub</li>
+                </ol>
+            </ol>
+            <h4>Termination of Membership</h4>
+            <p>Every member shall remain a member until their membership is terminated in accordance with the provisions herein contained:</p>
+            <ol>
+                <li>The membership of any person shall automatically be terminated:</li>
+                <ol>
+                    <li>Upon the deregistration from the School of Pharmacy in which they study, which is the basis of their admission to membership</li>
+                    <li>Upon receipt of a letter from the Executive Committee accepting their written resignation as a member</li>
+                    <li>Upon removal of their name by the Council from the Roll of Members in accordance with its powers under this Constitution</li>
+                </ol>
+                <li>No subscription or levy or part thereof shall be refunded to any member upon the termination of their membership.</li>
+                <li>A member may resign by giving notice in writing to the Hub. The Executive Committee shall be entitled to waive the whole or any part of the period of notice and/or subscription fee due for such period.</li>
+                <li>A member shall only be subject to expulsion if such expulsion occurs either pursuant to any disciplinary proceedings that may have been instituted against a member.</li>
+                <li>Any entity who was formerly a member of the Hub and whose membership has terminated for any reason may be re-admitted at the discretion of the Executive Committee and Council, who shall be entitled to rule on the re-admission of any member and to impose, in their sole discretion, terms, conditions, or restrictions to such re-admission they may determine.</li>
+                <li>The Executive Committee shall also be entitled, in its sole and absolute discretion, to reinstate any member who was previously expelled by the Hub in accordance with the relevant regulations.</li>
+            </ol>
+            <h4>Discipline and Disciplinary Action</h4>
+            <p>All complaints are to be channeled to the Executive Committee by writing. The Executive shall deliberate the matter in accordance with the Constitution.</p>
+        </section>
+
+        <!-- New Leadership Section -->
+        <section class="intro-section fade-in">
+            <h3>LEADERSHIP</h3>
+            <p>All members are eligible to be nominated as part of the Executive Committee.</p>
+        </section>
+
+        <!-- New Interaction and Partnerships Section -->
+        <section class="intro-section fade-in">
+            <h3>INTERACTION AND PARTNERSHIPS</h3>
+            <p>Association - shall associate with other bodies within the medical field upholding the same objectives.</p>
+            <p>Affiliation - shall be affiliated to KEPhSA.</p>
+        </section>
+
+        <div class="button-container fade-in">
+            <a href="research-projects.html">Ongoing Research Projects</a>
+            <a href="resources.html">Research Resources & Tools</a>
+            <a href="mentorship.html">Mentorship & Guidance</a>
+            <a href="events.html">Upcoming Webinars & Events</a>
         </div>
-        <button class="prev">&laquo;</button>
-        <button class="next">&raquo;</button>
-    </div>
-</section>
 
-            </div>
-			 <section class="downloads">
-            <h2>Downloads</h2>
-            <a href="constitution.pdf" download>Download Constitution</a>
-            <a href="2024 report.pdf" download>Download 2024 Report</a>
-        </section>
-      <section id="research-bootcamp">
-    <h2>Research Bootcamp Series</h2>
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slider-item">
-                <h3>Introduction to Research with Dr. Gareth Dyke</h3>
-                <img src="w1.jpg" alt="Introduction to Research with Dr. Gareth Dyke" class="slider-image">
-                <p>We had an insightful introduction to research session with Dr. Gareth Dyke. The session covered foundational aspects of conducting impactful research.</p>
-            </div>
-            <div class="slider-item">
-                <h3>Literature Review with Dr. Norhayati M. Farm</h3>
-                <img src="w2.jpg" alt="Literature Review with Dr. Norhayati M. Farm" class="slider-image">
-                <p>Our second session, hosted by Dr. Norhayati M. Farm, explored the critical process of literature reviews in research, emphasizing best practices and methodologies. The webinar covered topics including effective search strategies, PubMed, MeSH, and Mendeley software for citation management.</p>
-            </div>
-            <div class="slider-item">
-                <h3>Cervical Cancer Awareness</h3>
-                <img src="cervical.jpg" alt="Cervical Cancer Awareness" class="slider-image">
-                <p>Cervical cancer is one of the most preventable types of cancer. Regular screenings, HPV vaccinations, and public awareness campaigns can significantly reduce its impact. Join us in spreading awareness and saving lives.</p>
-                <a href="cervical.pdf" download class="cervical-awareness-link">Download Awareness Brochure</a>
-            </div>
+        <div class="auth-buttons fade-in">
         </div>
-        <button class="prev">&laquo;</button>
-        <button class="next">&raquo;</button>
-    </div>
-</section>
-
-
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Email: kephsa.research.hub@gmail.com</p>
-			<p>Phone: +254113236537</p>
-			<p>Location: Nairobi, Kenya</p>
-        </section>
     </main>
+
     <footer>
-        <p>&copy; 2025 KEPhSA Research Hub. All rights reserved.</p>
-        <div class="logos">
-            <img src="kephsa.jpg" alt="KEPhSA Logo">
-            <img src="afro.jpg" alt="IPSF Afro Logo">
-            <img src="ipsf.jpg" alt="IPSF Logo">
+        <p>Follow us on:</p>
+        <div class="social-icons">
+            <a href="https://www.youtube.com/channel/UC9T5jTqdPU7LBTZ4d_EtHQA/" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.instagram.com/kephsaresearchhub/" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/company/kephsa-research-hub/" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://twitter.com/kephsarh/" target="_blank">
+                <i class="fas fa-times"></i>
+            </a>
+            <a href="https://wa.me/254748052811" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
         </div>
+        <p>&copy; 2025 KEPhSA Research Hub. All rights reserved.</p>
     </footer>
-<script>
-    const slider = document.querySelector('.slider');
-    const sliderItems = document.querySelectorAll('.slider-item');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
 
-    let currentIndex = 0;
-
-    function updateSlider() {
-        const width = sliderItems[0].clientWidth;
-        slider.style.transform = `translateX(${-currentIndex * width}px)`;
-    }
-
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % sliderItems.length;
-        updateSlider();
-    });
-
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + sliderItems.length) % sliderItems.length;
-        updateSlider();
-    });
-
-    window.addEventListener('resize', updateSlider); // Recalculate on window resize
-</script>
-<script>
-    const bootcampSlider = document.querySelector('#research-bootcamp .slider');
-    const bootcampSliderItems = document.querySelectorAll('#research-bootcamp .slider-item');
-    const bootcampPrevBtn = document.querySelector('#research-bootcamp .prev');
-    const bootcampNextBtn = document.querySelector('#research-bootcamp .next');
-
-    let bootcampIndex = 0;
-
-    function updateBootcampSlider() {
-        const width = bootcampSliderItems[0].clientWidth;
-        bootcampSlider.style.transform = `translateX(${-bootcampIndex * width}px)`;
-    }
-
-    bootcampNextBtn.addEventListener('click', () => {
-        bootcampIndex = (bootcampIndex + 1) % bootcampSliderItems.length;
-        updateBootcampSlider();
-    });
-
-    bootcampPrevBtn.addEventListener('click', () => {
-        bootcampIndex = (bootcampIndex - 1 + bootcampSliderItems.length) % bootcampSliderItems.length;
-        updateBootcampSlider();
-    });
-
-    window.addEventListener('resize', updateBootcampSlider); // Ensures the slider adjusts on resizing
-</script>
-
+    <script src="script.js"></script> <!-- Link to external JS -->
 </body>
 </html>
