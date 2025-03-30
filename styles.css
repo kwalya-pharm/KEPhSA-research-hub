@@ -375,3 +375,62 @@ body.dark-mode .cta-btn {
 body.dark-mode .cta-btn:hover {
     background-color: var(--accent-color);
 }
+/* Mobile Styles */
+@media (max-width: 768px) {
+    :root {
+        --header-font-size: 2rem; /* Smaller header font size */
+        --subheader-font-size: 1.5rem; /* Smaller subheader font size */
+        --paragraph-font-size: 1rem; /* Smaller paragraph font size */
+    }
+
+    header {
+        padding: 20px 0; /* Reduced padding for header */
+    }
+
+    header img {
+        max-width: 120px; /* Smaller logo size */
+    }
+
+    .intro-section {
+        padding: 30px 20px; /* Reduced padding for intro section */
+    }
+
+    .cta-btn {
+        padding: 10px 20px; /* Smaller button padding */
+        font-size: 1rem; /* Smaller button font size */
+    }
+
+    main {
+        padding: 15px; /* Reduced padding for main content */
+    }
+
+    .button-container a {
+        width: 90%; /* Full width buttons on mobile */
+        padding: 12px 20px; /* Smaller button padding */
+        font-size: 1rem; /* Smaller button font size */
+    }
+
+    .social-icons a {
+        width: 40px; /* Smaller social icon size */
+        height: 40px; /* Smaller social icon size */
+        font-size: 1.2rem; /* Smaller icon font size */
+    }
+
+    .sidebar {
+        width: 80%; /* Sidebar width adjustment for mobile */
+    }
+
+    .sidebar a {
+        font-size: 1rem; /* Smaller sidebar link font size */
+    }
+
+    .scroll-to-top {
+        padding: 8px 10px; /* Smaller scroll-to-top button */
+        font-size: 1.2rem; /* Smaller font size */
+    }
+
+    .dark-mode-toggle {
+        padding: 6px 10px; /* Smaller dark mode toggle */
+        font-size: 1rem; /* Smaller font size */
+    }
+}
