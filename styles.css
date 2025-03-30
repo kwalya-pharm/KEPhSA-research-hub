@@ -37,7 +37,7 @@ header {
 }
 
 header img {
-    max-width: 150px;
+    max-width: 120px;
     margin-bottom: 15px;
     border-radius: 50%;
     border: 3px solid var(--secondary-color);
@@ -66,12 +66,12 @@ header p {
     text-align: justify;
     background: var(--secondary-color);
     color: var(--primary-color);
-    padding: 40px 30px;
+    padding: 20px 15px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     width: 90%;
-    max-width: 800px;
-    margin: 30px 0;
+    max-width: 700px;
+    margin: 20px 0;
     animation: fadeIn 1s ease-in-out;
     transition: transform var(--transition-speed) ease;
 }
@@ -113,7 +113,8 @@ header p {
 .cta-buttons {
     margin-top: 25px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 15px;
 }
 
@@ -138,7 +139,7 @@ header p {
 /* Main Content */
 main {
     width: 90%;
-    max-width: 800px;
+    max-width: 700px;
     padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -374,4 +375,23 @@ body.dark-mode .cta-btn {
 
 body.dark-mode .cta-btn:hover {
     background-color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        background: var(--secondary-color); /* Light background for contrast */
+        color: var(--primary-color); /* Dark text for readability */
+    }
+
+    .sidebar a {
+        color: var(--primary-color); /* Ensures links are visible */
+    }
+
+    .sidebar a:hover {
+        background: rgba(0, 0, 0, 0.1); /* Slight highlight on hover */
+    }
+
+    .close-btn {
+        color: var(--primary-color); /* Ensures close button is visible */
+    }
 }
