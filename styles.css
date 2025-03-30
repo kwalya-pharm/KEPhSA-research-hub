@@ -1,3 +1,4 @@
+/* General Styles */
 :root {
     --primary-color: #0b044e;   /* Dark Blue */
     --secondary-color: #fcfbfb;  /* Light Background */
@@ -5,11 +6,10 @@
     --text-color: #0b044e;       /* Dark Blue for text */
     --accent-color: #c1433c;     /* Red for accents */
     --border-radius: 12px;       /* Smoother corners */
-    --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+    --transition-speed: 0.3s;     /* Consistent transition speed */
     --header-font-size: 2.5rem;
     --subheader-font-size: 1.75rem;
     --paragraph-font-size: 1.1rem;
-    --transition-speed: 0.3s;    /* Consistent transition speed */
 }
 
 body {
@@ -32,8 +32,6 @@ header {
     color: var(--secondary-color);
     padding: 30px 0;
     text-align: center;
-    box-shadow: var(--box-shadow);
-    position: relative;
 }
 
 header img {
@@ -63,21 +61,14 @@ header p {
 
 /* Intro Section */
 .intro-section {
-    text-align: justify;
+    text-align: left; /* Left alignment for better readability */
     background: var(--secondary-color);
     color: var(--primary-color);
     padding: 20px 15px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    width: 90%;
-    max-width: 700px;
     margin: 20px 0;
-    animation: fadeIn 1s ease-in-out;
-    transition: transform var(--transition-speed) ease;
-}
-
-.intro-section:hover {
-    transform: translateY(-5px);
+    width: 90%; /* Responsive width */
+    max-width: 800px; /* Limit max width for larger screens */
+    border-radius: var(--border-radius);
 }
 
 .intro-section h2 {
@@ -89,7 +80,7 @@ header p {
 
 .intro-section h3 {
     font-size: var(--subheader-font-size);
-    margin-top: 25px;
+    margin-top: 20px; /* Reduced margin for better spacing */
     margin-bottom: 15px;
     color: var(--primary-color);
 }
@@ -128,7 +119,6 @@ header p {
     font-weight: 700;
     border-radius: var(--border-radius);
     transition: background-color var(--transition-speed), transform var(--transition-speed);
-    box-shadow: var(--box-shadow);
 }
 
 .cta-btn:hover {
@@ -138,14 +128,13 @@ header p {
 
 /* Main Content */
 main {
-    width: 90%;
-    max-width: 700px;
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    width: 90%; /* Responsive width */
+    max-width: 800px; /* Limit max width for larger screens */
+    padding: 20px; /* Adjust padding */
+    text-align: left; /* Left align text */
     background: var(--secondary-color);
     margin: 20px 0;
+    border-radius: var(--border-radius);
 }
 
 /* Links Section */
@@ -185,7 +174,6 @@ footer {
     text-align: center;
     padding: 20px 0;
     margin-top: 40px;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
 }
 
 footer p {
@@ -212,7 +200,6 @@ footer p {
     color: var(--primary-color);
     font-size: 1.5rem;
     transition: transform var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .social-icons a:hover {
@@ -240,8 +227,6 @@ footer p {
     cursor: pointer;
     border-radius: 50%;
     transition: background-color var(--transition-speed), transform var(--transition-speed);
-    box-shadow: var(--box-shadow);
-    z-index: 1000;
 }
 
 .sidebar-toggle-btn:hover {
@@ -258,7 +243,6 @@ footer p {
     height: 100%;
     background: linear-gradient(135deg, var(--primary-color), var(--background-color));
     color: var(--secondary-color);
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
     transition: left 0.4s ease-in-out;
     padding-top: 60px;
     z-index: 999;
@@ -322,7 +306,6 @@ footer p {
     cursor: pointer;
     opacity: 0;
     transition: opacity var(--transition-speed), transform var(--transition-speed);
-    box-shadow: var(--box-shadow);
 }
 
 .scroll-to-top.visible {
@@ -347,7 +330,6 @@ footer p {
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: background var(--transition-speed), transform var(--transition-speed);
-    box-shadow: var(--box-shadow);
 }
 
 .dark-mode-toggle:hover {
@@ -377,7 +359,23 @@ body.dark-mode .cta-btn:hover {
     background-color: var(--accent-color);
 }
 
+/* Media Queries */
 @media (max-width: 768px) {
+    .intro-section, main {
+        width: 90%; /* Responsive width */
+        margin: 0 auto; /* Center align */
+        padding: 15px; /* Adjust padding */
+    }
+
+    .cta-buttons {
+        width: 100%; /* Full width for buttons */
+    }
+
+    .button-container a {
+        width: 100%; /* Full width for links */
+        margin: 5px 0; /* Adjust margin */
+    }
+
     .sidebar {
         background: var(--secondary-color); /* Light background for contrast */
         color: var(--primary-color); /* Dark text for readability */
