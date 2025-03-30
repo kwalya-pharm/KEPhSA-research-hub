@@ -10,83 +10,65 @@ document.addEventListener("DOMContentLoaded", function () {
     // === Smooth Fade-in on Scroll ===
     function handleScroll() {
         fadeElements.forEach((element, index) => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            if (elementTop < windowHeight * 0.85) {
+            if (element.getBoundingClientRect().top < window.innerHeight * 0.85) {
                 element.style.transitionDelay = `${index * 0.15}s`; // Stagger effect
                 element.classList.add("visible");
             }
         });
 
-        // Show or hide Scroll-to-Top Button
-        if (window.scrollY > 300) {
-            scrollToTopBtn.classList.add("visible");
-        } else {
-            scrollToTopBtn.classList.remove("visible");
-        }
+        // Show/hide Scroll-to-Top Button
+        scrollToTopBtn.classList.toggle("visible", window.scrollY > 300);
     }
 
     // === Sidebar Toggle ===
-    toggleBtn?.addEventListener("click", function () {
-        sidebar?.classList.toggle("active");
-    });
+    toggleBtn?.addEventListener("click", () => sidebar?.classList.toggle("active"));
+    closeBtn?.addEventListener("click", () => sidebar?.classList.remove("active"));
 
-    closeBtn?.addEventListener("click", function () {
-        sidebar?.classList.remove("active");
-    });
-
-    // Close sidebar when clicking outside
-    document.addEventListener("click", function (event) {
+    document.addEventListener("click", (event) => {
         if (sidebar && !sidebar.contains(event.target) && !toggleBtn?.contains(event.target)) {
             sidebar.classList.remove("active");
         }
     });
 
-    // Close sidebar on Escape key press
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && sidebar) {
-            sidebar.classList.remove("active");
-        }
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") sidebar?.classList.remove("active");
     });
 
     // === Scroll-to-Top Button ===
     scrollToTopBtn.innerHTML = "⬆";
-    scrollToTopBtn.classList.add("scroll-to-top");
+    scrollToTopBtn.className = "scroll-to-top";
     document.body.appendChild(scrollToTopBtn);
 
-    scrollToTopBtn.addEventListener("click", function () {
+    scrollToTopBtn.addEventListener("click", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // === Dark Mode Toggle (Optional) ===
+    // === Dark Mode Toggle ===
     const darkModeToggle = document.createElement("button");
     darkModeToggle.innerHTML = "🌙";
-    darkModeToggle.classList.add("dark-mode-toggle");
+    darkModeToggle.className = "dark-mode-toggle";
     document.body.appendChild(darkModeToggle);
 
-    darkModeToggle.addEventListener("click", function () {
+    darkModeToggle.addEventListener("click", () => {
         document.body.classList.toggle("dark-mode");
     });
 
     // === Typewriter Effect ===
-    function typeWriterEffect(element, text, speed = 100) {
+    function typeWriterEffect(element, text, speed = 80) {
         let index = 0;
+        element.innerHTML = "";
         function type() {
             if (index < text.length) {
-                element.innerHTML += text.charAt(index);
-                index++;
+                element.innerHTML += text.charAt(index++);
                 setTimeout(type, speed);
             }
         }
-        element.innerHTML = "";
         type();
     }
 
-    if (typingText) {
-        typeWriterEffect(typingText, "THE KEPhSA RESEARCH HUB");
-    }
+    if (typingText) typeWriterEffect(typingText, "THE KEPhSA RESEARCH HUB");
 
-    // === Save Progress Locally ===
+    // === Save & Sync Progress Locally ===
     function saveProgress(key, data) {
         localStorage.setItem(key, JSON.stringify(data));
     }
@@ -95,16 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return JSON.parse(localStorage.getItem(key)) || {};
     }
 
-    // Example Usage:
-    saveProgress("userProgress", { course: "Pharmacology 101", completed: true });
-    const progress = getProgress("userProgress");
-    console.log("Restored progress:", progress);
-
-    // === Sync Data When Online ===
-    window.addEventListener("online", () => {
-        console.log("Back Online! Syncing Data...");
-        syncUserProgress();
-    });
+    window.addEventListener("online", syncUserProgress);
 
     function syncUserProgress() {
         const progress = getProgress("userProgress");
@@ -114,10 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: JSON.stringify(progress),
                 headers: { "Content-Type": "application/json" },
             })
-                .then(() => {
-                    console.log("Progress Synced!");
-                    localStorage.removeItem("userProgress"); // Clear stored data after sync
-                })
+                .then(() => localStorage.removeItem("userProgress"))
                 .catch((err) => console.error("Sync Failed:", err));
         }
     }
@@ -125,16 +95,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // === Fade In Sections on Scroll ===
     function revealOnScroll() {
         fadeElements.forEach((section) => {
-            const sectionTop = section.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            if (sectionTop < windowHeight - 100) {
+            if (section.getBoundingClientRect().top < window.innerHeight - 100) {
                 section.classList.add("visible");
             }
         });
     }
 
     window.addEventListener("scroll", revealOnScroll);
-    revealOnScroll(); // Trigger on page load
+    revealOnScroll(); // Initial trigger
 
     // === Register Service Worker ===
     if ("serviceWorker" in navigator) {
@@ -146,5 +114,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initial Scroll Handling
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Run once on page load
+    handleScroll(); // Initial trigger
 });
