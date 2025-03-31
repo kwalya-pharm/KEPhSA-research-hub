@@ -358,38 +358,3 @@ body.dark-mode .cta-btn {
 body.dark-mode .cta-btn:hover {
     background-color: var(--accent-color);
 }
-
-/* Media Queries */
-@media (max-width: 768px) {
-    .intro-section, main {
-        width: 90%; /* Responsive width */
-        margin: 0 auto; /* Center align */
-        padding: 15px; /* Adjust padding */
-    }
-
-    .cta-buttons {
-        width: 100%; /* Full width for buttons */
-    }
-
-    .button-container a {
-        width: 100%; /* Full width for links */
-        margin: 5px 0; /* Adjust margin */
-    }
-
-    .sidebar {
-        background: var(--secondary-color); /* Light background for contrast */
-        color: var(--primary-color); /* Dark text for readability */
-    }
-
-    .sidebar a {
-        color: var(--primary-color); /* Ensures links are visible */
-    }
-
-    .sidebar a:hover {
-        background: rgba(0, 0, 0, 0.1); /* Slight highlight on hover */
-    }
-
-    .close-btn {
-        color: var(--primary-color); /* Ensures close button is visible */
-    }
-}
