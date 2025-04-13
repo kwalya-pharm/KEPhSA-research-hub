@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kephsa Research Hub</title>
+  <link rel="stylesheet" href="blogstyles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <img src="logo.jpg" alt="Logo" class="logo" />
+    <h1>Kephsa Research Hub – Research Forum</h1>
+  </header>
+
+  <!-- Invitation Section -->
+  <section class="invite-section">
+    <h2>📢 Publish Your Research & Win Recognition</h2>
+    <p>
+      We invite all students to publish their original research on our forum.
+      The most outstanding submissions will be featured and awarded. Share your
+      insights and inspire the future of pharmacy and science!
+    </p>
+  </section>
+
+  <main class="blog-content">
+    <!-- Create Research Post Section -->
+    <section class="create-post">
+      <h2>📝 Create Your Research Post</h2>
+
+      <div class="post-form">
+        <!-- Author Name -->
+        <label for="authorName" class="input-label">Author Name</label>
+        <input type="text" id="authorName" class="post-title-input" placeholder="Enter your name" required />
+
+        <!-- Research Title -->
+        <label for="postTitle" class="input-label">Research Title</label>
+        <input type="text" id="postTitle" class="post-title-input" placeholder="Enter the title of your research" required />
+
+        <!-- Formatting Toolbar -->
+        <div class="toolbar">
+          <label for="fontSizeSelect">Font Size:</label>
+          <select id="fontSizeSelect">
+            <option value="3">Medium</option>
+            <option value="2">Small</option>
+            <option value="4">Large</option>
+          </select>
+
+          <button type="button" onclick="formatText('underline')">Underline</button>
+        </div>
+
+        <!-- Editable Research Content -->
+        <label for="postContent" class="input-label">Abstract or Content</label>
+        <div id="postContent" class="editable-post" contenteditable="true" aria-label="Post content" tabindex="0">
+          Start writing your research abstract or summary here...
+        </div>
+
+        <!-- Save Button -->
+        <button id="savePostBtn" class="save-btn">Publish Research</button>
+      </div>
+    </section>
+
+    <!-- Published Research Posts -->
+    <section id="publishedPostsContainer" class="published-posts">
+      <h2>📚 Published Research</h2>
+      <!-- Posts will be dynamically inserted here -->
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2025 Kephsa Research Hub. All rights reserved.</p>
+  </footer>
+
+  <!-- Script Link -->
+  <script src="blogscript.js"></script>
+</body>
+</html>
