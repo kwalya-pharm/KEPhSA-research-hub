@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/api/posts/${post._id}/replies`, {
+      const response = await fetch(https://blog-backend-wlzo.onrender.com/${post._id}/replies`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ replier: replierName, replyText })
