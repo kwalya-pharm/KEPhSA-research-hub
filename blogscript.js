@@ -1,3 +1,4 @@
+// Function to calculate time ago from the given date
 function timeAgo(date) {
   const seconds = Math.floor((new Date() - new Date(date)) / 1000);
   if (seconds < 60) return `${seconds}s ago`;
@@ -15,17 +16,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const postContentDiv = document.getElementById("postContent");
   const postsContainer = document.getElementById("publishedPostsContainer");
 
-  // Fetch and display posts from backend on page load
+  // Fetch and display posts from the backend on page load
   async function fetchPosts() {
-    const response = await fetch("https://blog-backend-wlzo.onrender.com/api/posts"); // Updated backend endpoint
-    const posts = await response.json();
+    try {
+      const response = await fetch("https://blog-backend-wlzo.onrender.com/api/posts"); // Updated backend endpoint
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const posts = await response.json();
+      postsContainer.innerHTML = '';  // Clear existing posts
 
-    postsContainer.innerHTML = '';  // Clear any existing posts
-
-    posts.forEach(post => {
-      const postCard = createPostCard(post); // Create HTML for each post
-      postsContainer.prepend(postCard);
-    });
+      posts.forEach(post => {
+        const postCard = createPostCard(post); // Create HTML for each post
+        postsContainer.prepend(postCard);
+      });
+    } catch (error) {
+      console.error("Failed to fetch posts:", error);
+      alert("An error occurred while fetching posts. Please try again later.");
+    }
   }
 
   // Create a post card from a post object
@@ -69,54 +77,76 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const response = await fetch(`https://blog-backend-wlzo.onrender.com/${post._id}/replies`, {  // Fixed string concatenation
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ replier: replierName, replyText })
-      });
+      try {
+        const response = await fetch(`https://blog-backend-wlzo.onrender.com/${post._id}/replies`, {  // Fixed string concatenation
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ replier: replierName, replyText })
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Failed to post reply. Status: ${response.status}`);
+        }
 
-      const updatedPost = await response.json();
+        const updatedPost = await response.json();
+        postCard.querySelector(".replies-list").innerHTML = updatedPost.replies.map((reply, index) => `
+          <div class="reply">
+            <strong>${reply.replier}</strong>
+            <p>${reply.replyText}</p>
+            <small class="reply-timestamp">${timeAgo(reply.createdAt)}</small>
+            <button class="delete-reply-btn" data-post-id="${post._id}" data-reply-index="${index}">Delete Reply</button>
+          </div>
+        `).join('');
 
-      postCard.querySelector(".replies-list").innerHTML = updatedPost.replies.map((reply, index) => `
-        <div class="reply">
-          <strong>${reply.replier}</strong>
-          <p>${reply.replyText}</p>
-          <small class="reply-timestamp">${timeAgo(reply.createdAt)}</small>
-          <button class="delete-reply-btn" data-post-id="${post._id}" data-reply-index="${index}">Delete Reply</button>
-        </div>
-      `).join('');
-
-      // Clear input fields
-      postCard.querySelector(".replier-name").value = '';
-      postCard.querySelector(".reply-text").value = '';
+        // Clear input fields
+        postCard.querySelector(".replier-name").value = '';
+        postCard.querySelector(".reply-text").value = '';
+      } catch (error) {
+        console.error("Error posting reply:", error);
+        alert("An error occurred while posting your reply. Please try again.");
+      }
     });
 
     // Edit post functionality
     postCard.querySelector(".edit-post-btn").addEventListener("click", async () => {
       const newContent = prompt("Edit your post content:", post.content);
       if (newContent !== null) {
-        const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${post._id}`, {  // Updated API URL
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ content: newContent })
-        });
+        try {
+          const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${post._id}`, {  // Updated API URL
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ content: newContent })
+          });
 
-        const updatedPost = await response.json();
-        postCard.querySelector(".post-content").innerHTML = updatedPost.content;
+          if (!response.ok) {
+            throw new Error(`Failed to update post. Status: ${response.status}`);
+          }
+
+          const updatedPost = await response.json();
+          postCard.querySelector(".post-content").innerHTML = updatedPost.content;
+        } catch (error) {
+          console.error("Error editing post:", error);
+          alert("An error occurred while updating the post. Please try again.");
+        }
       }
     });
 
     // Delete post functionality
     postCard.querySelector(".delete-post-btn").addEventListener("click", async () => {
       if (confirm("Are you sure you want to delete this post?")) {
-        const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${post._id}`, {  // Updated API URL
-          method: "DELETE"
-        });
+        try {
+          const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${post._id}`, {  // Updated API URL
+            method: "DELETE"
+          });
 
-        if (response.ok) {
-          postCard.remove(); // Remove post from UI
-        } else {
-          alert("Failed to delete post.");
+          if (response.ok) {
+            postCard.remove(); // Remove post from UI
+          } else {
+            alert("Failed to delete post.");
+          }
+        } catch (error) {
+          console.error("Error deleting post:", error);
+          alert("An error occurred while deleting the post. Please try again.");
         }
       }
     });
@@ -128,11 +158,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const replyIndex = e.target.dataset.replyIndex;
 
         if (confirm("Are you sure you want to delete this reply?")) {
-          const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${postId}/replies/${replyIndex}`, {  // Updated API URL
-            method: "DELETE"
-          });
+          try {
+            const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${postId}/replies/${replyIndex}`, {  // Updated API URL
+              method: "DELETE"
+            });
 
-          if (response.ok) {
+            if (!response.ok) {
+              throw new Error(`Failed to delete reply. Status: ${response.status}`);
+            }
+
             const updatedPost = await response.json();
             postCard.querySelector(".replies-list").innerHTML = updatedPost.replies.map((reply, index) => `
               <div class="reply">
@@ -142,8 +176,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="delete-reply-btn" data-post-id="${post._id}" data-reply-index="${index}">Delete Reply</button>
               </div>
             `).join('');
-          } else {
-            alert("Failed to delete reply.");
+          } catch (error) {
+            console.error("Error deleting reply:", error);
+            alert("An error occurred while deleting the reply. Please try again.");
           }
         }
       });
@@ -162,13 +197,17 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const response = await fetch("https://blog-backend-wlzo.onrender.com/api/posts", {  // Updated API URL
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ author, content })
-    });
+    try {
+      const response = await fetch("https://blog-backend-wlzo.onrender.com/api/posts", {  // Updated API URL
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ author, content })
+      });
 
-    if (response.ok) {
+      if (!response.ok) {
+        throw new Error(`Failed to save the post. Status: ${response.status}`);
+      }
+
       const post = await response.json();
       const postCard = createPostCard(post);  // Create HTML for the new post
       postsContainer.prepend(postCard);  // Add it to the posts container
@@ -176,8 +215,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Clear input fields
       authorInput.value = "";
       postContentDiv.innerHTML = `<p>Write your research here...</p>`;
-    } else {
-      alert("Failed to save the post. Try again.");
+    } catch (error) {
+      console.error("Error saving post:", error);
+      alert("An error occurred while saving the post. Please try again.");
     }
   });
 
