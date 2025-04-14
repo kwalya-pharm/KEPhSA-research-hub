@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch and display posts from backend on page load
   async function fetchPosts() {
-    const response = await fetch("http://localhost:5000/api/posts"); // Backend endpoint to fetch posts
+    const response = await fetch("https://blog-backend-wlzo.onrender.com/api/posts"); // Updated backend endpoint
     const posts = await response.json();
 
     postsContainer.innerHTML = '';  // Clear any existing posts
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const response = await fetch(https://blog-backend-wlzo.onrender.com/${post._id}/replies`, {
+      const response = await fetch(`https://blog-backend-wlzo.onrender.com/${post._id}/replies`, {  // Fixed string concatenation
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ replier: replierName, replyText })
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     postCard.querySelector(".edit-post-btn").addEventListener("click", async () => {
       const newContent = prompt("Edit your post content:", post.content);
       if (newContent !== null) {
-        const response = await fetch(`http://localhost:5000/api/posts/${post._id}`, {
+        const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${post._id}`, {  // Updated API URL
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ content: newContent })
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Delete post functionality
     postCard.querySelector(".delete-post-btn").addEventListener("click", async () => {
       if (confirm("Are you sure you want to delete this post?")) {
-        const response = await fetch(`http://localhost:5000/api/posts/${post._id}`, {
+        const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${post._id}`, {  // Updated API URL
           method: "DELETE"
         });
 
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const replyIndex = e.target.dataset.replyIndex;
 
         if (confirm("Are you sure you want to delete this reply?")) {
-          const response = await fetch(`http://localhost:5000/api/posts/${postId}/replies/${replyIndex}`, {
+          const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${postId}/replies/${replyIndex}`, {  // Updated API URL
             method: "DELETE"
           });
 
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const response = await fetch("http://localhost:5000/api/posts", {
+    const response = await fetch("https://blog-backend-wlzo.onrender.com/api/posts", {  // Updated API URL
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ author, content })
