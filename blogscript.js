@@ -106,6 +106,49 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("An error occurred while posting your reply. Please try again.");
       }
     });
+    // Edit post functionality
+     postCard.querySelector(".edit-post-btn").addEventListener("click", async () => {
+       const newContent = prompt("Edit your post content:", post.content);
+       if (newContent !== null) {
+         try {
+           const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${post._id}`, {  // Updated API URL
+             method: "PUT",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({ content: newContent })
+           });
+ 
+           if (!response.ok) {
+             throw new Error(`Failed to update post. Status: ${response.status}`);
+           }
+ 
+           const updatedPost = await response.json();
+           postCard.querySelector(".post-content").innerHTML = updatedPost.content;
+         } catch (error) {
+           console.error("Error editing post:", error);
+           alert("An error occurred while updating the post. Please try again.");
+         }
+       }
+     });
+ 
+     // Delete post functionality
+     postCard.querySelector(".delete-post-btn").addEventListener("click", async () => {
+       if (confirm("Are you sure you want to delete this post?")) {
+         try {
+           const response = await fetch(`https://blog-backend-wlzo.onrender.com/api/posts/${post._id}`, {  // Updated API URL
+             method: "DELETE"
+           });
+ 
+           if (response.ok) {
+             postCard.remove(); // Remove post from UI
+           } else {
+             alert("Failed to delete post.");
+           }
+         } catch (error) {
+           console.error("Error deleting post:", error);
+           alert("An error occurred while deleting the post. Please try again.");
+         }
+       }
+     });
     // Delete reply functionality
     postCard.querySelectorAll(".delete-reply-btn").forEach(button => {
       button.addEventListener("click", async (e) => {
