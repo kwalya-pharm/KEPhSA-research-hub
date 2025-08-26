@@ -1,229 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KEPhSA Research Hub - Connecting Pharmacy Students with Research</title>
-  <meta name="description" content="The official website for the KEPhSA Research Hub. Find resources, publications, mentorship, and opportunities for pharmacy students in Kenya to engage in research."/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KEPhSA Research Hub - Connecting Pharmacy Students with Research</title>
+    <meta name="description"
+        content="The official website for the KEPhSA Research Hub. Find resources, publications, mentorship, and opportunities for pharmacy students in Kenya to engage in research.">
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1458836272656682" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css" />
 
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96" />
-  <meta property="og:title" content="KEPhSA Research Hub" />
-  <meta property="og:description" content="Empowering and inspiring the next generation of pharmacy students in Kenya through a dynamic research hub." />
-  <meta property="og:image" content="https://kephsaresearchhub.co.ke/favicon.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="96" />
-  <meta property="og:image:height" content="96" />
-  <meta property="og:url" content="https://kephsaresearchhub.co.ke/" />
-  <meta property="og:type" content="website" />
-  </head>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">
 
-<body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+    <meta property="og:title" content="KEPhSA Research Hub">
+    <meta property="og:description"
+        content="Empowering and inspiring the next generation of pharmacy students in Kenya through a dynamic research hub.">
+    <meta property="og:image" content="https://kephsaresearchhub.co.ke/favicon.png">
+    <meta property="og:url" content="https://kephsaresearchhub.co.ke/">
+    <meta property="og:type" content="website">
+</head>
 
-  <nav class="sidebar" id="sidebar">
-    <button class="close-btn" id="close-btn" aria-label="Close Menu"><i class="fas fa-times" aria-hidden="true"></i></button>
-    <ul role="menu">
-      <li role="none"><a href="membership.html" role="menuitem"><i class="fas fa-user-plus" aria-hidden="true"></i> Be a Member</a></li>
-      <li role="none"><a href="publications.html" role="menuitem"><i class="fas fa-book" aria-hidden="true"></i> Publications</a></li>
-      <li role="none"><a href="FAQ.html" role="menuitem"><i class="fas fa-question-circle" aria-hidden="true"></i> FAQ</a></li>
-      <li role="none"><a href="privacy-policy.html" role="menuitem"><i class="fas fa-lock" aria-hidden="true"></i> Privacy Policy</a></li>
-    </ul>
-  </nav>
+<body class="dark-theme">
+    <div class="curtain" id="curtain" aria-hidden="true"></div>
 
-  <div class="curtain" id="curtain" aria-hidden="true"></div>
+    <header class="main-header sticky">
+        <div class="header-left">
+            <button class="sidebar-toggle-btn" id="toggle-btn" aria-label="Toggle Navigation Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="/" class="logo-link">
+                <img src="logo.jpg" alt="KEPhSA Research Hub Logo" class="logo">
+            </a>
+        </div>
+        <div class="header-center">
+            <h1>KEPhSA Research Hub</h1>
+            <p>Connecting Pharmacy Students with Research Opportunities</p>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search..." aria-label="Search">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
 
-  <header class="main-header">
-    <button class="sidebar-toggle-btn" id="toggle-btn" aria-label="Toggle Navigation Menu">
-      <i class="fas fa-bars" aria-hidden="true"></i>
-    </button>
-    <a href="/" aria-label="KEPhSA Research Hub homepage">
-      <img src="logo.jpg" alt="KEPhSA Research Hub Logo" />
-    </a>
-    <div class="header-text">
-      <h1>KEPhSA Research Hub</h1>
-      <p>Connecting Pharmacy Students with Research Opportunities</p>
-    </div>
-  </header>
+    <main id="main-content">
+        <section class="intro-section fade-in">
+            <h2>The KEPhSA Research Hub</h2>
+            <p class="affiliation-text">An affiliate of the Kenya Pharmaceutical Student's Organization (KEPhSA)</p>
+            <div class="card-grid">
+                <article class="card vision">
+                    <h3><i class="fas fa-lightbulb"></i> Vision</h3>
+                    <p>Empower and inspire the next generation of pharmacy students by establishing a dynamic research
+                        hub.</p>
+                </article>
+                <article class="card mission">
+                    <h3><i class="fas fa-bullseye"></i> Mission</h3>
+                    <p>Provide pharmacy students with a platform to explore, experiment, and excel, ultimately shaping
+                        the future of healthcare through their research contributions.</p>
+                </article>
+            </div>
+            <article class="card objectives">
+                <h3><i class="fas fa-flag"></i> Objectives</h3>
+                <ul>
+                    <li><i class="fas fa-flask"></i> Access to research facilities and equipment</li>
+                    <li><i class="fas fa-handshake"></i> Mentorship from experienced researchers</li>
+                    <li><i class="fas fa-users"></i> Networking among pharmacy students</li>
+                    <li><i class="fas fa-chart-line"></i> Advancement of pharmacy profession in Kenya</li>
+                </ul>
+            </article>
+        </section>
 
-  <main id="main-content">
-    <section class="video-section fade-in">
-      <h2>About Us Video</h2>
-      <div class="video-container">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/AS277R4l75A?si=6A_q41JluRhdFQHb"
-          title="KEPhSA Research Hub Introduction Video" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-    </section>
+        <section class="membership-section fade-in">
+            <h2>Membership</h2>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>Requirements</h3>
+                    <ul>
+                        <li>Non-refundable registration fee of Ksh 200</li>
+                        <li>Annual subscription to the Hub</li>
+                    </ul>
+                </article>
+                <article class="card">
+                    <h3>Rights & Responsibilities</h3>
+                    <p>Members may attend meetings, receive updates, access support, publish articles, and undergo
+                        specialized training.</p>
+                </article>
+                <article class="card">
+                    <h3>Termination</h3>
+                    <p>Membership may end by resignation, deregistration, or disciplinary action in accordance with the
+                        Constitution.</p>
+                </article>
+                <article class="card">
+                    <h3>Disciplinary Action</h3>
+                    <p>Complaints must be submitted in writing for review by the Executive Committee.</p>
+                </article>
+            </div>
+        </section>
 
-    <section class="intro-section fade-in">
-      <h2>The KEPhSA Research Hub</h2>
-      <p>An affiliate of the Kenya Pharmaceutical Student's Organization (KEPhSA)</p>
-      
-      <div class="mission-vision-container">
-        <article class="vision">
-          <h3>VISION</h3>
-          <p>Empower and inspire the next generation of pharmacy students by establishing a dynamic research hub.</p>
-        </article>
-        
-        <article class="mission">
-          <h3>MISSION</h3>
-          <p>Provide pharmacy students with a platform to explore, experiment, and excel, ultimately shaping the future of healthcare through their research contributions.</p>
-        </article>
-      </div>
+        <section class="leadership-section card fade-in">
+            <h2><i class="fas fa-user-tie"></i> Leadership</h2>
+            <p>All members are eligible to be nominated for the Executive Committee.</p>
+        </section>
 
-      <article class="objectives">
-        <h3>OBJECTIVES</h3>
-        <ul style="list-style-type: none; padding-left: 0;">
-          <li>Provide pharmacy students with access to research facilities and equipment.</li>
-          <li>Offer mentorship and guidance from experienced researchers.</li>
-          <li>Promote collaboration and networking among pharmacy students and researchers.</li>
-          <li>Contribute to the advancement of the pharmacy profession in Kenya.</li>
-        </ul>
-      </article>
-    </section>
+        <section class="partnerships-section card fade-in">
+            <h2><i class="fas fa-hand-holding-heart"></i> Interaction & Partnerships</h2>
+            <dl>
+                <dt>Association</dt>
+                <dd>Engage with medical organizations sharing similar objectives.</dd>
+                <dt>Affiliation</dt>
+                <dd>Officially affiliated with KEPhSA.</dd>
+            </dl>
+        </section>
 
-    <section class="membership-section fade-in">
-      <h2>Membership</h2>
-      
-      <article>
-        <h3>Requirements for Membership</h3>
-        <p>All pharmacy students from local chapters are eligible for membership.</p>
-        <ul>
-          <li>Pay a non-refundable registration fee of Ksh 200</li>
-          <li>Subscribe to KEPhSA Research Hub annually</li>
-        </ul>
-      </article>
+        <section class="cta-buttons fade-in">
+            <h2>Get Involved</h2>
+            <div class="button-container">
+                <a href="blogindex.html" class="cta-button"><i class="fas fa-pen-nib"></i> Publish Research</a>
+                <a href="resources.html" class="cta-button"><i class="fas fa-tools"></i> Resources & Tools</a>
+                <a href="mentorship.html" class="cta-button"><i class="fas fa-chalkboard-teacher"></i> Mentorship</a>
+                <a href="events.html" class="cta-button"><i class="fas fa-calendar-alt"></i> Events</a>
+            </div>
+        </section>
+        
+        <section class="newsletter-section fade-in">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter to receive updates on research, events, and opportunities.</p>
+            <form class="newsletter-form">
+                <input name="name" type="text" placeholder="Enter your name" required>
+                <input name="email" type="email" placeholder="Enter your email" required>
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+        </section>
+    </main>
 
-      <article>
-        <h3>Members’ Rights and Responsibilities</h3>
-        <p>Members have a range of rights and responsibilities to help them engage with the Hub.</p>
-        <ol>
-          <li>Attend any Hub meeting</li>
-          <li>Receive communications from the Executive Committee</li>
-          <li>Access assistance as per the Constitution</li>
-          <li>Participate in Hub discussions and decisions</li>
-          <li>Publish research articles</li>
-          <li>Attend specialized research training</li>
-          <li>
-            <p>Full members also have the right to:</p>
-            <ul>
-              <li>Vote on motions in General or Special Meetings</li>
-              <li>Nominate candidates for committees</li>
-              <li>Be eligible for nomination or appointment to office</li>
-            </ul>
-          </li>
-        </ol>
-      </article>
+    <footer>
+        <div class="footer-content">
+            <div class="social-media">
+                <p>Follow us:</p>
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/channel/UC9T5jTqdPU7LBTZ4d_EtHQA/" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/kephsaresearchhub/" target="_blank"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/kephsa-research-hub/" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/kephsarh/" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/254748052811" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 KEPhSA Research Hub. All rights reserved.</p>
+        </div>
+    </footer>
 
-      <article>
-        <h3>Termination of Membership</h3>
-        <p>Membership can be terminated under specific conditions as outlined below.</p>
-        <ol>
-          <li>
-            <p>Automatic termination occurs:</p>
-            <ul>
-              <li>Upon deregistration from the School of Pharmacy</li>
-              <li>Upon acceptance of resignation by the Executive Committee</li>
-              <li>Upon removal by Council in accordance with the Constitution</li>
-            </ul>
-          </li>
-          <li>Subscriptions are non-refundable upon termination.</li>
-          <li>Members may resign in writing, with terms determined by the Executive.</li>
-          <li>Expulsion follows disciplinary proceedings.</li>
-          <li>Re-admission is subject to Executive and Council discretion.</li>
-          <li>Expelled members may be reinstated at the Executive’s discretion.</li>
-        </ol>
-      </article>
-
-      <article>
-        <h3>Discipline and Disciplinary Action</h3>
-        <p>All complaints must be submitted in writing to the Executive Committee for appropriate action per the Constitution.</p>
-      </article>
-    </section>
-
-    <section class="leadership-section fade-in">
-      <h2>Leadership</h2>
-      <p>All members are eligible to be nominated for the Executive Committee.</p>
-    </section>
-
-    <section class="partnerships-section fade-in">
-      <h2>Interaction and Partnerships</h2>
-      <dl>
-        <dt>Association</dt>
-        <dd>Engage with medical organizations sharing similar objectives.</dd>
-        <dt>Affiliation</dt>
-        <dd>Officially affiliated with KEPhSA.</dd>
-      </dl>
-    </section>
-
-    <section class="cta-buttons fade-in">
-      <h2>Get Involved</h2>
-      <div class="button-container">
-        <a href="blogindex.html" class="cta-button">Publish your research on our forum</a>
-        <a href="resources.html" class="cta-button">Research Resources & Tools</a>
-        <a href="mentorship.html" class="cta-button">Mentorship & Guidance</a>
-        <a href="events.html" class="cta-button">Upcoming Webinars & Events</a>
-      </div>
-    </section>
-  </main>
-  
-  <div class="auth-buttons fade-in"></div>
-
-  <footer>
-    <div class="footer-content">
-      <div class="social-media">
-        <p>Follow us on:</p>
-        <div class="social-icons">
-          <a href="https://www.youtube.com/channel/UC9T5jTqdPU7LBTZ4d_EtHQA/" target="_blank" rel="noopener noreferrer" aria-label="Visit our YouTube channel"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-          <a href="https://www.instagram.com/kephsaresearchhub/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram profile"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-          <a href="https://www.linkedin.com/company/kephsa-research-hub/" target="_blank" rel="noopener noreferrer" aria-label="Visit our LinkedIn page"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-          <a href="https://twitter.com/kephsarh/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Twitter profile"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-          <a href="https://wa.me/254748052811" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-        </div>
-      </div>
-      <p class="copyright">&copy; 2025 KEPhSA Research Hub. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-    // JavaScript for sidebar functionality
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('toggle-btn');
-    const closeBtn = document.getElementById('close-btn');
-    const curtain = document.getElementById('curtain');
-
-    // Function to toggle the sidebar
-    toggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-      curtain.classList.toggle('active');
-    });
-
-    // Function to close the sidebar when the close button is clicked
-    closeBtn.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      curtain.classList.remove('active');
-    });
-
-    // Function to close the sidebar when clicking the curtain
-    curtain.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      curtain.classList.remove('active');
-    });
-
-    // Close the sidebar when a link inside it is clicked (optional)
-    document.querySelectorAll('#sidebar a').forEach(link => {
-        link.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            curtain.classList.remove('active');
-        });
-    });
-  </script>
+    <script src="script.js"></script>
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function (err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
 </body>
 </html>
