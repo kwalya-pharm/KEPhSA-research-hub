@@ -1,78 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kephsa Research Hub</title>
-  <link rel="stylesheet" href="blogstyles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Blog Spot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Body and container styles are handled by Tailwind classes */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+        }
+        /* Custom modal and message box for better UX */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        .modal-content {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body>
-  <!-- Header -->
-  <header class="site-header">
-    <img src="logo.jpg" alt="Logo" class="logo" />
-    <h1>Kephsa Research Hub – Research Forum</h1>
-  </header>
+<body class="bg-[#09090a] text-gray-200 min-h-screen flex flex-col items-center p-8">
 
-  <!-- Invitation Section -->
-  <section class="invite-section">
-    <h2>📢 Publish Your Research & Win Recognition</h2>
-    <p>
-      We invite all students to publish their original research on our forum.
-      The most outstanding submissions will be featured and awarded. Share your
-      insights and inspire the future of pharmacy and science!
-    </p>
-  </section>
-
-  <main class="blog-content">
-    <!-- Create Research Post Section -->
-    <section class="create-post">
-      <h2>📝 Create Your Research Post</h2>
-
-      <div class="post-form">
-        <!-- Author Name -->
-        <label for="authorName" class="input-label">Author Name</label>
-        <input type="text" id="authorName" class="post-title-input" placeholder="Enter your name" required />
-
-        <!-- Research Title -->
-        <label for="postTitle" class="input-label">Research Title</label>
-        <input type="text" id="postTitle" class="post-title-input" placeholder="Enter the title of your research" required />
-
-        <!-- Formatting Toolbar -->
-        <div class="toolbar">
-          <label for="fontSizeSelect">Font Size:</label>
-          <select id="fontSizeSelect">
-            <option value="3">Medium</option>
-            <option value="2">Small</option>
-            <option value="4">Large</option>
-          </select>
-
-          <button type="button" onclick="formatText('underline')">Underline</button>
+    <div class="container mx-auto p-8 rounded-xl bg-[#141415] shadow-2xl max-w-4xl w-full">
+        <div id="contentSection">
+            <h1 class="text-3xl font-bold text-center mb-6 text-white">Latest Write-ups</h1>
+            <div id="postsContainer" class="flex flex-col gap-6">
+                <div class="text-center text-xl text-gray-400">Loading posts...</div>
+            </div>
+            <div class="flex justify-center mt-8">
+                <button 
+                    id="adminBtn" 
+                    class="px-8 py-4 bg-red-600 text-white font-semibold rounded-full hover:bg-red-700 transition-colors shadow-md">
+                    Blog
+                </button>
+            </div>
         </div>
 
-        <!-- Editable Research Content -->
-        <label for="postContent" class="input-label">Abstract or Content</label>
-        <div id="postContent" class="editable-post" contenteditable="true" aria-label="Post content" tabindex="0">
-          Start writing your research abstract or summary here...
+        <div id="adminSection" class="hidden">
+            <h2 id="adminGreeting" class="text-3xl font-bold mb-2 text-white text-center"></h2>
+            <p class="text-gray-400 text-center mb-6">Create a New Post</p>
+            <form id="adminForm" class="space-y-4">
+                <div>
+                    <label for="formTitle" class="block font-medium text-gray-200 mb-1">Title</label>
+                    <input type="text" name="entry.58569012" id="formTitle" required class="w-full p-3 rounded-lg border border-gray-600 shadow-sm text-white bg-gray-800 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors">
+                </div>
+
+                <div>
+                    <label for="formContent" class="block font-medium text-gray-200 mb-1">Content</label>
+                    <textarea name="entry.1043739052" id="formContent" rows="10" required class="w-full p-3 rounded-lg border border-gray-600 shadow-sm text-white bg-gray-800 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors resize-y"></textarea>
+                </div>
+
+                <div>
+                    <label for="formReferences" class="block font-medium text-gray-200 mb-1">References</label>
+                    <input type="text" name="entry.2033393758" id="formReferences" required class="w-full p-3 rounded-lg border border-gray-600 shadow-sm text-white bg-gray-800 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors">
+                </div>
+
+                <div class="flex justify-end gap-4 mt-6">
+                    <button type="submit" class="px-8 py-4 bg-red-700 text-white font-bold rounded-full hover:bg-red-800 transition-colors shadow-lg">Submit Post</button>
+                    <button type="button" id="goBackBtn" class="px-8 py-4 bg-gray-600 text-white font-bold rounded-full hover:bg-gray-700 transition-colors shadow-lg">Go Back</button>
+                </div>
+            </form>
         </div>
 
-        <!-- Save Button -->
-        <button id="savePostBtn" class="save-btn">Publish Research</button>
-      </div>
-    </section>
+        <div id="loginModal" class="modal hidden">
+            <div class="modal-content bg-[#050508] p-8 rounded-xl shadow-2xl w-full max-w-sm relative">
+                <span id="closeModal" class="absolute top-4 right-6 text-4xl text-gray-400 hover:text-white cursor-pointer transition-colors">&times;</span>
+                <h2 class="text-2xl font-bold mb-4 text-white text-center">Author Access</h2>
+                <div class="space-y-4">
+                    <input type="text" id="adminPassword" placeholder="Enter your name" class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors">
+                    <div id="messageBox" class="p-3 text-sm rounded-lg text-white font-medium hidden"></div>
+                    <button id="loginBtn" class="w-full px-6 py-3 bg-red-700 text-white font-bold rounded-full hover:bg-red-800 transition-colors shadow-lg">Enter</button>
+                </div>
+            </div>
+        </div>
 
-    <!-- Published Research Posts -->
-    <section id="publishedPostsContainer" class="published-posts">
-      <h2>📚 Published Research</h2>
-      <!-- Posts will be dynamically inserted here -->
-    </section>
-  </main>
+        <div id="alertModal" class="modal hidden">
+            <div class="modal-content bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-sm text-center relative">
+                <h2 id="alertTitle" class="text-2xl font-bold mb-4 text-white"></h2>
+                <p id="alertMessage" class="text-gray-300 mb-6"></p>
+                <button id="alertCloseBtn" class="px-6 py-3 bg-red-700 text-white font-bold rounded-full hover:bg-red-800 transition-colors">OK</button>
+            </div>
+        </div>
+    </div>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <p>&copy; 2025 Kephsa Research Hub. All rights reserved.</p>
-  </footer>
+    <script>
+        // --- CONFIGURATION ---
+        // GOOGLE_SHEET_CSV_URL: Your published Google Sheet CSV URL
+        const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1is2Al2IyfObPFbPFeNd-vSydhw5yXihw-fx2d8yCtn0/export?format=csv&gid=854671043';
 
-  <!-- Script Link -->
-  <script src="blogscript.js"></script>
+        // GOOGLE_FORM_SUBMISSION_URL: Your Google Form submission URL
+        const GOOGLE_FORM_SUBMISSION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSc0cOR-VgduPKvlXK3fHLPJ7_zHMyVSsr8HdnyuIZWwp-VYGA/formResponse';
+        
+        // --- GLOBAL STATE ---
+        let currentAdminName = '';
+
+        // --- DOM ELEMENTS ---
+        const contentSection = document.getElementById('contentSection');
+        const adminSection = document.getElementById('adminSection');
+        const adminBtn = document.getElementById('adminBtn');
+        const goBackBtn = document.getElementById('goBackBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const adminPasswordInput = document.getElementById('adminPassword');
+        const loginBtn = document.getElementById('loginBtn');
+        const adminForm = document.getElementById('adminForm');
+        const postsContainer = document.getElementById('postsContainer');
+        const messageBox = document.getElementById('messageBox');
+        const alertModal = document.getElementById('alertModal');
+        const alertTitle = document.getElementById('alertTitle');
+        const alertMessage = document.getElementById('alertMessage');
+        const alertCloseBtn = document.getElementById('alertCloseBtn');
+        const adminGreeting = document.getElementById('adminGreeting');
+
+        // --- UTILITY FUNCTIONS ---
+        // Function to show a custom alert modal
+        const showAlert = (title, message, isError = false) => {
+            alertTitle.textContent = title;
+            alertMessage.textContent = message;
+            alertModal.classList.remove('hidden');
+            if (isError) {
+                alertTitle.classList.add('text-red-500');
+            } else {
+                alertTitle.classList.remove('text-red-500');
+            }
+        };
+
+        // --- STATE & INITIALIZATION ---
+        // Function to fetch and display all content from the Google Sheet
+        const fetchAndDisplayContent = async () => {
+            postsContainer.innerHTML = `<div class="text-center text-xl text-gray-400 animate-pulse">Loading posts...</div>`;
+            try {
+                const response = await fetch(GOOGLE_SHEET_CSV_URL);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch content from Google Sheet.');
+                }
+                const csvText = await response.text();
+                
+                // Parse CSV text into an array of objects
+                const rows = csvText.trim().split('\n');
+                const posts = [];
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.match(/(".*?"|[^",\s]+)(?=\s*\,|\s*$)/g);
+                    if (cells && cells.length >= 4) {
+                        const timestamp = cells[0].replace(/"/g, '');
+                        const title = cells[1].replace(/"/g, '');
+                        const content = cells[2].replace(/"/g, '');
+                        const references = cells[3].replace(/"/g, '');
+                        // Check if the author name exists (the sheet might have an extra column)
+                        const author = cells[4] ? cells[4].replace(/"/g, '') : 'Anonymous';
+                        posts.push({ timestamp, title, content, references, author });
+                    }
+                }
+
+                // Sort posts in reverse chronological order
+                posts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                // Clear previous posts and render new ones
+                postsContainer.innerHTML = '';
+                if (posts.length > 0) {
+                    posts.forEach(post => {
+                        const postCard = document.createElement('div');
+                        postCard.classList.add('post-card', 'bg-gray-800', 'p-6', 'rounded-xl', 'mb-6', 'shadow-md', 'border', 'border-gray-700', 'hover:border-red-500', 'transition-all', 'duration-300');
+                        postCard.innerHTML = `
+                            <h2 class="text-2xl font-bold text-white mb-3">${post.title}</h2>
+                            <p class="text-gray-300 leading-relaxed mb-4">${post.content}</p>
+                            <p class="font-semibold text-gray-400 mb-2">References: <span class="font-normal text-gray-500">${post.references}</span></p>
+                            <p class="text-sm font-semibold text-gray-500">Author: <span class="font-normal text-gray-400">${post.author}</span></p>
+                        `;
+                        postsContainer.appendChild(postCard);
+                    });
+                } else {
+                    postsContainer.innerHTML = `<div class="text-center text-xl text-gray-400">No posts found.</div>`;
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                postsContainer.innerHTML = `<div class="text-center text-red-500">Error: Could not load posts. Please check your network connection and the CSV URL.</div>`;
+            }
+        };
+
+        // Call the function to load the content on page load
+        fetchAndDisplayContent();
+
+        // --- EVENT LISTENERS ---
+
+        // Show the login modal
+        adminBtn.addEventListener('click', () => {
+            loginModal.classList.remove('hidden');
+            adminPasswordInput.value = '';
+            messageBox.classList.add('hidden');
+            adminPasswordInput.focus();
+        });
+
+        // Hide the modal
+        closeModalBtn.addEventListener('click', () => {
+            loginModal.classList.add('hidden');
+        });
+
+        // Handle the login attempt
+        loginBtn.addEventListener('click', () => {
+            const name = adminPasswordInput.value.trim();
+            if (name) {
+                currentAdminName = name;
+                loginModal.classList.add('hidden');
+                contentSection.classList.add('hidden');
+                adminSection.classList.remove('hidden');
+                adminGreeting.textContent = `Welcome, ${currentAdminName}!`;
+            } else {
+                messageBox.textContent = 'Please enter your name.';
+                messageBox.classList.remove('hidden');
+                messageBox.classList.add('bg-red-800', 'border-red-700');
+            }
+        });
+
+        // Handle form submission to update the Google Form
+        adminForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Use the correct entry IDs from your Google Form
+            const form = new FormData();
+            form.append('entry.58569012', document.getElementById('formTitle').value);
+            form.append('entry.1043739052', document.getElementById('formContent').value);
+            form.append('entry.2033393758', document.getElementById('formReferences').value);
+            // Append the author's name to a new field. You must create this field in your Google Form.
+            form.append('entry.836733952', currentAdminName);
+
+            try {
+                const response = await fetch(GOOGLE_FORM_SUBMISSION_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: form,
+                });
+
+                showAlert('Success!', 'Post submitted successfully! The page will refresh to show your new post.');
+                // Clear the form after successful submission
+                adminForm.reset();
+                // Wait for the sheet to update and then re-fetch the content
+                setTimeout(fetchAndDisplayContent, 3000); 
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                showAlert('Error', 'Submission failed. Please check the submission URL and your connection.', true);
+            }
+        });
+
+        // Go back to the public view
+        goBackBtn.addEventListener('click', () => {
+            adminSection.classList.add('hidden');
+            contentSection.classList.remove('hidden');
+            fetchAndDisplayContent();
+            currentAdminName = ''; // Clear the name when going back
+        });
+
+        // Close the custom alert modal
+        alertCloseBtn.addEventListener('click', () => {
+            alertModal.classList.add('hidden');
+        });
+
+        // Optional: Close modal on outside click
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.add('hidden');
+            }
+        });
+
+        // Optional: Close alert modal on outside click
+        alertModal.addEventListener('click', (e) => {
+            if (e.target === alertModal) {
+                alertModal.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
