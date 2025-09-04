@@ -1,0 +1,28 @@
+{
+  "name": "KEPhSA Research Hub",
+  "short_name": "KEPhSA Hub",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1222",
+  "theme_color": "#df4736",
+  "description": "A research hub for pharmacy students in Kenya.",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
