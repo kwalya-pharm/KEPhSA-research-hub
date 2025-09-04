@@ -694,3 +694,21 @@ p {
   color: var(--highlight-color);
   transform: scale(1.15);
 }
+
+.tagline-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 10px;
+}
+
+.tagline-footer a {
+  color: var(--highlight-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.tagline-footer a:hover {
+  text-decoration: underline;
+}
+
