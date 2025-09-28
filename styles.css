@@ -117,86 +117,118 @@ p {
   font-size: 1.1rem; /* Slightly larger text for readability */
 }
 
-/* --- Header & Navigation --- */
+/* --- FINAL Optimized Header & Navigation (Maximum Compactness) --- */
 .main-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: var(--surface-color);
-  border-bottom: 2px solid var(--border-color);
-  box-shadow: 0 4px 15px var(--shadow-color);
-  backdrop-filter: blur(8px); /* Stronger blur effect */
-  transition: all 0.3s ease;
-  padding: 1.5rem 2rem;
+    /* Reduced vertical padding (0.8rem) for the tightest possible header on mobile/tablet */
+    padding: 0.8rem 2rem; 
+    
+    transition: background-color 0.3s ease, border-bottom 0.3s ease, box-shadow 0.3s ease;
+    
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--surface-color);
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    backdrop-filter: blur(6px); 
 }
 
 .header-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .logo-link {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-decoration: none;
-  color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
 }
 
 .logo {
-  height: 55px; /* Slightly larger logo */
-  width: auto;
-  border-radius: 50%;
-  border: 3px solid var(--highlight-color);
-  transition: transform 0.3s ease;
+    height: 44px; /* Slightly smaller logo for more space saving */
+    width: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--highlight-color);
+    transition: transform 0.3s ease;
 }
 
 .logo:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .header-text {
-  line-height: 1.2;
+    line-height: 1.1; 
 }
 
 .header-text h1 {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  margin-bottom: 0.2rem;
+    font-size: clamp(1.4rem, 3vw, 1.7rem); /* Slightly smaller max size */
+    margin-bottom: 0.1rem; 
 }
 
 .header-text p {
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  margin: 0;
-  color: var(--text-secondary);
+    font-size: clamp(0.75rem, 1.2vw, 0.95rem); /* Tighter subtitle font size */
+    margin: 0;
+    color: var(--text-secondary);
 }
 
+/* NAVIGATION STYLES (Mobile First - Stacked) */
 .main-nav {
-  margin-top: 1rem; /* Space between logo and nav on small screens */
-  flex-basis: 100%;
-  text-align: center;
+    flex-basis: 100%;
+    text-align: center;
+    /* REDUCED: Minimal space between the logo/title block and the nav list when stacked */
+    margin-top: 0.5rem; 
 }
 
 .nav-list {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .nav-list a {
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-weight: 700;
-  transition: color 0.3s ease, transform 0.3s ease;
+    /* Use minimal vertical padding on the links themselves */
+    padding: 0.4rem 0; 
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 700;
+    transition: color 0.3s ease, transform 0.3s ease; 
 }
 
 .nav-list a:hover {
-  color: var(--highlight-color);
-  transform: scale(1.05);
+    color: var(--highlight-color);
+    transform: scale(1.02);
+}
+
+/* Desktop/Tablet Layout (Inline) */
+/* CRITICAL FIX: Lower the breakpoint to make the header collapse vertically sooner */
+@media (min-width: 750px) {
+    .main-header {
+        padding: 0.8rem 2rem;
+    }
+    
+    .header-container {
+        flex-wrap: nowrap; 
+    }
+    
+    .main-nav {
+        /* On desktop, the nav is inline, so remove all vertical margin */
+        flex-basis: auto;
+        margin-top: 0; 
+        text-align: right;
+    }
+    
+    .nav-list {
+        gap: 20px;
+    }
 }
 
 /* --- Buttons & CTAs --- */
@@ -293,6 +325,88 @@ p {
 .hero-content {
   max-width: 800px;
   margin: 0 auto;
+}
+/* ---------------------------------- */
+/* --- NEW Featured Section Styles -- */
+/* ---------------------------------- */
+.featured-section {
+    padding: 80px 20px;
+    text-align: center;
+    /* Optional: Slightly different background for visual break */
+    background-color: var(--background-color); 
+}
+
+.gallery-grid {
+    display: grid;
+    /* Responsive grid: 2 columns on medium screens, 3 on large */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery-item {
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-decoration: none; /* In case you wrap it in an anchor tag later */
+    display: block;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    border-color: var(--highlight-color);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 220px; /* Consistent height for all images */
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05); /* Subtle zoom effect on hover */
+}
+
+.gallery-item figcaption {
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--highlight-color);
+    background-color: var(--surface-color);
+    text-align: center;
+    line-height: 1.3;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.secondary-cta {
+    /* Style to make it look different from the primary CTA */
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: none;
+}
+
+.secondary-cta:hover {
+    background: var(--accent-color);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .tagline {
