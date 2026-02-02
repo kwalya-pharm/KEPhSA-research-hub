@@ -3,7 +3,7 @@
 const GOOGLE_SHEET_TSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSEYqS-HKiH_0JBnCRHarp88LvUK27a-xbdl6DGTkF-OWKZmEJDS7EdyqKZ6b2v9D8oY9yUKO7dQLh4/pub?gid=854671043&single=true&output=tsv';
 
 // URL for Google Form submission (must be the formResponse endpoint)
-const GOOGLE_FORM_SUBMISSION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSc0cOR-VgduPKvlXK3fHLPJ7_zHMyVSsr8HdnyuIZWwp-VYGA/formResponse';
+const GOOGLE_FORM_SUBMISSION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSccYq0GrdTz-f0SY1Uqgv5Zi9pLJCx67rAA7mVNhED0jPfJqg/formResponse';
 
 // --- DOM Elements ---
 const dynamicReviewsContainer = document.getElementById('dynamic-reviews');
