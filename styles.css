@@ -709,9 +709,6 @@ p {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 @keyframes heroGlow {
   from {
@@ -1390,9 +1387,6 @@ p {
 .font-semibold { font-weight: 600; }
 .font-bold { font-weight: 700; }
 .font-extrabold { font-weight: 800; }
-  overflow: hidden;
-}
-
 .secondary-cta::before {
   content: '';
   position: absolute;
