@@ -4,11 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const curtain = document.getElementById("curtain");
   if (curtain) {
     curtain.classList.add("curtain-hide"); // add CSS transition for fade-out
-    setTimeout(() => curtain.remove(), 1200); // remove after fade
+    setTimeout(() => curtain.remove(), 1500); // remove after fade
   }
 
   // --- SCROLL ANIMATIONS ---
   const fadeEls = document.querySelectorAll(".fade-in");
+  fadeEls.forEach((el, index) => {
+    const delay = Math.min(index * 0.06, 0.36);
+    el.style.setProperty("--reveal-delay", `${delay}s`);
+  });
+
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach(entry => {
@@ -28,8 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
       if (targetId && targetId.startsWith("#")) {
+        const targetEl = document.querySelector(targetId);
+        if (!targetEl) {
+          return;
+        }
         e.preventDefault();
-        document.querySelector(targetId).scrollIntoView({
+        targetEl.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });

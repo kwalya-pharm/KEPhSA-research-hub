@@ -14,12 +14,12 @@
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-..." crossorigin="anonymous">
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
 
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">
+    <link rel="icon" href="favicon.png" type="image/png" sizes="96x96">
 
     <meta property="og:title" content="KEPhSA Research Hub: Ignite Your Research Journey">
     <meta property="og:description"
@@ -45,7 +45,13 @@
 </head>
 
 <body class="dark-theme">
-    <div class="curtain" id="curtain" aria-hidden="true"></div>
+    <div class="curtain" id="curtain" aria-hidden="true">
+        <div class="loader-content">
+            <img src="logo.jpg" alt="" class="loader-logo">
+            <p class="loader-text">KEPhSA Research Hub</p>
+            <span class="loader-dots" aria-hidden="true"></span>
+        </div>
+    </div>
 
     <header class="main-header sticky">
         <div class="header-container">
@@ -244,7 +250,7 @@
             </div>
             <div class="footer-links">
                 <h4>Resources</h4>
-                <a href="constitution.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download KEPhSA Research Hub constitution">Constitution (PDF)</a>
+                <a href="#membership" aria-label="View KEPhSA Research Hub membership details">Constitution and Membership Details</a>
                 <a href="policy.html" target="_blank" rel="noopener noreferrer" aria-label="View our privacy policy">Privacy Policy</a>
             </div>
         </div>
@@ -254,52 +260,6 @@
     <script src="page.js" defer></script>
     <script src="reviews.js" defer></script>
     <script src="script.js" defer></script>
-    <script>
-        // Dynamically set the current year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // Hamburger Menu Functionality
-        const hamburgerMenu = document.getElementById('hamburger-menu');
-        const mainNav = document.getElementById('main-nav');
-
-        if (hamburgerMenu && mainNav) {
-            hamburgerMenu.addEventListener('click', function() {
-                this.classList.toggle('active');
-                mainNav.classList.toggle('active');
-                this.setAttribute('aria-expanded', this.classList.contains('active'));
-            });
-
-            // Close menu when clicking on a nav link
-            const navLinks = mainNav.querySelectorAll('a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    hamburgerMenu.classList.remove('active');
-                    mainNav.classList.remove('active');
-                    hamburgerMenu.setAttribute('aria-expanded', 'false');
-                });
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!hamburgerMenu.contains(event.target) && !mainNav.contains(event.target)) {
-                    hamburgerMenu.classList.remove('active');
-                    mainNav.classList.remove('active');
-                    hamburgerMenu.setAttribute('aria-expanded', 'false');
-                }
-            });
-        }
-
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, function (err) {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-            });
-        }
-    </script>
     <noscript>
         <div style="text-align: center; padding: 20px; background-color: #fed7d7; color: #c53030; border: 1px solid #fc8181;">
             <p>This website works best with JavaScript enabled. Please consider enabling it for the full experience.</p>
