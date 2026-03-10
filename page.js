@@ -3,8 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- PAGE LOAD ANIMATION ---
   const curtain = document.getElementById("curtain");
   if (curtain) {
-    curtain.classList.add("curtain-hide"); // add CSS transition for fade-out
-    setTimeout(() => curtain.remove(), 1500); // remove after fade
+    setTimeout(() => {
+      curtain.classList.add("curtain-hide"); // add CSS transition for fade-out
+    }, 1100);
+    setTimeout(() => curtain.remove(), 2600); // remove after visible hold + fade
   }
 
   // --- SCROLL ANIMATIONS ---
@@ -55,4 +57,35 @@ document.addEventListener("DOMContentLoaded", () => {
       header.classList.remove("scrolled");
     }
   });
+
+  // --- PARTNERS MARQUEE ---
+  const partnersTrack = document.getElementById("partners-track");
+  const firstPartnerGroup = partnersTrack?.querySelector(".partner-group");
+
+  if (partnersTrack && firstPartnerGroup) {
+    let offset = 0;
+    let lastTime = 0;
+    const speed = 42;
+
+    const step = timestamp => {
+      if (!lastTime) {
+        lastTime = timestamp;
+      }
+
+      const delta = (timestamp - lastTime) / 1000;
+      lastTime = timestamp;
+
+      offset -= speed * delta;
+      const resetPoint = firstPartnerGroup.offsetWidth;
+
+      if (resetPoint > 0 && Math.abs(offset) >= resetPoint) {
+        offset += resetPoint;
+      }
+
+      partnersTrack.style.setProperty("--marquee-offset", `${offset}px`);
+      window.requestAnimationFrame(step);
+    };
+
+    window.requestAnimationFrame(step);
+  }
 });
