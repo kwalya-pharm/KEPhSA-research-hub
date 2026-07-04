@@ -9,9 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const aboutTimeline = document.querySelector("[data-about-timeline]");
     const aboutSteps = Array.from(document.querySelectorAll("[data-about-step]"));
     const leadershipTitle = document.querySelector("[data-leadership-title]");
-    const leadershipCards = Array.from(document.querySelectorAll("[data-leadership-card]"));
-    const leadershipToggles = Array.from(document.querySelectorAll("[data-leadership-toggle]"));
-    const leadershipMobileQuery = window.matchMedia("(max-width: 768px)");
+    const leadershipCarousel = document.querySelector("#leadershipCarousel");
+    const leadershipCards = Array.from(document.querySelectorAll("[data-leader-card]"));
     const navItems = radios.map((radio, index) => ({
         radio,
         label: labels[index],
@@ -159,71 +158,106 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    const syncLeadershipToggleLabel = (card, isExpanded) => {
-        const toggle = card.querySelector("[data-leadership-toggle]");
+    // Leadership carousel functionality
+    let leadershipCurrentIndex = 0;
+    let leadershipAutoAdvanceInterval = null;
+    let leadershipTouchStartX = 0;
+    let leadershipTouchEndX = 0;
 
-        if (!toggle) {
+    const getLeadershipCardDimensions = () => {
+        const card = leadershipCards[0];
+        if (!card) return { cardWidth: 240, gap: 32 };
+        const cardWidth = card.offsetWidth;
+        const carouselStyle = window.getComputedStyle(leadershipCarousel);
+        const gap = parseFloat(carouselStyle.columnGap || carouselStyle.gap || "32");
+        return { cardWidth, gap };
+    };
+
+    const updateLeadershipCarousel = (index) => {
+        if (!leadershipCarousel || leadershipCards.length === 0) {
             return;
         }
 
-        toggle.setAttribute("aria-expanded", String(isExpanded));
-        toggle.textContent = isExpanded ? "Hide details" : "Expand details";
-    };
+        // Wrap index to valid range (infinite on both sides)
+        leadershipCurrentIndex = ((index % leadershipCards.length) + leadershipCards.length) % leadershipCards.length;
 
-    const collapseLeadershipCards = (exceptCard = null) => {
-        leadershipCards.forEach((card) => {
-            const shouldStayOpen = exceptCard && card === exceptCard;
-            const isExpanded = shouldStayOpen && card.classList.contains("is-expanded");
-
-            if (!shouldStayOpen) {
-                card.classList.remove("is-expanded");
-                syncLeadershipToggleLabel(card, false);
-                return;
-            }
-
-            syncLeadershipToggleLabel(card, isExpanded);
+        // Update active class on cards
+        leadershipCards.forEach((card, idx) => {
+            card.classList.toggle("active", idx === leadershipCurrentIndex);
         });
+
+        // Center the active card inside the carousel viewport
+        const { cardWidth, gap } = getLeadershipCardDimensions();
+        const cardSpace = cardWidth + gap;
+        const wrapperWidth = leadershipCarousel.parentElement?.clientWidth || window.innerWidth;
+        const centerOffset = wrapperWidth / 2 - cardWidth / 2;
+        const offset = centerOffset - leadershipCurrentIndex * cardSpace;
+        leadershipCarousel.style.transform = `translateX(${offset}px)`;
     };
 
-    const setLeadershipCardExpanded = (card, isExpanded) => {
-        card.classList.toggle("is-expanded", isExpanded);
-        syncLeadershipToggleLabel(card, isExpanded);
+    const advanceLeadershipCarousel = () => {
+        updateLeadershipCarousel(leadershipCurrentIndex + 1);
     };
 
-    const syncLeadershipMode = () => {
-        if (leadershipMobileQuery.matches) {
-            collapseLeadershipCards();
-            return;
+    const startLeadershipAutoAdvance = () => {
+        if (leadershipAutoAdvanceInterval) {
+            clearInterval(leadershipAutoAdvanceInterval);
         }
 
-        leadershipCards.forEach((card) => {
-            card.classList.remove("is-expanded");
-            syncLeadershipToggleLabel(card, false);
-        });
+        leadershipAutoAdvanceInterval = setInterval(advanceLeadershipCarousel, 3500);
     };
 
-    leadershipToggles.forEach((toggle) => {
-        toggle.addEventListener("click", () => {
-            const card = toggle.closest("[data-leadership-card]");
+    const stopLeadershipAutoAdvance = () => {
+        if (leadershipAutoAdvanceInterval) {
+            clearInterval(leadershipAutoAdvanceInterval);
+            leadershipAutoAdvanceInterval = null;
+        }
+    };
 
-            if (!card || !leadershipMobileQuery.matches) {
-                return;
-            }
+    const resetLeadershipAutoAdvance = () => {
+        stopLeadershipAutoAdvance();
+        startLeadershipAutoAdvance();
+    };
 
-            const shouldExpand = !card.classList.contains("is-expanded");
-
-            collapseLeadershipCards(card);
-            setLeadershipCardExpanded(card, shouldExpand);
+    // Click navigation
+    leadershipCards.forEach((card, index) => {
+        card.addEventListener("click", () => {
+            updateLeadershipCarousel(index);
+            resetLeadershipAutoAdvance();
         });
     });
 
-    if (typeof leadershipMobileQuery.addEventListener === "function") {
-        leadershipMobileQuery.addEventListener("change", syncLeadershipMode);
-    } else if (typeof leadershipMobileQuery.addListener === "function") {
-        leadershipMobileQuery.addListener(syncLeadershipMode);
+    // Swipe detection - forward only (continuous loop)
+    if (leadershipCarousel) {
+        leadershipCarousel.addEventListener("touchstart", (e) => {
+            leadershipTouchStartX = e.changedTouches[0].clientX;
+            stopLeadershipAutoAdvance();
+        }, false);
+
+        leadershipCarousel.addEventListener("touchend", (e) => {
+            leadershipTouchEndX = e.changedTouches[0].clientX;
+            const swipeThreshold = 50;
+            const diff = leadershipTouchStartX - leadershipTouchEndX;
+
+            // Only allow forward progression (swiping left)
+            if (diff > swipeThreshold) {
+                // Swiped left - advance carousel
+                advanceLeadershipCarousel();
+            }
+
+            resetLeadershipAutoAdvance();
+        }, false);
     }
 
-    syncLeadershipMode();
+    window.addEventListener("resize", () => {
+        updateLeadershipCarousel(leadershipCurrentIndex);
+    });
+
+    // Start auto-advance
+    startLeadershipAutoAdvance();
+
+    // Initialize carousel to first card
+    updateLeadershipCarousel(0);
 
     const getSelectedRadio = () => radios.find((radio) => radio.checked) || radios[0];
 
