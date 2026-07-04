@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const aboutSteps = Array.from(document.querySelectorAll("[data-about-step]"));
     const leadershipTitle = document.querySelector("[data-leadership-title]");
     const leadershipCards = Array.from(document.querySelectorAll("[data-leadership-card]"));
+    const leadershipToggles = Array.from(document.querySelectorAll("[data-leadership-toggle]"));
+    const leadershipMobileQuery = window.matchMedia("(max-width: 768px)");
     const navItems = radios.map((radio, index) => ({
         radio,
         label: labels[index],
@@ -197,6 +199,72 @@ document.addEventListener("DOMContentLoaded", () => {
             leadershipObserver.observe(leadershipSection);
         }
     }
+
+    const syncLeadershipToggleLabel = (card, isExpanded) => {
+        const toggle = card.querySelector("[data-leadership-toggle]");
+
+        if (!toggle) {
+            return;
+        }
+
+        toggle.setAttribute("aria-expanded", String(isExpanded));
+        toggle.textContent = isExpanded ? "Hide details" : "Expand details";
+    };
+
+    const collapseLeadershipCards = (exceptCard = null) => {
+        leadershipCards.forEach((card) => {
+            const shouldStayOpen = exceptCard && card === exceptCard;
+            const isExpanded = shouldStayOpen && card.classList.contains("is-expanded");
+
+            if (!shouldStayOpen) {
+                card.classList.remove("is-expanded");
+                syncLeadershipToggleLabel(card, false);
+                return;
+            }
+
+            syncLeadershipToggleLabel(card, isExpanded);
+        });
+    };
+
+    const setLeadershipCardExpanded = (card, isExpanded) => {
+        card.classList.toggle("is-expanded", isExpanded);
+        syncLeadershipToggleLabel(card, isExpanded);
+    };
+
+    const syncLeadershipMode = () => {
+        if (leadershipMobileQuery.matches) {
+            collapseLeadershipCards();
+            return;
+        }
+
+        leadershipCards.forEach((card) => {
+            card.classList.remove("is-expanded");
+            syncLeadershipToggleLabel(card, false);
+        });
+    };
+
+    leadershipToggles.forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+            const card = toggle.closest("[data-leadership-card]");
+
+            if (!card || !leadershipMobileQuery.matches) {
+                return;
+            }
+
+            const shouldExpand = !card.classList.contains("is-expanded");
+
+            collapseLeadershipCards(card);
+            setLeadershipCardExpanded(card, shouldExpand);
+        });
+    });
+
+    if (typeof leadershipMobileQuery.addEventListener === "function") {
+        leadershipMobileQuery.addEventListener("change", syncLeadershipMode);
+    } else if (typeof leadershipMobileQuery.addListener === "function") {
+        leadershipMobileQuery.addListener(syncLeadershipMode);
+    }
+
+    syncLeadershipMode();
 
     const getSelectedRadio = () => radios.find((radio) => radio.checked) || radios[0];
 

@@ -1107,6 +1107,7 @@ footer .social-media ul{
     padding:18px 16px;
     border-radius:20px;
     background:transparent;
+}
 
 .leadership-grid{
     grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -1115,6 +1116,11 @@ footer .social-media ul{
 
 .leadership-card{
     padding:20px 16px 18px;
+}
+
+.leadership-card-body{
+    display:grid;
+    gap:10px;
 }
 
 .leadership-avatar{
@@ -1126,16 +1132,42 @@ footer .social-media ul{
 .leadership-card h3{
     font-size:1.08rem;
 }
+
+.leadership-details{
+    display:grid;
+    gap:8px;
+}
+
+.leadership-toggle{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    border:1px solid rgba(212, 237, 249, 0.16);
+    border-radius:999px;
+    padding:0.78rem 1rem;
+    background:rgba(5, 23, 44, 0.45);
+    color:#eef6ff;
+    font:inherit;
+    font-size:0.78rem;
+    font-weight:800;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    cursor:pointer;
+}
+
+.leadership-toggle:focus-visible{
+    outline:2px solid rgba(43, 147, 255, 0.9);
+    outline-offset:3px;
+}
+
+.leadership-card.is-expanded{
+    border-color:rgba(43, 147, 255, 0.28);
+}
+
+.leader{
     border:1px solid rgba(212, 237, 249, 0.08);
     box-shadow:none;
-
-@media(max-width:520px){
-
-.leadership-grid{
-    grid-template-columns:1fr;
-}
-
-}
 }
 
 .leader img,
@@ -1314,6 +1346,24 @@ footer{
     padding:24px 20px;
 }
 
+.site-header{
+    padding:12px 12px 14px;
+    gap:10px;
+}
+
+.site-header .logo{
+    font-size:0.96rem;
+    letter-spacing:0.11em;
+}
+
+.nav-glass{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    border-radius:18px;
+}
+
 .Btn-Container{
     width:160px;
 }
@@ -1345,8 +1395,8 @@ body{
 
 .hero-content{
     width:min(100%, 92%);
-    gap:16px;
-    padding:22px 0 6px;
+    gap:14px;
+    padding:18px 0 4px;
 }
 
 .hero-eyebrow{
@@ -1356,31 +1406,37 @@ body{
 }
 
 .hero-logo{
-    width:min(120px, 38vw);
+    width:min(104px, 34vw);
 }
 
 .hero-content h1{
     max-width:16ch;
-    font-size:clamp(2.5rem, 10vw, 3.5rem);
+    font-size:clamp(2.1rem, 9vw, 3.15rem);
 }
 
 .hero-actions{
-    gap:14px;
+    width:100%;
+    gap:12px;
 }
 
 .btn{
-    min-width:210px;
-    min-height:58px;
+    width:min(100%, 360px);
+    min-width:0;
+    min-height:56px;
 }
 
 .btn-text{
-    padding:14px 22px;
+    padding:14px 18px;
     font-size:0.9rem;
 }
 
 .hero-metrics{
     grid-template-columns:1fr;
     gap:12px;
+}
+
+.hero-metric{
+    text-align:center;
 }
 
 #about,
@@ -1431,6 +1487,46 @@ footer li{
     grid-template-columns:1fr;
 }
 
+.leadership-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+}
+
+.leadership-card{
+    padding:18px 14px 16px;
+}
+
+.leadership-card-body{
+    gap:8px;
+}
+
+.leadership-avatar{
+    width:72px;
+    height:72px;
+    font-size:1.72rem;
+}
+
+.leadership-card h3{
+    font-size:1.02rem;
+}
+
+.leadership-details{
+    display:none;
+    padding-top:4px;
+}
+
+.leadership-card.is-expanded .leadership-details{
+    display:grid;
+}
+
+.leadership-toggle{
+    display:inline-flex;
+}
+
+.leadership-card:not(.is-expanded) .leadership-details{
+    display:none;
+}
+
 .about-sequence{
     gap:8px;
     font-size:0.76rem;
@@ -1477,6 +1573,97 @@ footer li{
 
 .about-step-right .about-step-badge{
     right:14px;
+}
+
+}
+
+@media(max-width:520px){
+
+.nav-glass label{
+    min-width:86px;
+    padding:0.75rem 0.9rem;
+    font-size:0.76rem;
+}
+
+.hero-content{
+    gap:12px;
+}
+
+.hero-copy{
+    font-size:0.98rem;
+    line-height:1.75;
+}
+
+.hero-actions{
+    margin-top:6px;
+}
+
+.hero-metric{
+    padding:12px 14px;
+}
+
+.about-timeline{
+    gap:18px;
+    padding-left:18px;
+}
+
+.about-rail{
+    left:8px;
+}
+
+.about-step,
+.about-step-left{
+    transform:translateX(20px);
+}
+
+.about-step-left{
+    transform:translateX(-20px);
+}
+
+.about-step-marker,
+.about-step-left .about-step-marker{
+    left:-22px;
+}
+
+.about-step-card{
+    padding:18px 16px;
+}
+
+.leadership-card{
+    overflow:hidden;
+}
+
+.leadership-grid{
+    scroll-snap-type:y mandatory;
+}
+
+.leadership-card{
+    scroll-snap-align:start;
+    min-height:calc(100svh - 198px);
+    display:flex;
+    align-items:flex-start;
+}
+
+.leadership-card-body{
+    flex:1;
+}
+
+.leadership-card-body{
+    align-items:start;
+}
+
+.leadership-toggle{
+    margin-top:auto;
+}
+
+.leadership-card .leadership-role,
+.leadership-card h3,
+.leadership-card > p{
+    margin-bottom:0;
+}
+
+.leadership-card .leadership-toggle{
+    margin-top:4px;
 }
 
 }
