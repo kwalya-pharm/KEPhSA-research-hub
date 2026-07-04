@@ -1,350 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#3182ce">
-    <title>KEPhSA Research Hub - Empowering Kenyan Pharmacy Students</title>
-    <meta name="description"
-        content="The premier platform for Kenyan pharmacy students to find research opportunities, mentorship, and publications. A hub for innovation and professional growth.">
-
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-
-    <link rel="stylesheet" href="style.css" />
-
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="favicon.png" type="image/png" sizes="96x96">
-
-    <meta property="og:title" content="KEPhSA Research Hub: Ignite Your Research Journey">
-    <meta property="og:description"
-        content="Empowering the next generation of pharmacy leaders in Kenya with resources, mentorship, and a vibrant community for research.">
-    <meta property="og:image" content="https://kephsaresearchhub.co.ke/social-share-image.jpg">
-    <meta property="og:url" content="https://kephsaresearchhub.co.ke/">
-    <meta property="og:type" content="website">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="KEPhSA Research Hub: Ignite Your Research Journey">
-    <meta name="twitter:description"
-        content="Empowering the next generation of pharmacy leaders in Kenya with resources, mentorship, and a vibrant community for research.">
-    <meta name="twitter:image" content="https://kephsaresearchhub.co.ke/social-share-image.jpg">
-
-    <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "t5k061dgqh");
-</script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEPhSA Research Hub</title>
+    <link rel="stylesheet" href="home.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.9.24/dist/vanta.net.min.js"></script>
+    <script src="home.js"></script>
 </head>
 
-<body class="dark-theme">
-    <div class="curtain" id="curtain" aria-hidden="true">
-        <div class="loader-content">
-            <img src="logo.jpg" alt="" class="loader-logo">
-            <p class="loader-text">KEPhSA Research Hub</p>
-            <span class="loader-dots" aria-hidden="true"></span>
-        </div>
-    </div>
+<body>
 
-    <header class="main-header sticky">
-        <div class="header-container">
-            <a href="/" class="logo-link fade-in" aria-label="KEPhSA Research Hub Home">
-                <img src="logo.jpg" alt="KEPhSA Research Hub Logo" class="logo">
-                <div class="header-text">
-                    <h1>KEPhSA Research Hub</h1>
-                    <p>Your Gateway to Pharmacy Research in Kenya</p>
-                </div>
-            </a>
-            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+    <!-- ================= HEADER ================= -->
+    <header>
+        <div class="logo">
+            KEPhSA Research Hub
         </div>
-        <nav class="main-nav" id="main-nav">
-            <ul class="nav-list">
-                <li><a href="#about">About</a></li>
-                <li><a href="#membership">Membership</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#get-involved">Get Involved</a></li>
-                <li><a href="resources.html">Resources</a></li>
-                <li><a href="events.html">Events</a></li>
+
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#leadership">Leadership</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#conferences">Conferences</a></li>
+                <li><a href="#alumni">Alumni</a></li>
+                <li><a href="#repository">Repository</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="main-content">
-        <section class="hero-section fade-in">
-            <div class="hero-content">
-                <h2 class="bounce-in">Ignite Your Research Journey with KEPhSA RH</h2>
-                <p class="tagline">
-                    Affiliated to <a href="https://www.kephsa.com/" target="_blank" rel="noopener noreferrer"
-                        class="styled-link">Kenya Pharmaceutical Student's Organization (KEPhSA)</a>, the KEPhSA Research Hub is your dedicated platform for fostering innovation and research excellence. We provide the tools, connections, and support you need to make a real impact on the future of healthcare in Kenya.
-                </p>
-                <a href="#get-involved" class="cta-button primary-cta">
-                    <i class="fas fa-hand-holding-heart"></i> Get Started Today
-                </a>
-            </div>
-        </section>
+    <!-- ================= HERO ================= -->
+    <section id="hero">
 
-        <section id="partners" class="partners-section fade-in">
-            <h2>Our Partners</h2>
-            <p class="section-subtitle">We collaborate with leading organizations to strengthen pharmacy research and student impact.</p>
+    <div class="overlay"></div>
 
-            <div class="partners-carousel" id="partners-carousel" aria-label="Partners carousel">
-                <div class="partners-track" id="partners-track">
-                    <div class="partner-group">
-                        <article class="partner-slide">
-                            <img src="kephsa.jpg" alt="Kenya Pharmaceutical Students Association logo" loading="lazy">
-                            <h3>KEPhSA</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="ipsf.jpg" alt="International Pharmaceutical Students Federation logo" loading="lazy">
-                            <h3>IPSF</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="usiu.jpg" alt="United States International University Africa logo" loading="lazy">
-                            <h3>USIU-A</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="jkuat.jpg" alt="Jomo Kenyatta University of Agriculture and Technology logo" loading="lazy">
-                            <h3>JKUAT</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="uon.jpg" alt="University of Nairobi logo" loading="lazy">
-                            <h3>UoN</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="kemu.jpg" alt="Kenya Methodist University logo" loading="lazy">
-                            <h3>KEMU</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="kisii.jpg" alt="Kisii University logo" loading="lazy">
-                            <h3>Kisii University</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="maseno.jpg" alt="Maseno University logo" loading="lazy">
-                            <h3>Maseno University</h3>
-                        </article>
-                    </div>
+    <div class="hero-content">
 
-                    <div class="partner-group" aria-hidden="true">
-                        <article class="partner-slide">
-                            <img src="kephsa.jpg" alt="" loading="lazy">
-                            <h3>KEPhSA</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="ipsf.jpg" alt="" loading="lazy">
-                            <h3>IPSF</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="usiu.jpg" alt="" loading="lazy">
-                            <h3>USIU-A</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="jkuat.jpg" alt="" loading="lazy">
-                            <h3>JKUAT</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="uon.jpg" alt="" loading="lazy">
-                            <h3>UoN</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="kemu.jpg" alt="" loading="lazy">
-                            <h3>KEMU</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="kisii.jpg" alt="" loading="lazy">
-                            <h3>Kisii University</h3>
-                        </article>
-                        <article class="partner-slide">
-                            <img src="maseno.jpg" alt="" loading="lazy">
-                            <h3>Maseno University</h3>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <img src="assets/logo.png" class="logo">
 
-        <section id="featured-events" class="featured-section fade-in">
-    <div class="container"> 
-        <h2>Featured Events & Highlights</h2>
-        <p class="section-subtitle">A look at our latest workshops, conferences, and community engagement.</p>
-        <div id="dynamic-gallery" class="gallery-grid">
-            
-            <figure class="gallery-item">
-                <img src="1.jpg" alt="Photo from the Annual Research Day" loading="lazy">
-                <figcaption>World Pharmacist Day 2025</figcaption>
-            </figure>
+        <h1>Ignite Your Research Journey</h1>
 
-            <figure class="gallery-item">
-                <img src="2.jpg" alt="Photo from the Mentorship Program Kick-off" loading="lazy">
-                <figcaption>Think Health Think Pharmacist</figcaption>
-            </figure>
+        <p>
+            Affiliated with the Kenya Pharmaceutical Students' Association,
+            empowering pharmacy students through research,
+            innovation and collaboration.
+        </p>
 
-            <figure class="gallery-item">
-                <img src="3.jpg" alt="Photo from a community health outreach event" loading="lazy">
-                <figcaption>Build confidence in research</figcaption>
-            </figure>
-                        <figure class="gallery-item">
-                <img src="4.jpg" alt="Photo from a community health outreach event" loading="lazy">
-                <figcaption>Our participants</figcaption>
-            </figure>
-                        <figure class="gallery-item">
-                <img src="5.jpg" alt="Photo from a community health outreach event" loading="lazy">
-                <figcaption>Awards</figcaption>
-            </figure>
-                        <figure class="gallery-item">
-                <img src="6.jpg" alt="Photo from a community health outreach event" loading="lazy">
-                <figcaption>University of Nairobi, Chandaria hall</figcaption>
-            </figure>
-
-
+        <div class="buttons">
+            <a href="#" class="btn primary">Become a Member</a>
+            <a href="#" class="btn secondary">Explore Research</a>
         </div>
-        <div class="text-center mt-4">
-            <a href="gallery.html" class="cta-button secondary-cta">
-                <i class="fas fa-images"></i> View Full Gallery
-            </a>
-        </div>
-    </div> 
+
+    </div>
+
 </section>
 
+    
+    <!-- ================= ABOUT ================= -->
+    <section id="about">
 
+        <h2>About Us</h2>
 
-        <section id="about" class="purpose-section fade-in">
-            <h2>Our Purpose</h2>
-            <p><strong>Mission:</strong> To provide pharmacy students with a dynamic platform to explore, experiment, and excel in research.</p>
-            <p><strong>Vision:</strong> To empower and inspire the next generation of pharmacy leaders in Kenya through impactful research contributions.</p>
-            <h3>What We Offer</h3>
+        <article class="preamble">
+            <h3>Preamble</h3>
+            <p>The KEPhSA Research Hub is the research and innovation arm of the Kenya Pharmaceutical Students' Association (KEPhSA). It was established to cultivate a strong culture of research among pharmacy students by providing access to mentorship, research opportunities, collaborations, conferences, grants, and professional development.</p>
+            <p>Our goal is to empower pharmacy students to become innovative researchers capable of addressing healthcare challenges through evidence-based solutions while building lasting academic and professional networks.</p>
+        </article>
+
+        <article class="goals">
+            <h3>Goals</h3>
+
             <ul>
-                <li><i class="fas fa-flask"></i> Access to research facilities and equipment</li>
-                <li><i class="fas fa-handshake"></i> Mentorship from experienced researchers</li>
-                <li><i class="fas fa-users"></i> Networking with pharmacy professionals</li>
-                <li><i class="fas fa-chart-line"></i> Publication opportunities</li>
-            </ul>
-        </section>
-
-        <section id="membership" class="membership-section fade-in">
-            <h2>Become a Member</h2>
-            <p class="section-subtitle">
-                Join our growing community and unlock opportunities for research and professional growth.
-            </p>
-
-            <h3>Membership Benefits</h3>
-            <ul>
-                <li><i class="fas fa-calendar-check"></i> Exclusive access to events and workshops</li>
-                <li><i class="fas fa-envelope-open-text"></i> Regular research opportunity updates</li>
-                <li><i class="fas fa-hands-helping"></i> Dedicated project support</li>
-                <li><i class="fas fa-newspaper"></i> Publication assistance</li>
-                <li><i class="fas fa-graduation-cap"></i> Specialized training sessions</li>
+                <li>Build research capacity among pharmacy students.</li>
+                <li>Promote innovation in pharmaceutical sciences.</li>
+                <li>Enhance student learning experiences through practical research.</li>
+                <li>Provide access to research training and workshops.</li>
+                <li>Connect students with experienced research mentors.</li>
+                <li>Support conference participation and scientific presentations.</li>
+                <li>Share grant, scholarship, and funding opportunities.</li>
+                <li>Develop a national network of young Kenyan researchers.</li>
+                <li>Promote collaboration between students, universities, and professionals.</li>
             </ul>
 
-            <h3>How to Join</h3>
-            <p>Membership requires a one-time fee of Ksh 200 plus annual subscription. Open to all Kenyan pharmacy students.</p>
-            <p><em>Registration details coming soon - stay tuned!</em></p>
-        </section>
+        </article>
 
-        <section id="reviews" class="reviews-section fade-in">
-            <div class="container">
-                <h2 class="section-title">Hear From Our Members</h2>
-                <p class="section-subtitle">
-                    See what students are saying about their experience with the KEPhSA Research Hub.
-                </p>
-                <div id="dynamic-reviews" class="review-grid" aria-live="polite">
-                    <div id="reviews-loading" class="loading-state">
-                        <i class="fas fa-spinner fa-spin mr-2"></i>Loading reviews...
-                    </div>
-                </div>
+        <article class="mission">
+            <h3>Mission</h3>
+            <p>To provide pharmacy students with a dynamic platform where they can explore, innovate, collaborate, and excel in pharmaceutical research.</p>
+        </article>
 
-                <div class="write-review-card">
-                    <h3 class="card-title">Share Your Experience</h3>
-                    <p>Your feedback helps us grow and inspires others to join the research community.</p>
-                    <form id="review-form" action="https://docs.google.com/forms/d/e/1FAIpQLSccYq0GrdTz-f0SY1Uqgv5Zi9pLJCx67rAA7mVNhED0jPfJqg/formResponse" method="POST">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="entry.836733952" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="institution">Your institution</label>
-                            <input type="text" id="institution" name="entry.58569012" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="review-text">Your Review</label>
-                            <textarea id="review-text" name="entry.1043739052" rows="4" required aria-required="true"></textarea>
-                        </div>
-                        <button type="submit" class="cta-button primary-cta">
-                            Submit Review
-                        </button>
-                    </form>
-                </div>
+        <article class="vision">
+            <h3>Vision</h3>
+            <p>To inspire and empower the next generation of pharmacy researchers and healthcare innovators in Kenya through impactful research, collaboration, and professional excellence.</p>
+        </article>
+
+    </section>
+
+    <!-- ================= WHAT WE OFFER ================= -->
+    <section id="offer">
+
+        <h2>What We Offer</h2>
+
+        <ul>
+            <li>Research mentorship</li>
+            <li>Access to research facilities</li>
+            <li>Statistical and data analysis support</li>
+            <li>Proposal writing guidance</li>
+            <li>Publication support</li>
+            <li>Research collaborations</li>
+            <li>Scientific writing workshops</li>
+            <li>Networking opportunities</li>
+            <li>Conference participation</li>
+            <li>Innovation incubation</li>
+        </ul>
+
+    </section>
+
+    <!-- ================= LEADERSHIP ================= -->
+    <section id="leadership">
+
+        <h2>Executive Team 2025/2026</h2>
+        <p>Leadership details will be updated as they are confirmed.</p>
+
+        <div class="leaders">
+
+            <div class="leader">
+                <img src="" alt="">
+                <h3>Chairperson</h3>
+                <p>Name</p>
             </div>
-        </section>
 
-        <section id="get-involved" class="cta-section fade-in">
-            <h2>Get Started Today</h2>
-            <p>Join our community and access the resources you need for your research journey.</p>
-            <div class="button-container">
-                <a href="#membership" class="cta-button">
-                    <i class="fas fa-user-plus"></i> Become a Member
-                </a>
-                <a href="resources.html" class="cta-button">
-                    <i class="fas fa-tools"></i> Research Resources
-                </a>
-                <a href="events.html" class="cta-button">
-                    <i class="fas fa-calendar-alt"></i> Events & Gallery
-                </a>
+            <div class="leader">
+                <img src="" alt="">
+                <h3>Vice Chairperson</h3>
+                <p>Name</p>
             </div>
-        </section>
 
-        <section class="newsletter-section fade-in">
-            <h2>Don't Miss Out!</h2>
-            <p>Subscribe to our newsletter for exclusive updates, research highlights, and event announcements directly to your inbox.</p>
-            <form class="newsletter-form">
-                <input name="email" type="email" placeholder="Enter your email" required aria-label="Enter your email for newsletter subscription">
-                <button type="submit" class="cta-button" aria-label="Subscribe to newsletter">
-  <i class="fas fa-paper-plane"></i> Subscribe
-</button>
-
-            </form>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="social-media">
-                <h4>Follow Us</h4>
-                <div class="social-icons">
-                    <a href="https://www.youtube.com/channel/UC9T5jTqdPU7LBTZ4d_EtHQA/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.instagram.com/kephsaresearchhub/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/kephsa-research-hub/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://twitter.com/kephsarh/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="https://wa.me/254748052811" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                </div>
+            <div class="leader">
+                <img src="" alt="">
+                <h3>Secretary General</h3>
+                <p>Name</p>
             </div>
-            <div class="footer-links">
-                <h4>Resources</h4>
-                <a href="#membership" aria-label="View KEPhSA Research Hub membership details">Constitution and Membership Details</a>
-                <a href="policy.html" target="_blank" rel="noopener noreferrer" aria-label="View our privacy policy">Privacy Policy</a>
+
+            <div class="leader">
+                <img src="" alt="">
+                <h3>Treasurer</h3>
+                <p>Name</p>
             </div>
+
+            <div class="leader">
+                <img src="" alt="">
+                <h3>Project Coordinator</h3>
+                <p>Name</p>
+            </div>
+
+            <div class="leader">
+                <img src="" alt="">
+                <h3>Media & Publicity Officer</h3>
+                <p>Name</p>
+            </div>
+
+            <div class="leader">
+                <img src="" alt="">
+                <h3>Patron</h3>
+                <p>Name</p>
+            </div>
+
         </div>
-        <p class="copyright">&copy; <span id="current-year">2025</span> KEPhSA Research Hub. All rights reserved.</p>
+
+    </section>
+
+    <!-- ================= PROGRAMS ================= -->
+    <section id="programs">
+
+        <h2>Programs</h2>
+
+        <div class="program">
+            <h3>Annual Calendar</h3>
+            <p>A structured yearly schedule designed to provide continuous research engagement throughout the academic year.</p>
+        </div>
+
+        <div class="program">
+            <h3>Student Onboarding</h3>
+            <p>Introduce new members to research fundamentals, KEPhSA RH programs, mentorship opportunities, and available resources.</p>
+        </div>
+
+        <div class="program">
+            <h3>Research & Innovation Bootcamp</h3>
+            <p>An intensive training program covering research methodology, proposal writing, data collection, statistical analysis, scientific writing, research ethics, and the publication process.</p>
+        </div>
+
+        <div class="program">
+            <h3>Mentorship & Collaboration</h3>
+            <p>Students are paired with experienced researchers, lecturers, alumni, and healthcare professionals for guidance throughout their research journey.</p>
+        </div>
+
+    </section>
+
+    <!-- ================= CONFERENCES ================= -->
+    <section id="conferences">
+
+        <h2>Conferences</h2>
+
+        <div class="conference">
+            <h3>Online Research Conference</h3>
+            <p>Virtual conferences featuring research presentations, keynote speakers, workshops, and networking sessions.</p>
+        </div>
+
+        <div class="conference">
+            <h3>World Pharmacists Day Conference</h3>
+            <p>An annual physical conference celebrating research, innovation, and excellence in pharmaceutical practice through poster presentations, oral presentations, awards, research exhibitions, and guest speakers.</p>
+        </div>
+
+    </section>
+
+    <!-- ================= FEATURED EVENTS ================= -->
+    <section id="featured-mentors">
+
+        <h2>Research Mentors of the Year</h2>
+        <div class="mentor-grid">
+
+            <div class="mentor-card">
+                <img src="" alt="">
+                <h3>Mentor Name</h3>
+                <p>Institution</p>
+                <p>Area of expertise</p>
+                <p>Research interests</p>
+                <button type="button">Contact</button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ALUMNI ================= -->
+    <section id="alumni">
+
+        <h2>Alumni Network</h2>
+
+        <p>Stay connected with former KEPhSA Research Hub members, celebrate achievements, and foster mentorship between alumni and current students.</p>
+
+        <div class="alumni-profiles">
+            <ul>
+                <li>Alumni Profiles</li>
+                <li>Alumni News</li>
+                <li>Career Highlights</li>
+                <li>Research Publications</li>
+            </ul>
+
+        </div>
+
+        <div class="alumni-news">
+            <p>Update Your Profile</p>
+
+        </div>
+
+        <div class="update-us">
+            <button>Update Your Profile</button>
+        </div>
+
+    </section>
+
+    <!-- ================= REPOSITORY ================= -->
+    <section id="repository">
+
+        <h2>Research Repository</h2>
+
+        <p>A digital archive containing undergraduate research projects, conference abstracts, published articles, research posters, innovation projects, student publications, and downloadable resources.</p>
+
+        <div class="search">
+
+        </div>
+
+        <div class="research-list">
+
+        </div>
+
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact">
+
+        <h2>KEPhSA Research Hub</h2>
+
+        <p>KEPhSA Research Hub</p>
+
+        <p>Nairobi, Kenya</p>
+
+        <p><a href="mailto:kephsa.research.hub@gmail.com">kephsa.research.hub@gmail.com</a></p>
+
+        <p>+254 708 321 799</p>
+        <p>+254 758 827 813</p>
+
+    </section>
+
+    <!-- ================= NEWSLETTER ================= -->
+    <section id="newsletter">
+
+        <h2>Don't Miss Out!</h2>
+
+        <p>Subscribe to receive research opportunities, conference announcements, workshop updates, scholarships, grants, and monthly newsletters.</p>
+
+        <form>
+            <input type="email" placeholder="Email address">
+            <button type="submit">Subscribe</button>
+        </form>
+
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+
+        <div class="footer-links">
+
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#leadership">Leadership</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#conferences">Conferences</a></li>
+                <li><a href="#mentors">Mentors</a></li>
+                <li><a href="#alumni">Alumni</a></li>
+                <li><a href="#repository">Repository</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <h3>Resources</h3>
+            <ul>
+                <li>Constitution</li>
+                <li>Membership Information</li>
+                <li>Privacy Policy</li>
+            </ul>
+
+        </div>
+
+        <div class="social-media">
+
+            <h3>Social Media</h3>
+            <ul>
+                <li>Facebook</li>
+                <li>Instagram</li>
+                <li>LinkedIn</li>
+                <li>X (Twitter)</li>
+            </ul>
+
+        </div>
+
+        <p>&copy; 2026 KEPhSA Research Hub. All Rights Reserved.</p>
+
     </footer>
-    <script src="featured.js" defer></script>
-    <script src="page.js" defer></script>
-    <script src="reviews.js" defer></script>
-    <script src="script.js" defer></script>
-    <noscript>
-        <div style="text-align: center; padding: 20px; background-color: #fed7d7; color: #c53030; border: 1px solid #fc8181;">
-            <p>This website works best with JavaScript enabled. Please consider enabling it for the full experience.</p>
-        </div>
-    </noscript>
-</body>
+    
+        <!-- ================= javascript ================= -->
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
+<!-- Vanta -->
+<script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.net.min.js"></script>
+
+<!-- Your Script -->
+<script src="home.js"></script>
+
+
+</body>
 </html>

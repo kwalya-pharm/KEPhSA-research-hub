@@ -1,9 +1,0 @@
-{
-  "name": "KEPhSA Research Hub",
-  "short_name": "KEPhSA RH",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#f4f8fc",
-  "theme_color": "#0d6a90",
-  "icons": []
-}
