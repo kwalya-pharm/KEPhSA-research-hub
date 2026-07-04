@@ -6,51 +6,125 @@
     <title>KEPhSA Research Hub</title>
     <link rel="stylesheet" href="home.css">
     <script src="https://cdn.jsdelivr.net/npm/vanta@0.9.24/dist/vanta.net.min.js"></script>
-    <script src="home.js"></script>
 </head>
 
 <body>
 
+    <div class="preload-overlay" role="status" aria-live="polite" aria-label="Loading site">
+        <div class="preload-content">
+            <img src="media/logo.png" alt="KEPhSA Research Hub logo" class="preload-logo">
+            <p class="preload-text">Hello there, Welcome to the KEPhSA Research hub website</p>
+            <div class="spinner" aria-hidden="true">
+                <div class="spinnerin"></div>
+            </div>
+            <button type="button" class="Btn-Container preload-continue">
+                <span class="text">let's go!</span>
+                <span class="icon-Container" aria-hidden="true">
+                    <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="1.61321" cy="1.61321" r="1.5" fill="black"></circle>
+                        <circle cx="5.73583" cy="1.61321" r="1.5" fill="black"></circle>
+                        <circle cx="5.73583" cy="5.5566" r="1.5" fill="black"></circle>
+                        <circle cx="9.85851" cy="5.5566" r="1.5" fill="black"></circle>
+                        <circle cx="9.85851" cy="9.5" r="1.5" fill="black"></circle>
+                        <circle cx="13.9811" cy="9.5" r="1.5" fill="black"></circle>
+                        <circle cx="5.73583" cy="13.4434" r="1.5" fill="black"></circle>
+                        <circle cx="9.85851" cy="13.4434" r="1.5" fill="black"></circle>
+                        <circle cx="1.61321" cy="17.3868" r="1.5" fill="black"></circle>
+                        <circle cx="5.73583" cy="17.3868" r="1.5" fill="black"></circle>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </div>
+
     <!-- ================= HEADER ================= -->
-    <header>
+    <header class="site-header">
         <div class="logo">
             KEPhSA Research Hub
         </div>
 
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#leadership">Leadership</a></li>
-                <li><a href="#programs">Programs</a></li>
-                <li><a href="#conferences">Conferences</a></li>
-                <li><a href="#alumni">Alumni</a></li>
-                <li><a href="#repository">Repository</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+        <nav class="site-nav" aria-label="Primary navigation">
+            <div class="glass-radio-group nav-glass">
+                <input type="radio" name="site-nav" id="nav-home" data-target="#home" checked />
+                <label for="nav-home">Home</label>
+
+                <input type="radio" name="site-nav" id="nav-about" data-target="#about" />
+                <label for="nav-about">About Us</label>
+
+                <input type="radio" name="site-nav" id="nav-leadership" data-target="#leadership" />
+                <label for="nav-leadership">Leadership</label>
+
+                <input type="radio" name="site-nav" id="nav-programs" data-target="#programs" />
+                <label for="nav-programs">Programs</label>
+
+                <input type="radio" name="site-nav" id="nav-conferences" data-target="#conferences" />
+                <label for="nav-conferences">Conferences</label>
+
+                <input type="radio" name="site-nav" id="nav-alumni" data-target="#alumni" />
+                <label for="nav-alumni">Alumni</label>
+
+                <input type="radio" name="site-nav" id="nav-repository" data-target="#repository" />
+                <label for="nav-repository">Repository</label>
+
+                <input type="radio" name="site-nav" id="nav-contact" data-target="#contact" />
+                <label for="nav-contact">Contact</label>
+
+                <div class="glass-glider" aria-hidden="true"></div>
+            </div>
         </nav>
     </header>
 
     <!-- ================= HERO ================= -->
-    <section id="hero">
+    <section id="home">
 
     <div class="overlay"></div>
 
     <div class="hero-content">
 
-        <img src="assets/logo.png" class="logo">
+        <p class="hero-eyebrow">Research, innovation, and collaboration for pharmacy students</p>
+
+        <img src="media/logo.png" class="hero-logo">
 
         <h1>Ignite Your Research Journey</h1>
 
-        <p>
+        <p class="hero-copy">
             Affiliated with the Kenya Pharmaceutical Students' Association,
             empowering pharmacy students through research,
             innovation and collaboration.
         </p>
 
-        <div class="buttons">
-            <a href="#" class="btn primary">Become a Member</a>
-            <a href="#" class="btn secondary">Explore Research</a>
+        <div class="hero-actions">
+            <a href="#about" class="btn primary">
+                <span class="btn-text">Learn More</span>
+                <span class="btn-shine" aria-hidden="true"></span>
+                <span class="btn-corner btn-corner-tl" aria-hidden="true"></span>
+                <span class="btn-corner btn-corner-tr" aria-hidden="true"></span>
+                <span class="btn-corner btn-corner-bl" aria-hidden="true"></span>
+                <span class="btn-corner btn-corner-br" aria-hidden="true"></span>
+            </a>
+            <a href="#repository" class="btn secondary">
+                <span class="btn-text">Explore Repository</span>
+                <span class="btn-shine" aria-hidden="true"></span>
+                <span class="btn-corner btn-corner-tl" aria-hidden="true"></span>
+                <span class="btn-corner btn-corner-tr" aria-hidden="true"></span>
+                <span class="btn-corner btn-corner-bl" aria-hidden="true"></span>
+                <span class="btn-corner btn-corner-br" aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="hero-metrics" aria-label="Key highlights">
+            <div class="hero-metric">
+                <strong>Mentorship</strong>
+                <span>Guided research support</span>
+            </div>
+            <div class="hero-metric">
+                <strong>Innovation</strong>
+                <span>Projects and collaboration</span>
+            </div>
+            <div class="hero-metric">
+                <strong>Community</strong>
+                <span>Students, alumni, and mentors</span>
+            </div>
         </div>
 
     </div>
@@ -63,38 +137,73 @@
 
         <h2>About Us</h2>
 
-        <article class="preamble">
-            <h3>Preamble</h3>
-            <p>The KEPhSA Research Hub is the research and innovation arm of the Kenya Pharmaceutical Students' Association (KEPhSA). It was established to cultivate a strong culture of research among pharmacy students by providing access to mentorship, research opportunities, collaborations, conferences, grants, and professional development.</p>
-            <p>Our goal is to empower pharmacy students to become innovative researchers capable of addressing healthcare challenges through evidence-based solutions while building lasting academic and professional networks.</p>
-        </article>
+        <div class="about-story">
+            <div class="about-sequence" aria-label="About us timeline sequence">
+                <span class="about-sequence-title">ABOUT US</span>
+                <span class="about-sequence-dot">●</span>
+                <span class="about-sequence-item">Preamble</span>
+                <span class="about-sequence-divider">││</span>
+                <span class="about-sequence-dot">●</span>
+                <span class="about-sequence-item">Goals</span>
+                <span class="about-sequence-divider">││</span>
+                <span class="about-sequence-dot">●</span>
+                <span class="about-sequence-item">Mission</span>
+                <span class="about-sequence-divider">││</span>
+                <span class="about-sequence-dot">●</span>
+                <span class="about-sequence-item">Vision</span>
+            </div>
 
-        <article class="goals">
-            <h3>Goals</h3>
+            <div class="about-timeline" data-about-timeline>
+                <span class="about-rail" aria-hidden="true"></span>
 
-            <ul>
-                <li>Build research capacity among pharmacy students.</li>
-                <li>Promote innovation in pharmaceutical sciences.</li>
-                <li>Enhance student learning experiences through practical research.</li>
-                <li>Provide access to research training and workshops.</li>
-                <li>Connect students with experienced research mentors.</li>
-                <li>Support conference participation and scientific presentations.</li>
-                <li>Share grant, scholarship, and funding opportunities.</li>
-                <li>Develop a national network of young Kenyan researchers.</li>
-                <li>Promote collaboration between students, universities, and professionals.</li>
-            </ul>
+                <article class="about-step about-step-left" data-about-step>
+                    <span class="about-step-badge" aria-hidden="true">01</span>
+                    <div class="about-step-marker" aria-hidden="true"></div>
+                    <div class="about-step-card">
+                        <h3>Preamble</h3>
+                        <p>The KEPhSA Research Hub is the research and innovation arm of the Kenya Pharmaceutical Students' Association (KEPhSA). It was established to cultivate a strong culture of research among pharmacy students by providing access to mentorship, research opportunities, collaborations, conferences, grants, and professional development.</p>
+                        <p>Our goal is to empower pharmacy students to become innovative researchers capable of addressing healthcare challenges through evidence-based solutions while building lasting academic and professional networks.</p>
+                    </div>
+                </article>
 
-        </article>
+                <article class="about-step about-step-right" data-about-step>
+                    <span class="about-step-badge" aria-hidden="true">02</span>
+                    <div class="about-step-marker" aria-hidden="true"></div>
+                    <div class="about-step-card">
+                        <h3>Goals</h3>
+                        <ul>
+                            <li>Build research capacity among pharmacy students.</li>
+                            <li>Promote innovation in pharmaceutical sciences.</li>
+                            <li>Enhance student learning experiences through practical research.</li>
+                            <li>Provide access to research training and workshops.</li>
+                            <li>Connect students with experienced research mentors.</li>
+                            <li>Support conference participation and scientific presentations.</li>
+                            <li>Share grant, scholarship, and funding opportunities.</li>
+                            <li>Develop a national network of young Kenyan researchers.</li>
+                            <li>Promote collaboration between students, universities, and professionals.</li>
+                        </ul>
+                    </div>
+                </article>
 
-        <article class="mission">
-            <h3>Mission</h3>
-            <p>To provide pharmacy students with a dynamic platform where they can explore, innovate, collaborate, and excel in pharmaceutical research.</p>
-        </article>
+                <article class="about-step about-step-left" data-about-step>
+                    <span class="about-step-badge" aria-hidden="true">03</span>
+                    <div class="about-step-marker" aria-hidden="true"></div>
+                    <div class="about-step-card">
+                        <h3>Mission</h3>
+                        <p>To provide pharmacy students with a dynamic platform where they can explore, innovate, collaborate, and excel in pharmaceutical research.</p>
+                    </div>
+                </article>
 
-        <article class="vision">
-            <h3>Vision</h3>
-            <p>To inspire and empower the next generation of pharmacy researchers and healthcare innovators in Kenya through impactful research, collaboration, and professional excellence.</p>
-        </article>
+                <article class="about-step about-step-right" data-about-step>
+                    <span class="about-step-badge" aria-hidden="true">04</span>
+                    <div class="about-step-marker" aria-hidden="true"></div>
+                    <div class="about-step-card">
+                        <h3>Vision</h3>
+                        <p>To inspire and empower the next generation of pharmacy researchers and healthcare innovators in Kenya through impactful research, collaboration, and professional excellence.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
 
     </section>
 
@@ -121,52 +230,101 @@
     <!-- ================= LEADERSHIP ================= -->
     <section id="leadership">
 
-        <h2>Executive Team 2025/2026</h2>
+        <h2 class="leadership-title" data-leadership-title>Leadership</h2>
         <p>Leadership details will be updated as they are confirmed.</p>
 
-        <div class="leaders">
+        <div class="leadership-grid" data-leadership-grid>
 
-            <div class="leader">
-                <img src="" alt="">
-                <h3>Chairperson</h3>
-                <p>Name</p>
-            </div>
+            <article class="leadership-card" data-leadership-card style="--card-delay:0ms;">
+                <div class="leadership-avatar leadership-avatar--placeholder" aria-hidden="true">
+                    <span class="leadership-avatar-head"></span>
+                    <span class="leadership-avatar-body"></span>
+                </div>
+                <div class="leadership-card-body">
+                    <p class="leadership-role">Chairperson</p>
+                    <h3>Coming Soon</h3>
+                    <p>Name to be announced</p>
+                    <p class="leadership-meta">Leadership details will be updated soon.</p>
+                </div>
+            </article>
 
-            <div class="leader">
-                <img src="" alt="">
-                <h3>Vice Chairperson</h3>
-                <p>Name</p>
-            </div>
+            <article class="leadership-card" data-leadership-card style="--card-delay:120ms;">
+                <div class="leadership-avatar leadership-avatar--placeholder" aria-hidden="true">
+                    <span class="leadership-avatar-head"></span>
+                    <span class="leadership-avatar-body"></span>
+                </div>
+                <div class="leadership-card-body">
+                    <p class="leadership-role">Vice Chairperson</p>
+                    <h3>Coming Soon</h3>
+                    <p>Name to be announced</p>
+                    <p class="leadership-meta">Leadership details will be updated soon.</p>
+                </div>
+            </article>
 
-            <div class="leader">
-                <img src="" alt="">
-                <h3>Secretary General</h3>
-                <p>Name</p>
-            </div>
+            <article class="leadership-card" data-leadership-card style="--card-delay:240ms;">
+                <div class="leadership-avatar leadership-avatar--placeholder" aria-hidden="true">
+                    <span class="leadership-avatar-head"></span>
+                    <span class="leadership-avatar-body"></span>
+                </div>
+                <div class="leadership-card-body">
+                    <p class="leadership-role">Secretary General</p>
+                    <h3>Coming Soon</h3>
+                    <p>Name to be announced</p>
+                    <p class="leadership-meta">Leadership details will be updated soon.</p>
+                </div>
+            </article>
 
-            <div class="leader">
-                <img src="" alt="">
-                <h3>Treasurer</h3>
-                <p>Name</p>
-            </div>
+            <article class="leadership-card" data-leadership-card style="--card-delay:360ms;">
+                <div class="leadership-avatar leadership-avatar--placeholder" aria-hidden="true">
+                    <span class="leadership-avatar-head"></span>
+                    <span class="leadership-avatar-body"></span>
+                </div>
+                <div class="leadership-card-body">
+                    <p class="leadership-role">Treasurer</p>
+                    <h3>Coming Soon</h3>
+                    <p>Name to be announced</p>
+                    <p class="leadership-meta">Leadership details will be updated soon.</p>
+                </div>
+            </article>
 
-            <div class="leader">
-                <img src="" alt="">
-                <h3>Project Coordinator</h3>
-                <p>Name</p>
-            </div>
+            <article class="leadership-card" data-leadership-card style="--card-delay:480ms;">
+                <div class="leadership-avatar leadership-avatar--placeholder" aria-hidden="true">
+                    <span class="leadership-avatar-head"></span>
+                    <span class="leadership-avatar-body"></span>
+                </div>
+                <div class="leadership-card-body">
+                    <p class="leadership-role">Project Coordinator</p>
+                    <h3>Coming Soon</h3>
+                    <p>Name to be announced</p>
+                    <p class="leadership-meta">Leadership details will be updated soon.</p>
+                </div>
+            </article>
 
-            <div class="leader">
-                <img src="" alt="">
-                <h3>Media & Publicity Officer</h3>
-                <p>Name</p>
-            </div>
+            <article class="leadership-card" data-leadership-card style="--card-delay:600ms;">
+                <div class="leadership-avatar leadership-avatar--placeholder" aria-hidden="true">
+                    <span class="leadership-avatar-head"></span>
+                    <span class="leadership-avatar-body"></span>
+                </div>
+                <div class="leadership-card-body">
+                    <p class="leadership-role">Media & Publicity Officer</p>
+                    <h3>Coming Soon</h3>
+                    <p>Name to be announced</p>
+                    <p class="leadership-meta">Leadership details will be updated soon.</p>
+                </div>
+            </article>
 
-            <div class="leader">
-                <img src="" alt="">
-                <h3>Patron</h3>
-                <p>Name</p>
-            </div>
+            <article class="leadership-card" data-leadership-card style="--card-delay:720ms;">
+                <div class="leadership-avatar leadership-avatar--placeholder" aria-hidden="true">
+                    <span class="leadership-avatar-head"></span>
+                    <span class="leadership-avatar-body"></span>
+                </div>
+                <div class="leadership-card-body">
+                    <p class="leadership-role">Patron</p>
+                    <h3>Coming Soon</h3>
+                    <p>Name to be announced</p>
+                    <p class="leadership-meta">Leadership details will be updated soon.</p>
+                </div>
+            </article>
 
         </div>
 
