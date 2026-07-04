@@ -143,61 +143,20 @@ document.addEventListener("DOMContentLoaded", () => {
             aboutTimeline.style.setProperty("--about-progress", String(progress));
         };
 
-        const aboutObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("is-visible");
-                }
-            });
-
-            const visibleCount = aboutSteps.filter((step) => step.classList.contains("is-visible")).length;
-            setAboutProgress(visibleCount);
-        }, {
-            rootMargin: "0px 0px -18% 0px",
-            threshold: 0.35
+        aboutSteps.forEach((step) => {
+            step.classList.add("is-visible");
         });
-
-        aboutSteps.forEach((step) => aboutObserver.observe(step));
-        setAboutProgress(0);
+        setAboutProgress(aboutSteps.length);
     }
 
     if (leadershipTitle || leadershipCards.length > 0) {
-        let leadershipAnimated = false;
-
-        const revealLeadership = () => {
-            if (leadershipAnimated) {
-                return;
-            }
-
-            leadershipAnimated = true;
-
-            if (leadershipTitle) {
-                leadershipTitle.classList.add("is-visible");
-            }
-
-            leadershipCards.forEach((card, index) => {
-                window.setTimeout(() => {
-                    card.classList.add("is-visible");
-                }, index * 120);
-            });
-        };
-
-        const leadershipObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    revealLeadership();
-                }
-            });
-        }, {
-            rootMargin: "0px 0px -20% 0px",
-            threshold: 0.28
-        });
-
-        const leadershipSection = document.querySelector("#leadership");
-
-        if (leadershipSection) {
-            leadershipObserver.observe(leadershipSection);
+        if (leadershipTitle) {
+            leadershipTitle.classList.add("is-visible");
         }
+
+        leadershipCards.forEach((card) => {
+            card.classList.add("is-visible");
+        });
     }
 
     const syncLeadershipToggleLabel = (card, isExpanded) => {
