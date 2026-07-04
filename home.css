@@ -1107,6 +1107,8 @@ footer .social-media ul{
     padding:18px 16px;
     border-radius:20px;
     background:transparent;
+    border:1px solid rgba(212, 237, 249, 0.08);
+    box-shadow:none;
 }
 
 .leadership-grid{
@@ -1163,11 +1165,6 @@ footer .social-media ul{
 
 .leadership-card.is-expanded{
     border-color:rgba(43, 147, 255, 0.28);
-}
-
-.leader{
-    border:1px solid rgba(212, 237, 249, 0.08);
-    box-shadow:none;
 }
 
 .leader img,
@@ -1523,8 +1520,35 @@ footer li{
     display:inline-flex;
 }
 
-.leadership-card:not(.is-expanded) .leadership-details{
-    display:none;
+.leadership-card{
+    overflow:hidden;
+    scroll-snap-align:start;
+    min-height:calc(100svh - 198px);
+    display:flex;
+    align-items:flex-start;
+}
+
+.leadership-grid{
+    scroll-snap-type:y mandatory;
+}
+
+.leadership-card-body{
+    flex:1;
+    align-items:start;
+}
+
+.leadership-toggle{
+    margin-top:auto;
+}
+
+.leadership-card .leadership-role,
+.leadership-card h3,
+.leadership-card > p{
+    margin-bottom:0;
+}
+
+.leadership-card .leadership-toggle{
+    margin-top:4px;
 }
 
 .about-sequence{
@@ -1627,43 +1651,6 @@ footer li{
 
 .about-step-card{
     padding:18px 16px;
-}
-
-.leadership-card{
-    overflow:hidden;
-}
-
-.leadership-grid{
-    scroll-snap-type:y mandatory;
-}
-
-.leadership-card{
-    scroll-snap-align:start;
-    min-height:calc(100svh - 198px);
-    display:flex;
-    align-items:flex-start;
-}
-
-.leadership-card-body{
-    flex:1;
-}
-
-.leadership-card-body{
-    align-items:start;
-}
-
-.leadership-toggle{
-    margin-top:auto;
-}
-
-.leadership-card .leadership-role,
-.leadership-card h3,
-.leadership-card > p{
-    margin-bottom:0;
-}
-
-.leadership-card .leadership-toggle{
-    margin-top:4px;
 }
 
 }
