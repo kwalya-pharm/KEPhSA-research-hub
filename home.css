@@ -65,7 +65,7 @@ body.popup-open{
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:26px;
+    gap:32px;
     padding:32px 28px;
     text-align:center;
 }
