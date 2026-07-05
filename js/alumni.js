@@ -35,43 +35,82 @@
         .replace(/(^-|-$)/g, "")
         .toLowerCase();
 
+    const convertGoogleDriveLink = (url) => {
+        if (!url) return "";
+
+        url = String(url).trim();
+
+        // Already a direct Google Drive image URL
+        if (url.includes("uc?export=view&id=")) {
+            return url;
+        }
+
+        // Convert Google Drive sharing link: /d/<id>/
+        const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (match) {
+            return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+        }
+
+        // Handle links with ?id=
+        const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+        if (idMatch) {
+            return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+        }
+
+        // Support Google Photos short share links
+        const photosMatch = url.match(/https?:\/\/photos\.app\.goo\.gl\/([A-Za-z0-9_-]+)/i);
+        if (photosMatch) {
+            return `https://photos.app.goo.gl/${photosMatch[1]}`;
+        }
+
+        // Return any other URL unchanged
+        return url;
+    };
+
     const buildImageCandidates = (person, value) => {
         const candidates = [];
         const rawValue = String(value || "").trim();
+        const normalizedValue = convertGoogleDriveLink(rawValue);
 
         const personName = normalizeValue(person, ["name"], "");
         const firstName = personName.split(/\s+/).filter(Boolean)[0] || personName;
         const nameSlug = slugify(firstName);
 
-        if (nameSlug) {
-            const baseName = `media/alumni/${nameSlug}`;
-            [".jpg", ".jpeg", ".webp", ".png"].forEach((extension) => {
-                candidates.push(`${baseName}${extension}`);
-            });
+        // Use normalized value (converted Drive link when applicable)
+        const checkValue = normalizedValue || rawValue;
+
+        // If backend provided a full data/blob URL, use it first
+        if (/^data:|^blob:/i.test(checkValue)) {
+            candidates.push(checkValue);
+            return [...new Set(candidates.filter(Boolean))];
         }
 
-        if (/^https?:\/\//i.test(rawValue)) {
-            candidates.push(rawValue);
-        } else if (rawValue) {
-            const cleanedValue = rawValue.replace(/^\.\//, "").replace(/^\/+/, "");
+        // If backend provided an absolute or protocol-relative URL, prefer it
+        if (/^https?:\/\//i.test(checkValue) || /^\/\//.test(checkValue)) {
+            candidates.push(checkValue);
+            return [...new Set(candidates.filter(Boolean))];
+        }
+
+        // If backend provided a relative path or filename, prefer the exact value first
+        if (checkValue) {
+            const cleanedValue = checkValue.replace(/^\.\//, "").replace(/^\/+/, "");
             const withoutHash = cleanedValue.split("#")[0].split("?")[0];
 
             if (withoutHash) {
-                const normalizedCandidate = withoutHash.startsWith("media/")
-                    ? withoutHash
-                    : `media/alumni/${withoutHash}`;
-                candidates.push(normalizedCandidate);
+                candidates.push(withoutHash);
 
                 const hasSupportedExtension = /\.(jpe?g|webp|png)$/i.test(withoutHash);
                 const baseName = hasSupportedExtension
-                    ? normalizedCandidate.replace(/\.(jpe?g|webp|png)$/i, "")
-                    : normalizedCandidate;
+                    ? withoutHash.replace(/\.(jpe?g|webp|png)$/i, "")
+                    : withoutHash;
 
                 [".jpg", ".jpeg", ".webp", ".png"].forEach((extension) => {
                     candidates.push(`${baseName}${extension}`);
                 });
             }
         }
+
+        // Do not force local media/alumni paths — prefer backend-provided URLs or explicit paths.
 
         return [...new Set(candidates.filter(Boolean))];
     };
