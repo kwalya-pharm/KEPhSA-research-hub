@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
         leadershipCarousel.addEventListener("touchstart", (e) => {
             leadershipTouchStartX = e.changedTouches[0].clientX;
             stopLeadershipAutoAdvance();
-        }, false);
+        }, { passive: true });
 
         leadershipCarousel.addEventListener("touchend", (e) => {
             leadershipTouchEndX = e.changedTouches[0].clientX;
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             resetLeadershipAutoAdvance();
-        }, false);
+        }, { passive: true });
     }
 
     window.addEventListener("resize", () => {
@@ -260,6 +260,9 @@ document.addEventListener("DOMContentLoaded", () => {
     updateLeadershipCarousel(0);
 
     const getSelectedRadio = () => radios.find((radio) => radio.checked) || radios[0];
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+    const shouldUseSmoothScroll = !isTouchDevice && !prefersReducedMotion;
 
     const moveGlider = (navItemOrRadio) => {
         const navItem = navItemOrRadio && navItemOrRadio.label ? navItemOrRadio : navItemsByTarget.get(navItemOrRadio?.dataset?.target) || navItemsByTarget.get(navItemOrRadio?.target) || null;
@@ -270,8 +273,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        const duration = prefersReducedMotion ? "0ms" : "420ms";
+        glider.style.transition = `transform ${duration} cubic-bezier(0.22, 1, 0.36, 1), width ${duration} cubic-bezier(0.22, 1, 0.36, 1), background 0.35s ease, box-shadow 0.35s ease`;
         glider.style.width = `${label.offsetWidth}px`;
-        glider.style.transform = `translateX(${label.offsetLeft}px)`;
+        glider.style.transform = `translate3d(${label.offsetLeft}px, 0, 0)`;
         glider.style.background = theme.background;
         glider.style.boxShadow = theme.shadow;
     };
@@ -283,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        targetElement.scrollIntoView({ behavior: shouldUseSmoothScroll ? "smooth" : "auto", block: "start" });
         history.replaceState(null, "", target);
     };
 
@@ -306,27 +311,67 @@ document.addEventListener("DOMContentLoaded", () => {
         setActiveNav(currentHash, { force: true });
     };
 
+    let sectionNavFrameId = 0;
+
+    const targetSections = radios
+        .map((radio) => document.querySelector(radio.dataset.target || ""))
+        .filter(Boolean);
+
+    const updateActiveSectionFromScroll = () => {
+        if (!targetSections.length) {
+            return;
+        }
+
+        const offset = isTouchDevice ? 120 : 160;
+        let nearestSection = null;
+        let nearestDistance = Number.POSITIVE_INFINITY;
+
+        targetSections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            const sectionOffset = rect.top + window.scrollY - offset;
+            const distance = Math.abs(sectionOffset - window.scrollY);
+
+            if (distance < nearestDistance) {
+                nearestDistance = distance;
+                nearestSection = section;
+            }
+        });
+
+        if (nearestSection) {
+            if (sectionNavFrameId) {
+                window.cancelAnimationFrame(sectionNavFrameId);
+            }
+
+            sectionNavFrameId = window.requestAnimationFrame(() => {
+                queueNavUpdate(`#${nearestSection.id}`);
+            });
+        }
+    };
+
     const sectionObserver = new IntersectionObserver((entries) => {
         const activeEntry = entries
             .filter((entry) => entry.isIntersecting)
             .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
 
         if (!activeEntry) {
+            updateActiveSectionFromScroll();
             return;
         }
 
-        queueNavUpdate(`#${activeEntry.target.id}`);
+        if (sectionNavFrameId) {
+            window.cancelAnimationFrame(sectionNavFrameId);
+        }
+
+        sectionNavFrameId = window.requestAnimationFrame(() => {
+            queueNavUpdate(`#${activeEntry.target.id}`);
+        });
     }, {
-        rootMargin: "-28% 0px -42% 0px",
+        rootMargin: isTouchDevice ? "-12% 0px -20% 0px" : "-28% 0px -42% 0px",
         threshold: [0.2, 0.45, 0.65]
     });
 
-    radios.forEach((radio) => {
-        const targetSection = document.querySelector(radio.dataset.target || "");
-
-        if (targetSection) {
-            sectionObserver.observe(targetSection);
-        }
+    targetSections.forEach((section) => {
+        sectionObserver.observe(section);
     });
 
     const scheduleLayoutSync = () => {
@@ -346,8 +391,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.addEventListener("hashchange", syncFromHash);
-    window.addEventListener("resize", scheduleLayoutSync);
+    window.addEventListener("resize", () => {
+        scheduleLayoutSync();
+        updateActiveSectionFromScroll();
+    });
+    window.addEventListener("scroll", () => {
+        updateActiveSectionFromScroll();
+    }, { passive: true });
     window.addEventListener("load", syncFromHash, { once: true });
 
     scheduleLayoutSync();
+    updateActiveSectionFromScroll();
 });

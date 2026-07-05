@@ -7,6 +7,7 @@
 html{
     scroll-behavior:smooth;
     scroll-padding-top:128px;
+    -webkit-text-size-adjust:100%;
 }
 
 body{
@@ -15,6 +16,14 @@ body{
     background:linear-gradient(180deg,#031427 0%,#061b33 40%,#081f3a 100%);
     color:#eaf2ff;
     padding-top:128px;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-y:none;
+}
+
+@media (pointer: coarse) and (prefers-reduced-motion: no-preference){
+    html{
+        scroll-behavior:auto;
+    }
 }
 
 .preload-overlay{
@@ -205,6 +214,7 @@ section{
     overflow:auto hidden;
     scrollbar-width:none;
     isolation:isolate;
+    padding:4px;
 }
 
 .nav-glass::-webkit-scrollbar{
@@ -229,33 +239,37 @@ section{
     color:var(--text);
     position:relative;
     z-index:2;
-    transition:color 0.3s ease-in-out;
+    transition:color 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease;
     white-space:nowrap;
 }
 
 .nav-glass label:hover{
     color:white;
+    transform:translateY(-1px);
+    text-shadow:0 0 14px rgba(255,255,255,0.2);
 }
 
 .nav-glass input:checked + label{
     color:#fff;
+    text-shadow:0 0 16px rgba(255,255,255,0.32);
 }
 
 .glass-glider{
     position:absolute;
-    top:0;
-    bottom:0;
+    top:4px;
+    bottom:4px;
     left:0;
     width:0;
     border-radius:999px;
     z-index:1;
     pointer-events:none;
     transition:
-        transform 0.5s cubic-bezier(0.37,1.95,0.66,0.56),
-        width 0.35s ease-in-out,
-        background 0.4s ease-in-out,
-        box-shadow 0.4s ease-in-out;
+        transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.35s ease,
+        box-shadow 0.35s ease;
     will-change:transform, width, background, box-shadow;
+    transform:translate3d(0,0,0);
 }
 
 #home{
