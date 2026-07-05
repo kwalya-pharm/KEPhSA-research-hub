@@ -2016,6 +2016,126 @@ footer li{
     padding-bottom:16px;
 }
 
+.annual-calendar{
+    --calendar-primary:#0056b3;
+    --calendar-accent:#00b894;
+    --calendar-card:#ffffff;
+    --calendar-text:#233040;
+    --calendar-border:#dde4ec;
+    max-width:1500px;
+    margin:32px 0 0;
+    padding:24px 0 8px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.calendar-header{
+    text-align:center;
+    margin-bottom:24px;
+}
+
+.calendar-header h2{
+    font-size:clamp(1.8rem, 3.2vw, 2.5rem);
+    color:var(--calendar-primary);
+    margin:0;
+}
+
+.calendar-header p{
+    color:#7b8796;
+    margin:8px 0 0;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:20px;
+}
+
+.month-card{
+    background:var(--calendar-card);
+    border:1px solid var(--calendar-border);
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    overflow:hidden;
+}
+
+.month-title{
+    background:var(--calendar-primary);
+    color:white;
+    text-align:center;
+    padding:14px 12px;
+    font-weight:700;
+    font-size:1rem;
+}
+
+.weekdays,
+.days{
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+}
+
+.weekdays div{
+    padding:10px 6px;
+    text-align:center;
+    font-size:0.72rem;
+    color:#6f7a87;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+}
+
+.day{
+    height:42px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    cursor:pointer;
+    transition:background-color 0.25s ease, transform 0.25s ease;
+    color:var(--calendar-text);
+    font-size:0.92rem;
+}
+
+.day:hover{
+    background:#eef5ff;
+}
+
+.empty{
+    visibility:hidden;
+}
+
+.event{
+    background:var(--calendar-accent);
+    color:white;
+    font-weight:700;
+    border-radius:50%;
+}
+
+.today{
+    border:2px solid var(--calendar-primary);
+    border-radius:50%;
+}
+
+.event::after{
+    content:attr(data-title);
+    position:absolute;
+    bottom:120%;
+    left:50%;
+    transform:translateX(-50%);
+    white-space:nowrap;
+    background:#18212d;
+    color:#ffffff;
+    padding:6px 10px;
+    border-radius:6px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.25s ease;
+    font-size:0.75rem;
+    z-index:10;
+}
+
+.event:hover::after{
+    opacity:1;
+}
 
 #newsletter form{
     display:grid;
