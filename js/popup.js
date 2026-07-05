@@ -1,6 +1,7 @@
 (() => {
     const STORAGE_KEY = "kephsa-popup-dismissed";
-    const API_URL = "https://script.google.com/macros/s/AKfycbxhGe5LCYuDof4ChP1px7CDtkRywT18uWexbZBfvYGpnTZ4fBGzQ6RU4Hyvd-8AyPTV/exec";
+    const ALUMNI_API_URL = "https://script.google.com/macros/s/AKfycbxhGe5LCYuDof4ChP1px7CDtkRywT18uWexbZBfvYGpnTZ4fBGzQ6RU4Hyvd-8AyPTV/exec";
+    const EVENTS_API_URL = "https://script.google.com/macros/s/AKfycbyVHUlybyAt8RdE2qu1iWH5_ff46jWWCH7hJg5l50K6XKaGQj3nHdO9TpYw-t0Vr6f9dQ/exec";
 
     const slugify = (value) => String(value || "")
         .trim()
@@ -45,7 +46,7 @@
             return window.__KEPHSA_ALUMNI_LOAD_PROMISE__;
         }
 
-        window.__KEPHSA_ALUMNI_LOAD_PROMISE__ = fetch(API_URL)
+        window.__KEPHSA_ALUMNI_LOAD_PROMISE__ = fetch(ALUMNI_API_URL)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status ${response.status}`);
@@ -65,15 +66,71 @@
         return window.__KEPHSA_ALUMNI_LOAD_PROMISE__;
     };
 
-    const getEventData = () => {
-        return Array.from(document.querySelectorAll("#programs .image-card, #conferences .image-card"))
-            .map((card) => {
-                const title = card.querySelector("h3, h4, .card-title")?.textContent?.trim();
-                const description = card.querySelector("p, .card-copy")?.textContent?.trim();
-                return title ? { title, description: description || "Open the section for more details." } : null;
+    const normalizeEventsPayload = (payload) => {
+        if (Array.isArray(payload)) {
+            return payload;
+        }
+
+        if (payload && typeof payload === "object") {
+            for (const key of ["events", "data", "records", "items"]) {
+                if (Array.isArray(payload[key])) {
+                    return payload[key];
+                }
+            }
+        }
+
+        return [];
+    };
+
+    const getEventImageSrc = (event) => {
+        const rawValue = String(event?.Image || event?.image || "").trim();
+        if (!rawValue) {
+            return "media/logo.png";
+        }
+
+        if (/^https?:\/\//i.test(rawValue)) {
+            return rawValue;
+        }
+
+        const cleanedValue = rawValue.replace(/^\.\//, "").replace(/^\/+/, "");
+        const hasLocalPrefix = cleanedValue.startsWith("media/events/");
+        return hasLocalPrefix ? cleanedValue : `media/events/${cleanedValue}`;
+    };
+
+    const getEventData = async () => {
+        if (Array.isArray(window.__KEPHSA_EVENTS_DATA__)) {
+            return window.__KEPHSA_EVENTS_DATA__;
+        }
+
+        if (window.__KEPHSA_EVENTS_LOAD_PROMISE__) {
+            return window.__KEPHSA_EVENTS_LOAD_PROMISE__;
+        }
+
+        window.__KEPHSA_EVENTS_LOAD_PROMISE__ = fetch(EVENTS_API_URL, { cache: "no-store" })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Events request failed with status ${response.status}`);
+                }
+                return response.json();
             })
-            .filter(Boolean)
-            .slice(0, 3);
+            .then((payload) => {
+                const events = normalizeEventsPayload(payload)
+                    .filter(Boolean)
+                    .slice(0, 3)
+                    .map((event) => ({
+                        title: event?.Title || event?.title || "Upcoming event",
+                        description: event?.Description || event?.description || event?.Venue || event?.Venue || "More details coming soon",
+                        image: event?.Image || event?.image || ""
+                    }));
+                window.__KEPHSA_EVENTS_DATA__ = events;
+                return events;
+            })
+            .catch(() => {
+                window.__KEPHSA_EVENTS_DATA__ = [];
+                return [];
+            });
+
+        return window.__KEPHSA_EVENTS_LOAD_PROMISE__;
     };
 
     const buildImageCandidates = (person, value) => {
@@ -175,11 +232,14 @@
         }
 
         if (eventsListEl) {
-            const eventMarkup = (events && events.length ? events : [{ title: "No upcoming updates", description: "Check back soon for new opportunities." }])
+            const eventMarkup = (events && events.length ? events : [{ title: "No upcoming updates", description: "Check back soon for new opportunities.", image: "" }])
                 .map((event) => `
-                    <li>
-                        <strong>${event.title}</strong>
-                        <span>${event.description}</span>
+                    <li class="popup-event-item">
+                        <img class="popup-event-image" src="${getEventImageSrc(event)}" alt="${String(event.title || "Upcoming event").replace(/"/g, "&quot;")}" onerror="this.src='media/logo.png'">
+                        <div class="popup-event-copy">
+                            <strong>${String(event.title || "Upcoming event")}</strong>
+                            <span>${String(event.description || "More details coming soon")}</span>
+                        </div>
                     </li>
                 `)
                 .join("");
@@ -267,7 +327,7 @@
 
         const [alumniPeople, events] = await Promise.all([
             getAlumniData(),
-            Promise.resolve(getEventData())
+            getEventData()
         ]);
 
         const spotlight = Array.isArray(alumniPeople) && alumniPeople.length

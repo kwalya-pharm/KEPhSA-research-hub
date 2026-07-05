@@ -57,12 +57,15 @@
             const withoutHash = cleanedValue.split("#")[0].split("?")[0];
 
             if (withoutHash) {
-                candidates.push(withoutHash);
+                const normalizedCandidate = withoutHash.startsWith("media/")
+                    ? withoutHash
+                    : `media/alumni/${withoutHash}`;
+                candidates.push(normalizedCandidate);
 
                 const hasSupportedExtension = /\.(jpe?g|webp|png)$/i.test(withoutHash);
                 const baseName = hasSupportedExtension
-                    ? withoutHash.replace(/\.(jpe?g|webp|png)$/i, "")
-                    : withoutHash;
+                    ? normalizedCandidate.replace(/\.(jpe?g|webp|png)$/i, "")
+                    : normalizedCandidate;
 
                 [".jpg", ".jpeg", ".webp", ".png"].forEach((extension) => {
                     candidates.push(`${baseName}${extension}`);

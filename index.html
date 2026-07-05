@@ -6,6 +6,7 @@
     <title>KEPhSA Research Hub</title>
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="css/alumni.css">
+    <link rel="stylesheet" href="css/events.css">
     <script src="https://cdn.jsdelivr.net/npm/vanta@0.9.24/dist/vanta.net.min.js"></script>
 </head>
 
@@ -397,55 +398,17 @@
 
     </section>
 
-    <!-- ================= CONFERENCES ================= -->
-    <section id="conferences">
+   <!-- ================= EVENTS (LIVE FROM API) ================= -->
+<section id="events" class="events-section">
 
-        <h2>Conferences</h2>
+    <div class="events-section-heading">
+        <h2>Upcoming Events</h2>
+        <p>Join the latest conferences, workshops, and community gatherings from the KEPhSA network.</p>
+    </div>
 
-        <div class="image-grid">
-            <article class="image-card image-card-large" style="--card-bg:linear-gradient(135deg, rgba(161, 226, 255, 0.8), rgba(77, 175, 248, 0.9));">
-                <div class="image-card-bg" aria-hidden="true"></div>
-                <div class="image-card-overlay" aria-hidden="true"></div>
-                <div class="image-card-content">
-                    <div class="image-card-icon">🌐</div>
-                    <h3>Online Research Conference</h3>
-                    <p>Virtual conferences featuring research presentations, keynote speakers, workshops, and networking sessions.</p>
-                    <a href="#conferences" class="image-card-btn">Learn More</a>
-                </div>
-            </article>
+    <div id="events-container" class="image-grid events-grid" aria-live="polite"></div>
 
-            <article class="image-card image-card-large" style="--card-bg:linear-gradient(135deg, rgba(110, 196, 255, 0.8), rgba(31, 138, 229, 0.9));">
-                <div class="image-card-bg" aria-hidden="true"></div>
-                <div class="image-card-overlay" aria-hidden="true"></div>
-                <div class="image-card-content">
-                    <div class="image-card-icon">🏆</div>
-                    <h3>World Pharmacists Day Conference</h3>
-                    <p>An annual physical conference celebrating research, innovation, and excellence in pharmaceutical practice through poster presentations, oral presentations, awards, research exhibitions, and guest speakers.</p>
-                    <a href="#conferences" class="image-card-btn">Learn More</a>
-                </div>
-            </article>
-        </div>
-
-    </section>
-
-    <!-- ================= FEATURED EVENTS ================= -->
-    <section id="featured-mentors">
-
-        <h2>Research Mentors of the Year</h2>
-        <div class="mentor-grid">
-
-            <div class="mentor-card">
-                <img src="" alt="">
-                <h3>Mentor Name</h3>
-                <p>Institution</p>
-                <p>Area of expertise</p>
-                <p>Research interests</p>
-                <button type="button">Contact</button>
-            </div>
-
-        </div>
-
-    </section>
+</section>
 
 
     <!-- ================= ALUMNI ================= -->
@@ -740,6 +703,7 @@
 
 <!-- Your Script -->
 <script src="home.js"></script>
+<script src="js/events.js"></script>
 <script src="js/alumni.js"></script>
 <script src="js/popup.js"></script>
 
