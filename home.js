@@ -173,6 +173,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return { cardWidth, gap };
     };
 
+    let leadershipTransformFrame = 0;
+    let leadershipResizeTimer = 0;
+
     const updateLeadershipCarousel = (index) => {
         if (!leadershipCarousel || leadershipCards.length === 0) {
             return;
@@ -192,7 +195,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const wrapperWidth = leadershipCarousel.parentElement?.clientWidth || window.innerWidth;
         const centerOffset = wrapperWidth / 2 - cardWidth / 2;
         const offset = centerOffset - leadershipCurrentIndex * cardSpace;
-        leadershipCarousel.style.transform = `translateX(${offset}px)`;
+
+        if (leadershipTransformFrame) {
+            window.cancelAnimationFrame(leadershipTransformFrame);
+        }
+
+        leadershipTransformFrame = window.requestAnimationFrame(() => {
+            // hint the browser this element will be transformed
+            leadershipCarousel.style.willChange = "transform";
+            leadershipCarousel.style.transform = `translate3d(${offset}px, 0, 0)`;
+        });
     };
 
     const advanceLeadershipCarousel = () => {
@@ -249,8 +261,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }, { passive: true });
     }
 
+    // Debounced resize for carousel to avoid layout thrashing
     window.addEventListener("resize", () => {
-        updateLeadershipCarousel(leadershipCurrentIndex);
+        if (leadershipResizeTimer) clearTimeout(leadershipResizeTimer);
+        leadershipResizeTimer = setTimeout(() => {
+            updateLeadershipCarousel(leadershipCurrentIndex);
+        }, 120);
     });
 
     // Start auto-advance
@@ -258,6 +274,107 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initialize carousel to first card
     updateLeadershipCarousel(0);
+
+    // -----------------------
+    // Facilitators carousel
+    // -----------------------
+    const facilitatorsCarousel = document.querySelector("#facilitatorsCarousel");
+    const facilitatorsCards = Array.from(document.querySelectorAll("[data-facilitator-card]"));
+    let facilitatorsCurrentIndex = 0;
+    let facilitatorsAutoAdvanceInterval = null;
+    let facilitatorsTouchStartX = 0;
+    let facilitatorsTouchEndX = 0;
+    let facilitatorsTransformFrame = 0;
+    let facilitatorsResizeTimer = 0;
+
+    const getFacilitatorCardDimensions = () => {
+        const card = facilitatorsCards[0];
+        if (!card) return { cardWidth: 240, gap: 32 };
+        const cardWidth = card.offsetWidth;
+        const carouselStyle = window.getComputedStyle(facilitatorsCarousel);
+        const gap = parseFloat(carouselStyle.columnGap || carouselStyle.gap || "32");
+        return { cardWidth, gap };
+    };
+
+    const updateFacilitatorsCarousel = (index) => {
+        if (!facilitatorsCarousel || facilitatorsCards.length === 0) {
+            return;
+        }
+
+        facilitatorsCurrentIndex = ((index % facilitatorsCards.length) + facilitatorsCards.length) % facilitatorsCards.length;
+
+        facilitatorsCards.forEach((card, idx) => {
+            card.classList.toggle("active", idx === facilitatorsCurrentIndex);
+        });
+
+        const { cardWidth, gap } = getFacilitatorCardDimensions();
+        const cardSpace = cardWidth + gap;
+        const wrapperWidth = facilitatorsCarousel.parentElement?.clientWidth || window.innerWidth;
+        const centerOffset = wrapperWidth / 2 - cardWidth / 2;
+        const offset = centerOffset - facilitatorsCurrentIndex * cardSpace;
+
+        if (facilitatorsTransformFrame) {
+            window.cancelAnimationFrame(facilitatorsTransformFrame);
+        }
+
+        facilitatorsTransformFrame = window.requestAnimationFrame(() => {
+            facilitatorsCarousel.style.willChange = "transform";
+            facilitatorsCarousel.style.transform = `translate3d(${offset}px, 0, 0)`;
+        });
+    };
+
+    const advanceFacilitatorsCarousel = () => updateFacilitatorsCarousel(facilitatorsCurrentIndex + 1);
+
+    const startFacilitatorsAutoAdvance = () => {
+        if (facilitatorsAutoAdvanceInterval) clearInterval(facilitatorsAutoAdvanceInterval);
+        facilitatorsAutoAdvanceInterval = setInterval(advanceFacilitatorsCarousel, 4200);
+    };
+
+    const stopFacilitatorsAutoAdvance = () => {
+        if (facilitatorsAutoAdvanceInterval) {
+            clearInterval(facilitatorsAutoAdvanceInterval);
+            facilitatorsAutoAdvanceInterval = null;
+        }
+    };
+
+    const resetFacilitatorsAutoAdvance = () => {
+        stopFacilitatorsAutoAdvance();
+        startFacilitatorsAutoAdvance();
+    };
+
+    facilitatorsCards.forEach((card, index) => {
+        card.addEventListener("click", () => {
+            updateFacilitatorsCarousel(index);
+            resetFacilitatorsAutoAdvance();
+        });
+    });
+
+    if (facilitatorsCarousel) {
+        facilitatorsCarousel.addEventListener("touchstart", (e) => {
+            facilitatorsTouchStartX = e.changedTouches[0].clientX;
+            stopFacilitatorsAutoAdvance();
+        }, { passive: true });
+
+        facilitatorsCarousel.addEventListener("touchend", (e) => {
+            facilitatorsTouchEndX = e.changedTouches[0].clientX;
+            const swipeThreshold = 50;
+            const diff = facilitatorsTouchStartX - facilitatorsTouchEndX;
+            if (diff > swipeThreshold) {
+                advanceFacilitatorsCarousel();
+            }
+            resetFacilitatorsAutoAdvance();
+        }, { passive: true });
+
+        window.addEventListener("resize", () => {
+            if (facilitatorsResizeTimer) clearTimeout(facilitatorsResizeTimer);
+            facilitatorsResizeTimer = setTimeout(() => {
+                updateFacilitatorsCarousel(facilitatorsCurrentIndex);
+            }, 120);
+        });
+    }
+
+    startFacilitatorsAutoAdvance();
+    updateFacilitatorsCarousel(0);
 
     const getSelectedRadio = () => radios.find((radio) => radio.checked) || radios[0];
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -391,9 +508,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.addEventListener("hashchange", syncFromHash);
+    let globalResizeTimer = 0;
     window.addEventListener("resize", () => {
-        scheduleLayoutSync();
-        updateActiveSectionFromScroll();
+        if (globalResizeTimer) clearTimeout(globalResizeTimer);
+        globalResizeTimer = setTimeout(() => {
+            scheduleLayoutSync();
+            updateActiveSectionFromScroll();
+        }, 120);
     });
     window.addEventListener("scroll", () => {
         updateActiveSectionFromScroll();
