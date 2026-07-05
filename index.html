@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KEPhSA Research Hub</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="css/alumni.css">
     <script src="https://cdn.jsdelivr.net/npm/vanta@0.9.24/dist/vanta.net.min.js"></script>
 </head>
 
@@ -267,7 +268,7 @@
             <div class="leadership-carousel" id="leadershipCarousel">
                 
                 <div class="leader-card active" data-leader-card>
-                    <img src="media/logo.png" alt="Chairperson - Coming Soon" class="leader-image">
+                    <img src="media/leaders/chairperson.webp" alt="Chairperson - Coming Soon" class="leader-image">
                     <div class="leader-overlay" aria-hidden="true"></div>
                     <div class="leader-info">
                         <p class="leader-position">Chairperson</p>
@@ -277,7 +278,7 @@
                 </div>
 
                 <div class="leader-card" data-leader-card>
-                    <img src="media/logo.png" alt="Vice Chairperson - Coming Soon" class="leader-image">
+                    <img src="media/leaders/vice.webp" alt="Vice Chairperson - Coming Soon" class="leader-image">
                     <div class="leader-overlay" aria-hidden="true"></div>
                     <div class="leader-info">
                         <p class="leader-position">Vice Chairperson</p>
@@ -448,32 +449,212 @@
 
 
     <!-- ================= ALUMNI ================= -->
-    <section id="alumni">
+   <!-- ======================================================
+                    ALUMNI NETWORK
+======================================================= -->
 
-        <h2>Alumni Network</h2>
+<section id="alumni">
 
-        <p>Stay connected with former KEPhSA Research Hub members, celebrate achievements, and foster mentorship between alumni and current students.</p>
+    <div class="alumni-bg"></div>
 
-        <div class="alumni-profiles">
-            <ul>
-                <li>Alumni Profiles</li>
-                <li>Alumni News</li>
-                <li>Career Highlights</li>
-                <li>Research Publications</li>
-            </ul>
+    <div class="section-title">
+
+        <span>KEPhSA Research Community</span>
+
+        <h2>
+            Our Students & Alumni
+        </h2>
+
+        <p>
+            Meet members of the KEPhSA Research Hub—from current BPharm students to graduates beginning their professional journey. Discover their interests, research projects, and aspirations while building a stronger research community.
+        </p>
+
+    </div>
+
+
+    <!-- FEATURED PROFILE -->
+
+    <div class="alumni-feature">
+
+        <div class="alumni-image">
+
+            <img
+                id="alumniPortrait"
+                src=""
+                alt="Alumni Portrait">
+
+            <div class="image-gradient"></div>
 
         </div>
 
-        <div class="alumni-news">
-            <p>Update Your Profile</p>
+        <div class="alumni-content">
+
+            <span class="badge" id="graduationYear">
+                Class of 2024
+            </span>
+
+            <h2 id="alumniName">
+                Morgan Kwalya
+            </h2>
+
+            <h3 id="currentRole">
+                Fourth-Year BPharm Student
+            </h3>
+
+            <p class="organization">
+
+                <strong>Current Institution</strong>
+
+                <span id="organization">
+                    Kenyatta University
+                </span>
+
+            </p>
+
+            <p class="career">
+
+                <strong>Career Aspiration</strong>
+
+                <span id="careerGoal">
+                    Pharmaceutical Research Scientist
+                </span>
+
+            </p>
+
+            <p
+                id="bio"
+                class="bio">
+            </p>
+
+            <div
+                id="interestTags"
+                class="interest-tags">
+            </div>
+
+            <div class="projects">
+
+                <h4>Research Projects</h4>
+
+                <ul id="projectList">
+
+                </ul>
+
+            </div>
+
+            <div class="publications">
+
+                <h4>
+                    Publications
+                </h4>
+
+                <ul id="publicationList">
+
+                </ul>
+
+            </div>
+
+            <div class="buttons">
+
+                <a
+                    id="profileBtn"
+                    href="#">
+
+                    View Profile
+
+                </a>
+
+                <a
+                    target="_blank"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSe88kI9OuegXreu_icyKq1vohH0GN9w6izzxOxXsWQGMswBFw/viewform">
+
+                    Join the Network
+
+                </a>
+
+            </div>
 
         </div>
 
-        <div class="update-us">
-            <button>Update Your Profile</button>
+    </div>
+
+
+    <!-- THUMBNAILS -->
+
+    <div
+        id="thumbnailStrip"
+        class="thumbnail-strip">
+
+    </div>
+
+
+    <!-- COMMUNITY -->
+
+    <div class="community-stats">
+
+        <div>
+
+            <h3>120+</h3>
+
+            <span>Community Members</span>
+
         </div>
 
-    </section>
+        <div>
+
+            <h3>30+</h3>
+
+            <span>Current Students</span>
+
+        </div>
+
+        <div>
+
+            <h3>100+</h3>
+
+            <span>Graduates</span>
+
+        </div>
+
+        <div>
+
+            <h3>5+</h3>
+
+            <span>Research Projects</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- CTA -->
+
+    <div class="join-card">
+
+        <h2>
+
+            Become Part of the KEPhSA Research Community
+
+        </h2>
+
+        <p>
+
+            Whether you're a student, intern, graduate or researcher,
+            we'd love to showcase your journey and connect you with the
+            next generation of pharmacy researchers.
+
+        </p>
+
+        <a
+            target="_blank"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSe88kI9OuegXreu_icyKq1vohH0GN9w6izzxOxXsWQGMswBFw/viewform">
+
+            Join the Network →
+
+        </a>
+
+    </div>
+
+</section>
 
     <!-- ================= REPOSITORY ================= -->
     <section id="repository">
@@ -559,6 +740,8 @@
 
 <!-- Your Script -->
 <script src="home.js"></script>
+<script src="js/alumni.js"></script>
+<script src="js/popup.js"></script>
 
 
 </body>
