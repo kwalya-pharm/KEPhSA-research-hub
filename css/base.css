@@ -73,14 +73,14 @@ section:not(#home) {
 }
 
 section h2 {
-    margin: 0 0 var(--space-lg);
+    margin: 0 0 var(--space-xl);
     font-size: clamp(1.8rem, 3vw, 2.6rem);
     line-height: 1.08;
     letter-spacing: -0.02em;
 }
 
 section h3 {
-    margin: 0 0 var(--space-sm);
+    margin: 0 0 var(--space-md);
     font-size: clamp(1.08rem, 1.4vw, 1.28rem);
     line-height: 1.2;
 }

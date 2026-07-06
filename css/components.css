@@ -1155,7 +1155,7 @@
 
 .repository-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 16px;
     margin-top: 24px;
 }
@@ -1164,11 +1164,11 @@
     padding: 20px;
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(212, 237, 249, 0.14);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
-    backdrop-filter: blur(10px);
-    display: grid;
-    gap: 10px;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    display: block;
+    gap: 6px;
 }
 
 .repository-card--wide {
@@ -1207,20 +1207,21 @@
 
 .repository-video-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 14px;
 }
 
 .repository-video-card {
-    border-radius: 14px;
+    border-radius: 8px;
     overflow: hidden;
-    border: 1px solid rgba(212, 237, 249, 0.12);
-    background: #08111f;
+    border: none;
+    background: transparent;
 }
 
 .repository-video-card iframe {
     display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
     border: 0;
 }
@@ -1246,6 +1247,40 @@
 
 .repo-link--email {
     background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+}
+
+/* Simple list links for repository folders (no pill/button styling) */
+.repo-list {
+    margin: 8px 0 0 0;
+    padding: 0 0 0 18px;
+}
+.repo-list .repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.25rem 0.5rem;
+    background: rgba(43, 147, 255, 0.06);
+    color: var(--color-accent);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.18s var(--ease-standard), background 0.18s var(--ease-standard);
+}
+.repo-list .repo-link::after {
+    content: '\2197';
+    margin-left: 6px;
+    font-size: 0.92rem;
+    opacity: 0.95;
+}
+.repo-list .repo-link:hover {
+    background: rgba(43, 147, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+/* Add spacing between eyebrow label and following text in repository section */
+.repository-grid > div .card-eyebrow {
+    margin-bottom: var(--space-sm);
+    display: inline-flex;
 }
 
 #contact p {

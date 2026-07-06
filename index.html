@@ -392,7 +392,7 @@
 
         <div class="repository-grid">
 
-            <article class="repository-card repository-card--wide">
+            <div>
                 <div class="card-eyebrow">Featured media</div>
                 <h3>Highlights from the KEPhSA Research Hub</h3>
                 <div class="repository-video-grid">
@@ -403,28 +403,29 @@
                         <iframe src="https://www.youtube.com/embed/jDr3SmdPzxo?si=-4Aq-HCj2QG8_N3S" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                 </div>
-            </article>
+            </div>
 
-            <article class="repository-card">
+            <div>
                 <div class="card-eyebrow">Student projects</div>
-                <h3>Research projects & publications</h3>
                 <p>Browse student-led research projects, posters, and publications stored in the publications folder.</p>
-                <a class="repo-link" href="media/repository/publications/" target="_blank" rel="noreferrer">Open publications folder</a>
-            </article>
+                <ul class="repo-list">
+                    <li><a class="repo-link" href="media/repository/publications/" target="_blank" rel="noreferrer">Open publications folder</a></li>
+                </ul>
+            </div>
 
-            <article class="repository-card">
+            <div>
                 <div class="card-eyebrow">Annual reports</div>
-                <h3>Milestones & impact</h3>
                 <p>Explore annual reports and hub updates that document our growth, partnerships, and achievements.</p>
-                <a class="repo-link" href="media/repository/reports/" target="_blank" rel="noreferrer">Open reports folder</a>
-            </article>
+                <ul class="repo-list">
+                    <li><a class="repo-link" href="media/repository/reports/" target="_blank" rel="noreferrer">Open reports folder</a></li>
+                </ul>
+            </div>
 
-            <article class="repository-card repository-card--accent">
+            <div>
                 <div class="card-eyebrow">Submit your work</div>
-                <h3>Share a research project</h3>
                 <p>Send your project summary, abstract, or publication to the hub for review and visibility.</p>
-                <a class="repo-link repo-link--email" href="mailto:kephsa.research.hub@gmail.com?subject=Submit%20my%20research%20project%20to%20KEPhSA%20Research%20Hub">Submit to hub email</a>
-            </article>
+                <p><a class="repo-link repo-link--email" href="mailto:kephsa.research.hub@gmail.com?subject=Submit%20my%20research%20project%20to%20KEPhSA%20Research%20Hub">Email the hub to submit</a></p>
+            </div>
 
         </div>
 
@@ -446,44 +447,10 @@
     </section>
 
     <!-- ================= FOOTER ================= -->
-    <footer class="site-footer">
-        <div class="footer-links">
-
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#leadership">Leadership</a></li>
-                <li><a href="#programs">Programs</a></li>
-                <li><a href="#conferences">Conferences</a></li>
-                <li><a href="#mentors">Mentors</a></li>
-                <li><a href="#alumni">Alumni</a></li>
-                <li><a href="#repository">Repository</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-
-            <h3>Resources</h3>
-            <ul>
-                <li>Constitution</li>
-                <li>Membership Information</li>
-                <li>Privacy Policy</li>
-            </ul>
-
-        </div>
-
-        <div class="social-media">
-
-            <h3>Social Media</h3>
-            <ul>
-                <li>Facebook</li>
-                <li>Instagram</li>
-                <li>LinkedIn</li>
-                <li>X (Twitter)</li>
-            </ul>
-
-        </div>
-
-        <p>&copy; 2026 KEPhSA Research Hub. All Rights Reserved.</p>
-
+    <footer class="site-footer" role="contentinfo">
+        <hr class="footer-sep">
+        <p class="site-footer-copy">Website developed by Morgan Kwalya (bpharm) — WhatsApp: <a href="https://wa.me/254748052811" target="_blank" rel="noopener noreferrer">+254 748 052 811</a> / Email: <a href="mailto:kwalyamorgan042@gmail.com">kwalyamorgan042@gmail.com</a> — Websites at student pricing</p>
+        <p class="site-footer-meta">&copy; <span id="footer-year"></span> KEPhSA Research Hub</p>
     </footer>
     
         <!-- ================= javascript ================= -->
@@ -498,6 +465,13 @@
 <script src="js/events.js"></script>
 <script src="js/students.js?v=20260706"></script>
 <script src="js/popup.js?v=20260706"></script>
+
+<script>
+    (function(){
+        var el = document.getElementById('footer-year');
+        if(el) el.textContent = new Date().getFullYear();
+    })();
+</script>
 
 </body>
 </html>
