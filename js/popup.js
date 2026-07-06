@@ -37,6 +37,59 @@
         return [];
     };
 
+    const resolvePhotoUrl = (value = "") => {
+        const raw = String(value || "").trim();
+
+        if (!raw) {
+            return "";
+        }
+
+        if (/^https?:\/\//i.test(raw)) {
+            if (/drive\.google\.com/i.test(raw)) {
+                const match = raw.match(/(?:^|[?&])id=([^&]+)/i) || raw.match(/\/file\/d\/([^/]+)/i);
+                if (match?.[1]) {
+                    return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+                }
+            }
+
+            return raw;
+        }
+
+        const normalized = raw.replace(/^\.?\//, "");
+        const match = normalized.match(/([A-Za-z0-9_-]{10,})/);
+        if (match?.[1] && !normalized.includes(" ")) {
+            return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+        }
+
+        return raw;
+    };
+
+    const getStudentField = (student, keys, fallback = "") => {
+        for (const key of keys) {
+            if (!key) {
+                continue;
+            }
+
+            const value = student?.[key];
+            if (value !== undefined && value !== null) {
+                const text = String(value).trim();
+                if (text) {
+                    return text;
+                }
+            }
+        }
+
+        return fallback;
+    };
+
+    const normalizeStudent = (student) => ({
+        name: getStudentField(student, ["name", "Full Name", "full name", "Student Name", "student_name"], "Student spotlight"),
+        photo: resolvePhotoUrl(getStudentField(student, ["photo", "Upload your photo", "Photo", "Profile Photo", "image", "Image"], "")),
+        year: getStudentField(student, ["year", "Year of Study", "Year", "Study Year"], "Student member"),
+        interests: getStudentField(student, ["interests", "Research Interests", "Research Interest", "Areas of Interest"], "More details coming soon"),
+        career: getStudentField(student, ["career", "Career Ambitions", "Career", "Career Goals"], "")
+    });
+
     const getStudentData = async () => {
         if (Array.isArray(window.__KEPHSA_STUDENTS_DATA__)) {
             return window.__KEPHSA_STUDENTS_DATA__;
@@ -46,7 +99,7 @@
             return window.__KEPHSA_STUDENTS_LOAD_PROMISE__;
         }
 
-        window.__KEPHSA_STUDENTS_LOAD_PROMISE__ = fetch(STUDENTS_API_URL)
+        window.__KEPHSA_STUDENTS_LOAD_PROMISE__ = fetch(STUDENTS_API_URL, { cache: "no-store" })
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status ${response.status}`);
@@ -54,7 +107,7 @@
                 return response.json();
             })
             .then((payload) => {
-                const students = normalizeStudentsPayload(payload);
+                const students = normalizeStudentsPayload(payload).map(normalizeStudent);
                 window.__KEPHSA_STUDENTS_DATA__ = students;
                 return students;
             })
@@ -172,12 +225,14 @@
         const eventsListEl = root.querySelector(".popup-events-list");
 
         if (student) {
-            imageEl.src = student.photo;
-            imageEl.alt = student.name;
+            imageEl.src = student.photo || "media/logo.jpeg";
+            imageEl.alt = student.name || "Student spotlight";
             imageEl.style.display = "block";
-            nameEl.textContent = student.name;
-            roleEl.textContent = student.year;
-            quoteEl.textContent = "Research Interests: " + student.interests;
+            nameEl.textContent = student.name || "Student spotlight";
+            roleEl.textContent = student.year || "Student member";
+            quoteEl.textContent = student.interests
+                ? `Research Interests: ${student.interests}`
+                : "More details coming soon.";
         } else {
             imageEl.style.display = "none";
             nameEl.textContent = "No student profiles";

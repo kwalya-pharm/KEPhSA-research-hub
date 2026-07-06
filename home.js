@@ -320,6 +320,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let facilitatorsTransformFrame = 0;
     let facilitatorsResizeTimer = 0;
 
+    const isFacilitatorsMobile = () => window.matchMedia("(max-width: 768px)").matches;
+
     const getFacilitatorCardDimensions = () => {
         const card = facilitatorsCards[0];
         if (!card) return { cardWidth: 240, gap: 32 };
@@ -331,6 +333,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateFacilitatorsCarousel = (index) => {
         if (!facilitatorsCarousel || facilitatorsCards.length === 0) {
+            return;
+        }
+
+        const isMobile = isFacilitatorsMobile();
+        facilitatorsCarousel.classList.toggle("is-mobile-layout", isMobile);
+
+        if (isMobile) {
+            facilitatorsCarousel.style.transform = "translate3d(0, 0, 0)";
+            facilitatorsCards.forEach((card) => {
+                card.classList.add("active");
+            });
             return;
         }
 
@@ -356,10 +369,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    const advanceFacilitatorsCarousel = () => updateFacilitatorsCarousel(facilitatorsCurrentIndex + 1);
+    const advanceFacilitatorsCarousel = () => {
+        if (isFacilitatorsMobile()) {
+            return;
+        }
+
+        updateFacilitatorsCarousel(facilitatorsCurrentIndex + 1);
+    };
 
     const startFacilitatorsAutoAdvance = () => {
         if (facilitatorsAutoAdvanceInterval) clearInterval(facilitatorsAutoAdvanceInterval);
+        if (isFacilitatorsMobile()) {
+            return;
+        }
+
         facilitatorsAutoAdvanceInterval = setInterval(advanceFacilitatorsCarousel, 4200);
     };
 
@@ -392,7 +415,7 @@ document.addEventListener("DOMContentLoaded", () => {
             facilitatorsTouchEndX = e.changedTouches[0].clientX;
             const swipeThreshold = 50;
             const diff = facilitatorsTouchStartX - facilitatorsTouchEndX;
-            if (diff > swipeThreshold) {
+            if (!isFacilitatorsMobile() && diff > swipeThreshold) {
                 advanceFacilitatorsCarousel();
             }
             resetFacilitatorsAutoAdvance();
