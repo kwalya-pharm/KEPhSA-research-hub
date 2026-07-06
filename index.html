@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KEPhSA Research Hub</title>
     <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="css/alumni.css">
+    <link rel="stylesheet" href="css/students.css">
     <link rel="stylesheet" href="css/events.css">
     <script src="https://cdn.jsdelivr.net/npm/vanta@0.9.24/dist/vanta.net.min.js"></script>
 </head>
@@ -44,33 +44,41 @@
             KEPhSA Research Hub
         </div>
 
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-links" aria-label="Toggle primary navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <nav class="site-nav" aria-label="Primary navigation">
-            <div class="glass-radio-group nav-glass">
-                <input type="radio" name="site-nav" id="nav-home" data-target="#home" checked />
-                <label for="nav-home">Home</label>
+            <div class="site-nav-links" id="site-nav-links">
+                <div class="glass-radio-group nav-glass">
+                    <input type="radio" name="site-nav" id="nav-home" data-target="#home" checked />
+                    <label for="nav-home">Home</label>
 
-                <input type="radio" name="site-nav" id="nav-about" data-target="#about" />
-                <label for="nav-about">About Us</label>
+                    <input type="radio" name="site-nav" id="nav-about" data-target="#about" />
+                    <label for="nav-about">About Us</label>
 
-                <input type="radio" name="site-nav" id="nav-leadership" data-target="#leadership" />
-                <label for="nav-leadership">Leadership</label>
+                    <input type="radio" name="site-nav" id="nav-leadership" data-target="#leadership" />
+                    <label for="nav-leadership">Leadership</label>
 
-                <input type="radio" name="site-nav" id="nav-programs" data-target="#programs" />
-                <label for="nav-programs">Programs</label>
+                    <input type="radio" name="site-nav" id="nav-programs" data-target="#programs" />
+                    <label for="nav-programs">Programs</label>
 
-                <input type="radio" name="site-nav" id="nav-conferences" data-target="#conferences" />
-                <label for="nav-conferences">Conferences</label>
+                    <input type="radio" name="site-nav" id="nav-conferences" data-target="#conferences" />
+                    <label for="nav-conferences">Conferences</label>
 
-                <input type="radio" name="site-nav" id="nav-alumni" data-target="#alumni" />
-                <label for="nav-alumni">Alumni</label>
+                    <input type="radio" name="site-nav" id="nav-alumni" data-target="#alumni" />
+                    <label for="nav-alumni">Alumni</label>
 
-                <input type="radio" name="site-nav" id="nav-repository" data-target="#repository" />
-                <label for="nav-repository">Repository</label>
+                    <input type="radio" name="site-nav" id="nav-repository" data-target="#repository" />
+                    <label for="nav-repository">Repository</label>
 
-                <input type="radio" name="site-nav" id="nav-contact" data-target="#contact" />
-                <label for="nav-contact">Contact</label>
+                    <input type="radio" name="site-nav" id="nav-contact" data-target="#contact" />
+                    <label for="nav-contact">Contact</label>
 
-                <div class="glass-glider" aria-hidden="true"></div>
+                    <div class="glass-glider" aria-hidden="true"></div>
+                </div>
             </div>
         </nav>
     </header>
@@ -278,12 +286,12 @@
                 </div>
 
                 <div class="leader-card" data-leader-card>
-                    <img src="media/leaders/vice.jpg" alt="Vice Chairperson - Coming Soon" class="leader-image" loading="lazy" decoding="async">
+                    <img src="media/leaders/Ian Gitau.jpg" alt="Vice Chairperson - Coming Soon" class="leader-image" loading="lazy" decoding="async">
                     <div class="leader-overlay" aria-hidden="true"></div>
                     <div class="leader-info">
                         <p class="leader-position">Vice Chairperson</p>
-                        <h3 class="leader-name">Coming Soon</h3>
-                        <p class="leader-institution">Institution TBA</p>
+                        <h3 class="leader-name">Ian Gitau</h3>
+                        <p class="leader-institution">UON</p>
                     </div>
                 </div>
 
@@ -308,22 +316,22 @@
                 </div>
 
                 <div class="leader-card" data-leader-card>
-                    <img src="media/project-coordinator.png" alt="Project Coordinator - Coming Soon" class="leader-image" loading="lazy" decoding="async">
+                    <img src="media/leaders/project-coordinator.png" alt="Project Coordinator - Coming Soon" class="leader-image" loading="lazy" decoding="async">
                     <div class="leader-overlay" aria-hidden="true"></div>
                     <div class="leader-info">
                         <p class="leader-position">Project Coordinator</p>
-                        <h3 class="leader-name">Coming Soon</h3>
-                        <p class="leader-institution">Institution TBA</p>
+                        <h3 class="leader-name">Coming soon</h3>
+                        <p class="leader-institution">KEMU</p>
                     </div>
                 </div>
 
                 <div class="leader-card" data-leader-card>
-                    <img src="media/media-publicity-officer.png" alt="Media & Publicity Officer - Coming Soon" class="leader-image" loading="lazy" decoding="async">
+                    <img src="media/leaders/Gloria Sofiya.jpg" alt="Media & Publicity Officer - Coming Soon" class="leader-image" loading="lazy" decoding="async">
                     <div class="leader-overlay" aria-hidden="true"></div>
                     <div class="leader-info">
                         <p class="leader-position">Media & Publicity Officer</p>
-                        <h3 class="leader-name">Coming Soon</h3>
-                        <p class="leader-institution">Institution TBA</p>
+                        <h3 class="leader-name">Gloria Sofiya</h3>
+                        <p class="leader-institution">KEMU</p>
                     </div>
                 </div>
 
@@ -354,52 +362,27 @@
             <div class="leadership-carousel" id="facilitatorsCarousel">
 
                 <div class="leader-card" data-facilitator-card>
+                    <img src="media/leaders/patron.jpg" alt="Prof. Ermia Terefe" class="leader-image" loading="lazy" decoding="async">
+                    <div class="leader-overlay" aria-hidden="true"></div>
+                    <div class="leader-info">
+                        <p class="leader-position">Facilitator</p>
+                        <h3 class="leader-name">Prof. Ermia Terefe</h3>
+                        <p class="leader-topic">Introduction to Research and Innovation</p>
+                        <p class="leader-description">Consultant Pharmacologist and Assistant Professor with a strong focus on research mentorship.</p>
+                        <p class="leader-institution">USIU-A · Pharmacology</p>
+                        <a class="leader-link" href="https://linkedin.com/in/ermias-m-terefe-phd-38a29979" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="leader-card" data-facilitator-card>
                     <img src="media/Facilitators/Dr.%20Chris%20Muraguri.jfif" alt="Dr. Chris Muraguri" class="leader-image" loading="lazy" decoding="async">
                     <div class="leader-overlay" aria-hidden="true"></div>
                     <div class="leader-info">
                         <p class="leader-position">Facilitator</p>
                         <h3 class="leader-name">Dr. Chris Muraguri</h3>
-                        <p class="leader-institution"></p>
-                    </div>
-                </div>
-
-                <div class="leader-card" data-facilitator-card>
-                    <img src="media/Facilitators/Dr.%20Fred%20Monari.jpg" alt="Dr. Fred Monari" class="leader-image" loading="lazy" decoding="async">
-                    <div class="leader-overlay" aria-hidden="true"></div>
-                    <div class="leader-info">
-                        <p class="leader-position">Facilitator</p>
-                        <h3 class="leader-name">Dr. Fred Monari</h3>
-                        <p class="leader-institution"></p>
-                    </div>
-                </div>
-
-                <div class="leader-card" data-facilitator-card>
-                    <img src="media/Facilitators/Dr.%20Godwill%20Ozoechina.jpg" alt="Dr. Godwill Ozoechina" class="leader-image" loading="lazy" decoding="async">
-                    <div class="leader-overlay" aria-hidden="true"></div>
-                    <div class="leader-info">
-                        <p class="leader-position">Facilitator</p>
-                        <h3 class="leader-name">Dr. Godwill Ozoechina</h3>
-                        <p class="leader-institution"></p>
-                    </div>
-                </div>
-
-                <div class="leader-card" data-facilitator-card>
-                    <img src="media/Facilitators/Dr.%20Sunday%20Okafor.jpg" alt="Dr. Sunday Okafor" class="leader-image" loading="lazy" decoding="async">
-                    <div class="leader-overlay" aria-hidden="true"></div>
-                    <div class="leader-info">
-                        <p class="leader-position">Facilitator</p>
-                        <h3 class="leader-name">Dr. Sunday Okafor</h3>
-                        <p class="leader-institution"></p>
-                    </div>
-                </div>
-
-                <div class="leader-card" data-facilitator-card>
-                    <img src="media/Facilitators/Dr.%20victor%20Mobegi.jpg" alt="Dr. Victor Mobegi" class="leader-image" loading="lazy" decoding="async">
-                    <div class="leader-overlay" aria-hidden="true"></div>
-                    <div class="leader-info">
-                        <p class="leader-position">Facilitator</p>
-                        <h3 class="leader-name">Dr. Victor Mobegi</h3>
-                        <p class="leader-institution"></p>
+                        <p class="leader-topic">Conceptualization in Innovation</p>
+                        <p class="leader-description">Visionary pharmacist and healthcare innovator, pioneering 3D printing in maxillofacial surgery in Kenya.</p>
+                        <p class="leader-institution">USIU-A</p>
                     </div>
                 </div>
 
@@ -409,7 +392,71 @@
                     <div class="leader-info">
                         <p class="leader-position">Facilitator</p>
                         <h3 class="leader-name">Dr. Nortan Hashad</h3>
-                        <p class="leader-institution"></p>
+                        <p class="leader-topic">Literature Review</p>
+                        <p class="leader-description">PhD in Clinical Pharmacy, academic program chair at Higher Colleges of Technology, Dubai, and Fellow of the Higher Education Academy.</p>
+                        <p class="leader-institution">Robert Gordon University · Pharmacology</p>
+                    </div>
+                </div>
+
+                <div class="leader-card" data-facilitator-card>
+                    <img src="media/Facilitators/Dr.%20Fred%20Monari.jpg" alt="Dr. Fred Monari" class="leader-image" loading="lazy" decoding="async">
+                    <div class="leader-overlay" aria-hidden="true"></div>
+                    <div class="leader-info">
+                        <p class="leader-position">Facilitator</p>
+                        <h3 class="leader-name">Dr. Fred Monari</h3>
+                        <p class="leader-topic">Research Methodology and Design</p>
+                        <p class="leader-description">Statistician, lecturer and PhD holder in applied statistics with expertise in data analysis and disease modelling.</p>
+                        <p class="leader-institution">Kisii University · Mathematics &amp; Actuarial Sciences</p>
+                        <a class="leader-link" href="https://www.linkedin.com/in/fred-monari-phd-8840a242/" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="leader-card" data-facilitator-card>
+                    <img src="media/Facilitators/Dr.%20victor%20Mobegi.jpg" alt="Dr. Victor Mobegi" class="leader-image" loading="lazy" decoding="async">
+                    <div class="leader-overlay" aria-hidden="true"></div>
+                    <div class="leader-info">
+                        <p class="leader-position">Facilitator</p>
+                        <h3 class="leader-name">Dr. Victor Mobegi</h3>
+                        <p class="leader-topic">Data Collection and Analysis</p>
+                        <p class="leader-description">Senior lecturer in biochemistry and expert in pathogen genomics and bioinformatics.</p>
+                        <p class="leader-institution">University of Nairobi · Biochemistry</p>
+                    </div>
+                </div>
+
+                <div class="leader-card" data-facilitator-card>
+                    <img src="media/Facilitators/Dr.%20Godwill%20Ozoechina.jpg" alt="Dr. Godswill Uzoechina" class="leader-image" loading="lazy" decoding="async">
+                    <div class="leader-overlay" aria-hidden="true"></div>
+                    <div class="leader-info">
+                        <p class="leader-position">Facilitator</p>
+                        <h3 class="leader-name">Dr. Godswill Uzoechina</h3>
+                        <p class="leader-topic">Writing a Scientific Paper</p>
+                        <p class="leader-description">Medical researcher and peer reviewer specialising in neuro-oncology and scientific communication.</p>
+                        <p class="leader-institution">University of Nigeria</p>
+                        <a class="leader-link" href="https://linkedin.com/in/uzoechina" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="leader-card" data-facilitator-card>
+                    <div class="leader-image leader-image-placeholder" role="img" aria-label="Miss Vani Dhaka"><span>V</span></div>
+                    <div class="leader-overlay" aria-hidden="true"></div>
+                    <div class="leader-info">
+                        <p class="leader-position">Facilitator</p>
+                        <h3 class="leader-name">Miss Vani Dhaka</h3>
+                        <p class="leader-topic">Citation, Referencing and Plagiarism</p>
+                        <p class="leader-description">Research support facilitator with a focus on scholarly writing standards and academic integrity.</p>
+                        <p class="leader-institution">IJMRRS</p>
+                    </div>
+                </div>
+
+                <div class="leader-card" data-facilitator-card>
+                    <img src="media/Facilitators/Dr.%20Sunday%20Okafor.jpg" alt="Prof. Sunday Okafor" class="leader-image" loading="lazy" decoding="async">
+                    <div class="leader-overlay" aria-hidden="true"></div>
+                    <div class="leader-info">
+                        <p class="leader-position">Facilitator</p>
+                        <h3 class="leader-name">Prof. Sunday Okafor</h3>
+                        <p class="leader-topic">Prototyping, MVP Development, Testing, Validation and Iteration</p>
+                        <p class="leader-description">Associate Professor of medicinal chemistry and drug design, supporting innovation from concept to prototype.</p>
+                        <p class="leader-institution">University of Nigeria</p>
                     </div>
                 </div>
 
@@ -419,7 +466,9 @@
                     <div class="leader-info">
                         <p class="leader-position">Facilitator</p>
                         <h3 class="leader-name">Jenner Akwale</h3>
-                        <p class="leader-institution"></p>
+                        <p class="leader-topic">Commercialization and Market Readiness</p>
+                        <p class="leader-description">Registered patent attorney, graduate engineer and IP strategist supporting commercialization pathways.</p>
+                        <p class="leader-institution">JKUAT</p>
                     </div>
                 </div>
 
@@ -442,214 +491,45 @@
 
 </section>
 
+<!-- ================= CURRENT STUDENTS ================= -->
 
-    <!-- ================= ALUMNI ================= -->
-   <!-- ======================================================
-                    ALUMNI NETWORK
-======================================================= -->
+<section id="students">
 
-<section id="alumni">
+    <div class="students-section-heading">
+        <span class="section-kicker">Student network</span>
+        <h2>Meet the students shaping research in pharmacy</h2>
+        <p>Explore current student researchers, their interests, and the growing projects that are defining the KEPhSA Research Hub.</p>
+    </div>
 
-    <div class="alumni-bg"></div>
+    <div class="students-toolbar">
 
-    <div class="section-title">
+        <label class="students-search" for="studentSearch">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="6"></circle>
+                <path d="m20 20-4.2-4.2"></path>
+            </svg>
+            <input
+                type="search"
+                id="studentSearch"
+                placeholder="Search students...">
+        </label>
 
-        <span>KEPhSA Research Community</span>
-
-        <h2>
-            Our Students & Alumni
-        </h2>
-
-        <p>
-            Meet members of the KEPhSA Research Hub—from current BPharm students to graduates beginning their professional journey. Discover their interests, research projects, and aspirations while building a stronger research community.
-        </p>
+        <select id="yearFilter">
+            <option value="">All Years</option>
+            <option>First Year</option>
+            <option>Second Year</option>
+            <option>Third Year</option>
+            <option>Fourth Year</option>
+            <option>Fifth Year</option>
+        </select>
 
     </div>
 
-
-    <!-- FEATURED PROFILE -->
-
-    <div class="alumni-feature">
-
-        <div class="alumni-image">
-
-            <img
-                id="alumniPortrait"
-                src=""
-                alt="Alumni Portrait">
-
-            <div class="image-gradient"></div>
-
-        </div>
-
-        <div class="alumni-content">
-
-            <span class="badge" id="graduationYear">
-                Class of 2024
-            </span>
-
-            <h2 id="alumniName">
-                Morgan Kwalya
-            </h2>
-
-            <h3 id="currentRole">
-                Fourth-Year BPharm Student
-            </h3>
-
-            <p class="organization">
-
-                <strong>Current Institution</strong>
-
-                <span id="organization">
-                    Kenyatta University
-                </span>
-
-            </p>
-
-            <p class="career">
-
-                <strong>Career Aspiration</strong>
-
-                <span id="careerGoal">
-                    Pharmaceutical Research Scientist
-                </span>
-
-            </p>
-
-            <p
-                id="bio"
-                class="bio">
-            </p>
-
-            <div
-                id="interestTags"
-                class="interest-tags">
-            </div>
-
-            <div class="projects">
-
-                <h4>Research Projects</h4>
-
-                <ul id="projectList">
-
-                </ul>
-
-            </div>
-
-            <div class="publications">
-
-                <h4>
-                    Publications
-                </h4>
-
-                <ul id="publicationList">
-
-                </ul>
-
-            </div>
-
-            <div class="buttons">
-
-                <a
-                    id="profileBtn"
-                    href="#">
-
-                    View Profile
-
-                </a>
-
-                <a
-                    target="_blank"
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSe88kI9OuegXreu_icyKq1vohH0GN9w6izzxOxXsWQGMswBFw/viewform">
-
-                    Join the Network
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- THUMBNAILS -->
-
-    <div
-        id="thumbnailStrip"
-        class="thumbnail-strip">
-
-    </div>
-
-
-    <!-- COMMUNITY -->
-
-    <div class="community-stats">
-
-        <div>
-
-            <h3>120+</h3>
-
-            <span>Community Members</span>
-
-        </div>
-
-        <div>
-
-            <h3>30+</h3>
-
-            <span>Current Students</span>
-
-        </div>
-
-        <div>
-
-            <h3>100+</h3>
-
-            <span>Graduates</span>
-
-        </div>
-
-        <div>
-
-            <h3>5+</h3>
-
-            <span>Research Projects</span>
-
-        </div>
-
-    </div>
-
-
-    <!-- CTA -->
-
-    <div class="join-card">
-
-        <h2>
-
-            Become Part of the KEPhSA Research Community
-
-        </h2>
-
-        <p>
-
-            Whether you're a student, intern, graduate or researcher,
-            we'd love to showcase your journey and connect you with the
-            next generation of pharmacy researchers.
-
-        </p>
-
-        <a
-            target="_blank"
-            href="https://docs.google.com/forms/d/e/1FAIpQLSe88kI9OuegXreu_icyKq1vohH0GN9w6izzxOxXsWQGMswBFw/viewform">
-
-            Join the Network →
-
-        </a>
-
-    </div>
+    <div id="studentsGrid" aria-live="polite"></div>
 
 </section>
+
+
 
     <!-- ================= REPOSITORY ================= -->
     <section id="repository">
@@ -766,7 +646,7 @@
 <!-- Your Script -->
 <script src="home.js"></script>
 <script src="js/events.js"></script>
-<script src="js/alumni.js"></script>
+<script src="js/students.js"></script>
 <script src="js/popup.js"></script>
 
 

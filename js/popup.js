@@ -1,6 +1,6 @@
 (() => {
     const STORAGE_KEY = "kephsa-popup-dismissed";
-    const ALUMNI_API_URL = "https://script.google.com/macros/s/AKfycbxhGe5LCYuDof4ChP1px7CDtkRywT18uWexbZBfvYGpnTZ4fBGzQ6RU4Hyvd-8AyPTV/exec";
+    const STUDENTS_API_URL = "https://script.google.com/macros/s/AKfycbwN5F5d_nDGaPavl6FgiigJrJY1VAoEnYOu9QIMS66Ge0WINuPfXRRHIBUqN3z40vbc1w/exec";
     const EVENTS_API_URL = "https://script.google.com/macros/s/AKfycbyVHUlybyAt8RdE2qu1iWH5_ff46jWWCH7hJg5l50K6XKaGQj3nHdO9TpYw-t0Vr6f9dQ/exec";
 
     const slugify = (value) => String(value || "")
@@ -21,13 +21,13 @@
         return fallback;
     };
 
-    const normalizeAlumniPayload = (payload) => {
+    const normalizeStudentsPayload = (payload) => {
         if (Array.isArray(payload)) {
             return payload;
         }
 
         if (payload && typeof payload === "object") {
-            for (const key of ["alumni", "data", "records", "items"]) {
+            for (const key of ["students", "data", "records", "items"]) {
                 if (Array.isArray(payload[key])) {
                     return payload[key];
                 }
@@ -37,16 +37,16 @@
         return [];
     };
 
-    const getAlumniData = async () => {
-        if (Array.isArray(window.__KEPHSA_ALUMNI_DATA__)) {
-            return window.__KEPHSA_ALUMNI_DATA__;
+    const getStudentData = async () => {
+        if (Array.isArray(window.__KEPHSA_STUDENTS_DATA__)) {
+            return window.__KEPHSA_STUDENTS_DATA__;
         }
 
-        if (window.__KEPHSA_ALUMNI_LOAD_PROMISE__) {
-            return window.__KEPHSA_ALUMNI_LOAD_PROMISE__;
+        if (window.__KEPHSA_STUDENTS_LOAD_PROMISE__) {
+            return window.__KEPHSA_STUDENTS_LOAD_PROMISE__;
         }
 
-        window.__KEPHSA_ALUMNI_LOAD_PROMISE__ = fetch(ALUMNI_API_URL)
+        window.__KEPHSA_STUDENTS_LOAD_PROMISE__ = fetch(STUDENTS_API_URL)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status ${response.status}`);
@@ -54,16 +54,16 @@
                 return response.json();
             })
             .then((payload) => {
-                const alumni = normalizeAlumniPayload(payload);
-                window.__KEPHSA_ALUMNI_DATA__ = alumni;
-                return alumni;
+                const students = normalizeStudentsPayload(payload);
+                window.__KEPHSA_STUDENTS_DATA__ = students;
+                return students;
             })
             .catch(() => {
-                window.__KEPHSA_ALUMNI_DATA__ = [];
+                window.__KEPHSA_STUDENTS_DATA__ = [];
                 return [];
             });
 
-        return window.__KEPHSA_ALUMNI_LOAD_PROMISE__;
+        return window.__KEPHSA_STUDENTS_LOAD_PROMISE__;
     };
 
     const normalizeEventsPayload = (payload) => {
@@ -160,91 +160,48 @@
         return [...new Set(candidates.filter(Boolean))];
     };
 
-    const resolveSpotlightImage = (person) => {
-        return new Promise((resolve) => {
-            const candidates = buildImageCandidates(person, normalizeValue(person, ["portrait", "image", "avatar"], ""));
-            if (!candidates.length) {
-                resolve("");
-                return;
-            }
-
-            let attempt = 0;
-            const tryNext = () => {
-                if (attempt >= candidates.length) {
-                    resolve("");
-                    return;
-                }
-
-                const candidate = candidates[attempt++];
-                const image = new Image();
-                image.onload = () => resolve(candidate);
-                image.onerror = () => tryNext();
-                image.src = candidate;
-            };
-
-            tryNext();
-        });
+    const resolveSpotlightImage = async (student) => {
+        return student.photo || "";
     };
 
-    const fillPopupContent = async (root, spotlight, events) => {
+    const fillPopupContent = async (root, student, events) => {
         const imageEl = root.querySelector("#popup-image");
         const nameEl = root.querySelector("#popup-spotlight-name");
         const roleEl = root.querySelector("#popup-spotlight-role");
         const quoteEl = root.querySelector("#popup-spotlight-quote");
         const eventsListEl = root.querySelector(".popup-events-list");
 
-        if (spotlight) {
-            const spotlightName = normalizeValue(spotlight, ["name"], "Alumni Spotlight");
-            const spotlightRole = normalizeValue(spotlight, ["currentRole", "role", "position"], "KEPhSA member");
-            const spotlightQuote = normalizeValue(spotlight, ["bio", "about", "quote"], "Research grows through connection and mentorship.");
-            const spotlightImage = await resolveSpotlightImage(spotlight);
-
-            if (imageEl) {
-                imageEl.src = spotlightImage;
-                imageEl.alt = spotlightName;
-                imageEl.style.display = spotlightImage ? "block" : "none";
-            }
-
-            if (nameEl) {
-                nameEl.textContent = spotlightName;
-            }
-            if (roleEl) {
-                roleEl.textContent = spotlightRole;
-            }
-            if (quoteEl) {
-                const quoteText = String(spotlightQuote).trim();
-                quoteEl.textContent = `“${quoteText.slice(0, 140)}${quoteText.length > 140 ? "…" : ""}”`;
-            }
+        if (student) {
+            imageEl.src = student.photo;
+            imageEl.alt = student.name;
+            imageEl.style.display = "block";
+            nameEl.textContent = student.name;
+            roleEl.textContent = student.year;
+            quoteEl.textContent = "Research Interests: " + student.interests;
         } else {
-            if (imageEl) {
-                imageEl.removeAttribute("src");
-                imageEl.style.display = "none";
-            }
-            if (nameEl) {
-                nameEl.textContent = "No alumni spotlight yet";
-            }
-            if (roleEl) {
-                roleEl.textContent = "Updates will appear here soon";
-            }
-            if (quoteEl) {
-                quoteEl.textContent = "The alumni feed is currently unavailable.";
-            }
+            imageEl.style.display = "none";
+            nameEl.textContent = "No student profiles";
+            roleEl.textContent = "";
+            quoteEl.textContent = "";
         }
 
         if (eventsListEl) {
-            const eventMarkup = (events && events.length ? events : [{ title: "No upcoming updates", description: "Check back soon for new opportunities.", image: "" }])
+            const html = (events.length ? events : [{
+                title: "No upcoming updates",
+                description: "Check back later."
+            }])
                 .map((event) => `
                     <li class="popup-event-item">
-                        <img class="popup-event-image" src="${getEventImageSrc(event)}" alt="${String(event.title || "Upcoming event").replace(/"/g, "&quot;")}" onerror="this.src='media/logo.png'">
+                        <img class="popup-event-image" src="${getEventImageSrc(event)}" alt="${event.title}">
                         <div class="popup-event-copy">
-                            <strong>${String(event.title || "Upcoming event")}</strong>
-                            <span>${String(event.description || "More details coming soon")}</span>
+                            <strong>${event.title}</strong>
+                            <span>${event.description}</span>
                         </div>
                     </li>
                 `)
                 .join("");
 
-            eventsListEl.innerHTML = eventMarkup;
+            eventsListEl.innerHTML = html;
         }
     };
 
@@ -279,14 +236,14 @@
                     <div class="popup-shell">
                         <section class="popup-card popup-card-spotlight">
                             <div class="popup-card-title-row">
-                                <h3>Alumni spotlight</h3>
+                                <h3>Student Spotlight</h3>
                                 <span>Live</span>
                             </div>
                             <div class="popup-spotlight">
                                 <img class="popup-image" id="popup-image" alt="">
                                 <div class="popup-spotlight-copy">
                                     <h4 id="popup-spotlight-name">Loading spotlight…</h4>
-                                    <p id="popup-spotlight-role">Gathering the latest alumni profile</p>
+                                    <p id="popup-spotlight-role">Loading current student...</p>
                                     <blockquote id="popup-spotlight-quote">Please wait while the latest community update is loaded.</blockquote>
                                 </div>
                             </div>
@@ -325,13 +282,13 @@
             fab.classList.add("is-hidden");
         }
 
-        const [alumniPeople, events] = await Promise.all([
-            getAlumniData(),
+        const [students, events] = await Promise.all([
+            getStudentData(),
             getEventData()
         ]);
 
-        const spotlight = Array.isArray(alumniPeople) && alumniPeople.length
-            ? alumniPeople[Math.floor(Math.random() * alumniPeople.length)]
+        const spotlight = students.length
+            ? students[Math.floor(Math.random() * students.length)]
             : null;
         await fillPopupContent(root, spotlight, events);
 

@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const preloadContinueButton = document.querySelector(".preload-continue");
     const homeSection = document.querySelector("#home");
     const navGroup = document.querySelector(".nav-glass");
+    const navToggle = document.querySelector(".nav-toggle");
+    const siteNav = document.querySelector(".site-nav");
+    const siteHeader = document.querySelector(".site-header");
     const radios = Array.from(document.querySelectorAll('.nav-glass input[type="radio"]'));
     const labels = Array.from(document.querySelectorAll('.nav-glass label'));
     const glider = document.querySelector(".glass-glider");
@@ -68,6 +71,36 @@ document.addEventListener("DOMContentLoaded", () => {
             maxDistance: 22,
             spacing: 18,
             showDots: true
+        });
+    }
+
+    const closeMobileNav = () => {
+        if (!siteNav || !navToggle) {
+            return;
+        }
+
+        siteNav.classList.remove("is-open");
+        siteHeader?.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-open");
+    };
+
+    const openMobileNav = () => {
+        if (!siteNav || !navToggle) {
+            return;
+        }
+
+        siteNav.classList.add("is-open");
+        siteHeader?.classList.add("is-open");
+        navToggle.setAttribute("aria-expanded", "true");
+        document.body.classList.add("nav-open");
+    };
+
+    if (navToggle && siteNav) {
+        navToggle.addEventListener("click", () => {
+            const isOpen = siteNav.classList.toggle("is-open");
+            navToggle.setAttribute("aria-expanded", String(isOpen));
+            document.body.classList.toggle("nav-open", isOpen);
         });
     }
 
@@ -420,7 +453,23 @@ document.addEventListener("DOMContentLoaded", () => {
     radios.forEach((radio) => {
         radio.addEventListener("change", () => {
             syncSelection(radio, true);
+            if (window.innerWidth <= 900) {
+                closeMobileNav();
+            }
         });
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!siteNav || !siteNav.classList.contains("is-open")) {
+            return;
+        }
+
+        const clickedInsideNav = siteNav.contains(event.target);
+        const clickedToggle = navToggle?.contains(event.target);
+
+        if (!clickedInsideNav && !clickedToggle) {
+            closeMobileNav();
+        }
     });
 
     const syncFromHash = () => {
@@ -510,6 +559,10 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("hashchange", syncFromHash);
     let globalResizeTimer = 0;
     window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) {
+            closeMobileNav();
+        }
+
         if (globalResizeTimer) clearTimeout(globalResizeTimer);
         globalResizeTimer = setTimeout(() => {
             scheduleLayoutSync();
