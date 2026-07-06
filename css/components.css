@@ -610,13 +610,14 @@
     max-width: 100%;
     aspect-ratio: 4 / 5;
     flex-shrink: 0;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
     display: block;
     border: 0;
     outline: none;
     box-shadow: none;
     background: transparent;
+    border-radius: 0;
 }
 
 .leader-overlay {

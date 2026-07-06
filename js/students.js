@@ -6,6 +6,12 @@ const searchInput = document.getElementById("studentSearch");
 const yearFilter = document.getElementById("yearFilter");
 
 let students = [];
+let activeStudentList = [];
+let renderedStudentCount = 0;
+let isRenderingStudentBatch = false;
+let studentObserver = null;
+const STUDENT_CHUNK_SIZE = 12;
+const BACKEND_SORT_KEYS = ["sort", "sortOrder", "order", "position", "sequence", "index", "priority"];
 
 function escapeHtml(value = "") {
     return String(value ?? "")
@@ -81,6 +87,53 @@ function resolvePhotoUrl(value = "") {
     return raw;
 }
 
+function getBackendSortValue(student) {
+    for (const key of BACKEND_SORT_KEYS) {
+        if (!key) {
+            continue;
+        }
+
+        const value = student?.[key];
+        if (value === undefined || value === null || value === "") {
+            continue;
+        }
+
+        const numericValue = Number(value);
+        if (!Number.isNaN(numericValue)) {
+            return numericValue;
+        }
+
+        return String(value).trim().toLowerCase();
+    }
+
+    return null;
+}
+
+function sortStudentsByBackendOrder(list) {
+    return list
+        .map((student, index) => ({ student, index }))
+        .sort((left, right) => {
+            const leftSort = getBackendSortValue(left.student);
+            const rightSort = getBackendSortValue(right.student);
+
+            if (leftSort !== null && rightSort !== null) {
+                if (typeof leftSort === "number" && typeof rightSort === "number") {
+                    if (leftSort !== rightSort) {
+                        return leftSort - rightSort;
+                    }
+                } else {
+                    const textCompare = String(leftSort).localeCompare(String(rightSort), undefined, { sensitivity: "base" });
+                    if (textCompare !== 0) {
+                        return textCompare;
+                    }
+                }
+            }
+
+            return left.index - right.index;
+        })
+        .map(({ student }) => student);
+}
+
 function normalizeStudent(student) {
     const name = getStudentField(student, ["name", "Full Name", "full name", "Student Name", "student_name"], "Student profile");
     const photo = resolvePhotoUrl(getStudentField(student, ["photo", "Upload your photo", "Photo", "Profile Photo", "image", "Image"], ""));
@@ -100,6 +153,7 @@ function normalizeStudent(student) {
         linkedIn,
         projects,
         publications,
+        __backendSortValue: getBackendSortValue(student),
     };
 }
 
@@ -171,10 +225,42 @@ function createDescriptionModal(student) {
     document.body.appendChild(overlay);
 }
 
+function disconnectStudentObserver() {
+    if (studentObserver) {
+        studentObserver.disconnect();
+        studentObserver = null;
+    }
+}
+
+function attachStudentObserver() {
+    disconnectStudentObserver();
+
+    const sentinel = document.createElement("div");
+    sentinel.className = "student-scroll-sentinel";
+    sentinel.setAttribute("aria-hidden", "true");
+    grid.appendChild(sentinel);
+
+    studentObserver = new IntersectionObserver((entries) => {
+        const shouldLoadMore = entries.some((entry) => entry.isIntersecting);
+
+        if (shouldLoadMore && !isRenderingStudentBatch) {
+            renderStudentBatch();
+        }
+    }, {
+        rootMargin: "240px 0px 240px 0px"
+    });
+
+    studentObserver.observe(sentinel);
+}
+
 function renderStudents(list) {
+    activeStudentList = Array.isArray(list) ? list : [];
+    renderedStudentCount = 0;
+    isRenderingStudentBatch = false;
+    disconnectStudentObserver();
     grid.innerHTML = "";
 
-    if (!list.length) {
+    if (!activeStudentList.length) {
         const empty = document.createElement("div");
         empty.className = "student-empty";
         empty.innerHTML = "No student profiles matched your search yet. Try a different keyword or year.";
@@ -182,7 +268,22 @@ function renderStudents(list) {
         return;
     }
 
-    list.forEach((student) => {
+    attachStudentObserver();
+    renderStudentBatch();
+}
+
+function renderStudentBatch() {
+    if (isRenderingStudentBatch || renderedStudentCount >= activeStudentList.length) {
+        disconnectStudentObserver();
+        return;
+    }
+
+    isRenderingStudentBatch = true;
+
+    const nextCount = Math.min(activeStudentList.length, renderedStudentCount + STUDENT_CHUNK_SIZE);
+    const nextStudents = activeStudentList.slice(renderedStudentCount, nextCount);
+
+    nextStudents.forEach((student) => {
         const card = document.createElement("article");
         card.className = "student-card";
 
@@ -257,6 +358,13 @@ function renderStudents(list) {
 
         grid.appendChild(card);
     });
+
+    renderedStudentCount = nextCount;
+    isRenderingStudentBatch = false;
+
+    if (renderedStudentCount >= activeStudentList.length) {
+        disconnectStudentObserver();
+    }
 }
 
 function applyFilters() {
@@ -308,7 +416,7 @@ async function loadStudents() {
             return response.json();
         })
         .then((data) => {
-            students = normalizeStudentsPayload(data).map(normalizeStudent);
+            students = sortStudentsByBackendOrder(normalizeStudentsPayload(data).map(normalizeStudent));
             window.__KEPHSA_STUDENTS_DATA__ = students;
             return students;
         })
