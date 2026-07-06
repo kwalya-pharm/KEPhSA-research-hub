@@ -183,10 +183,7 @@ export const createNavController = ({
     radios.forEach((radio) => {
       radio.addEventListener("change", () => {
         setActiveNav(radio.dataset.target, { shouldScroll: true, force: true });
-
-        if (window.innerWidth <= MOBILE_NAV_BREAKPOINT) {
-          closeMobileNav();
-        }
+        closeMobileNav();
       });
     });
 

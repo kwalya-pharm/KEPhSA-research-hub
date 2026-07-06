@@ -137,6 +137,40 @@ function isMobileViewport() {
     return window.matchMedia("(max-width: 768px)").matches;
 }
 
+function createDescriptionModal(student) {
+    const overlay = document.createElement("div");
+    overlay.className = "popup-overlay is-open";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", `${student.name} profile`);
+
+    overlay.innerHTML = `
+        <div class="popup-modal">
+            <button type="button" class="popup-close" aria-label="Close profile">×</button>
+            <div class="student-description-modal">
+                <p class="popup-kicker">Student profile</p>
+                <h2 class="student-name">${escapeHtml(student.name || "Student profile")}</h2>
+                <span class="student-year">${escapeHtml(student.year || "Year of study")}</span>
+                <p>${escapeHtml(student.career || "Research-focused pharmacy student")}</p>
+                ${student.interests ? `<p><strong>Interests:</strong> ${escapeHtml(student.interests)}</p>` : ""}
+                ${student.projects ? `<p><strong>Projects:</strong> ${escapeHtml(student.projects)}</p>` : ""}
+                ${student.publications ? `<p><strong>Publications:</strong> ${escapeHtml(student.publications)}</p>` : ""}
+                ${student.linkedIn ? `<p><a href="${escapeHtml(student.linkedIn)}" target="_blank" rel="noreferrer">View profile</a></p>` : ""}
+            </div>
+        </div>
+    `;
+
+    const close = () => overlay.remove();
+    overlay.addEventListener("click", (event) => {
+        if (event.target === overlay) {
+            close();
+        }
+    });
+
+    overlay.querySelector(".popup-close").addEventListener("click", close);
+    document.body.appendChild(overlay);
+}
+
 function renderStudents(list) {
     grid.innerHTML = "";
 
@@ -160,9 +194,8 @@ function renderStudents(list) {
         const linkedIn = student.linkedIn || "";
         const projectCount = student.projects ? 1 : 0;
         const publicationCount = student.publications ? 1 : 0;
-        const isMobile = isMobileViewport();
-        const collapsedCareer = career.length > 180 ? `${career.slice(0, 180).trimEnd()}…` : career;
-        const showReadToggle = isMobile && career.length > 180;
+        const collapsedCareer = career.length > 140 ? `${career.slice(0, 140).trimEnd()}…` : career;
+        const showReadToggle = career.length > 140;
 
         const tags = interests
             .split(",")
@@ -182,21 +215,27 @@ function renderStudents(list) {
 
         card.innerHTML = `
             <div class="student-card-header">
-                <div class="student-avatar">
-                    ${photo
-                        ? `<img src="${escapeHtml(photo)}" alt="${escapeHtml(name)}" loading="lazy" decoding="async">`
-                        : escapeHtml(getInitials(name))}
+                <div class="student-card-media">
+                    <div class="student-avatar">
+                        ${photo
+                            ? `<img src="${escapeHtml(photo)}" alt="${escapeHtml(name)}" decoding="async">`
+                            : escapeHtml(getInitials(name))}
+                    </div>
+                    <div class="student-profile-copy">
+                        <span class="student-year">${escapeHtml(year)}</span>
+                        <h3 class="student-name">${escapeHtml(name)}</h3>
+                    </div>
                 </div>
                 <div class="student-meta">
-                    <h3 class="student-name">${escapeHtml(name)}</h3>
-                    <span class="student-year">${escapeHtml(year)}</span>
                     <div class="student-career-shell">
                         <p class="student-career ${showReadToggle ? "student-career--collapsed" : ""}" data-full-text="${escapeHtml(career)}" data-collapsed-text="${escapeHtml(collapsedCareer)}">${escapeHtml(showReadToggle ? collapsedCareer : career)}</p>
-                        ${showReadToggle ? `<button type="button" class="student-read-toggle" aria-expanded="false">... Read More</button>` : ""}
                     </div>
                     ${facts.length ? `<div class="student-facts">${facts.map((fact) => `<span>${escapeHtml(fact)}</span>`).join("")}</div>` : ""}
                     <div class="student-tags">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
-                    ${linkedIn ? `<div class="student-links"><a href="${escapeHtml(linkedIn)}" target="_blank" rel="noreferrer">View profile</a></div>` : ""}
+                    <div class="student-actions">
+                        ${showReadToggle ? `<button type="button" class="student-read-toggle" aria-expanded="false">Read more</button>` : ""}
+                        ${linkedIn ? `<div class="student-links"><a href="${escapeHtml(linkedIn)}" target="_blank" rel="noreferrer">View profile</a></div>` : ""}
+                    </div>
                 </div>
             </div>
         `;
@@ -204,22 +243,15 @@ function renderStudents(list) {
         const readToggle = card.querySelector(".student-read-toggle");
         if (readToggle) {
             readToggle.addEventListener("click", () => {
-                const paragraph = card.querySelector(".student-career");
-                const isExpanded = readToggle.getAttribute("aria-expanded") === "true";
-
-                if (isExpanded) {
-                    paragraph.classList.remove("student-career--expanded");
-                    paragraph.classList.add("student-career--collapsed");
-                    paragraph.textContent = paragraph.dataset.collapsedText || paragraph.textContent;
-                    readToggle.setAttribute("aria-expanded", "false");
-                    readToggle.textContent = "... Read More";
-                } else {
-                    paragraph.classList.remove("student-career--collapsed");
-                    paragraph.classList.add("student-career--expanded");
-                    paragraph.textContent = paragraph.dataset.fullText || paragraph.textContent;
-                    readToggle.setAttribute("aria-expanded", "true");
-                    readToggle.textContent = "Read Less";
-                }
+                createDescriptionModal({
+                    name,
+                    year,
+                    career,
+                    interests,
+                    projects: student.projects || "",
+                    publications: student.publications || "",
+                    linkedIn
+                });
             });
         }
 

@@ -18,41 +18,14 @@
         max-width: 70%;
     }
 
-    .nav-toggle {
-        display: inline-flex;
-        position: absolute;
-        top: 14px;
-        right: 1rem;
-    }
-
     .site-nav {
         justify-content: flex-end;
     }
 
     .site-nav-links {
-        display: none;
-        position: absolute;
-        top: calc(100% + 0.75rem);
-        left: 1rem;
-        right: 1rem;
-        width: auto;
-        z-index: 1001;
-    }
-
-    .site-nav.is-open .site-nav-links {
-        display: block;
-    }
-
-    .nav-glass {
-        flex-direction: column;
-        border-radius: 24px;
-        padding: 8px;
-    }
-
-    .nav-glass label {
-        min-width: 0;
-        justify-content: flex-start;
-        padding: 0.95rem 1rem;
+        left: auto;
+        right: 0;
+        width: min(320px, calc(100vw - 2rem));
     }
 
     .glass-glider {
@@ -207,23 +180,28 @@
         padding: 0;
     }
 
+    .about-story {
+        padding-top: 4px;
+    }
+
     .about-sequence {
-        gap: 6px;
-        font-size: 0.68rem;
+        gap: 4px 6px;
+        margin: 4px 0 16px;
+        font-size: 0.64rem;
         line-height: 1.4;
     }
 
     .about-sequence-dot {
-        font-size: 0.75rem;
+        font-size: 0.72rem;
     }
 
     .about-timeline {
-        gap: 18px;
-        padding-left: 18px;
+        gap: 14px;
+        padding: 2px 0 0 16px;
     }
 
     .about-rail {
-        left: 8px;
+        left: 6px;
         width: 2px;
         transform: none;
     }
@@ -232,41 +210,39 @@
     .about-step-left {
         width: 100%;
         margin: 0;
-        transform: translateX(20px);
-    }
-
-    .about-step-left {
-        transform: translateX(-20px);
+        padding-left: 18px;
+        transform: translateX(0);
     }
 
     .about-step-marker,
     .about-step-left .about-step-marker {
-        left: -18px;
+        left: 0;
         right: auto;
-        width: 14px;
-        height: 14px;
-        top: 14px;
+        width: 12px;
+        height: 12px;
+        top: 16px;
     }
 
     .about-step-badge {
         top: -8px;
-        left: 8px;
-        min-width: 28px;
-        padding: 0.35rem 0.5rem;
-        font-size: 0.65rem;
+        left: 14px;
+        min-width: 30px;
+        padding: 0.34rem 0.5rem;
+        font-size: 0.64rem;
     }
 
     .about-step-right .about-step-badge {
-        right: 8px;
-        left: auto;
+        right: auto;
+        left: 14px;
     }
 
     .about-step-card {
-        padding: 16px 14px;
+        padding: 16px 14px 16px 16px;
+        border-radius: 18px;
     }
 
     .about-step-card h3 {
-        font-size: clamp(0.95rem, 5vw, 1.2rem);
+        font-size: clamp(0.95rem, 5vw, 1.15rem);
         margin-bottom: 8px;
     }
 
@@ -278,8 +254,17 @@
 
     .about-step-card p,
     .about-step-card li {
-        font-size: 0.85rem;
+        font-size: 0.84rem;
         line-height: 1.6;
+    }
+
+    .about-step-card ul {
+        gap: 8px;
+        margin-top: 6px;
+    }
+
+    .about-step-card li {
+        padding-left: 16px;
     }
 
     .image-grid {

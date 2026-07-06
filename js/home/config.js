@@ -27,21 +27,25 @@ export const SECTION_THEMES = {
     background: "linear-gradient(135deg, rgba(108, 181, 255, 0.55), rgba(58, 105, 214, 0.96))",
     shadow: "0 0 18px rgba(108, 181, 255, 0.48), 0 0 10px rgba(255, 255, 255, 0.2) inset"
   },
+  "#offer": {
+    background: "linear-gradient(135deg, rgba(127, 219, 255, 0.54), rgba(40, 155, 236, 0.96))",
+    shadow: "0 0 18px rgba(127, 219, 255, 0.46), 0 0 10px rgba(255, 255, 255, 0.2) inset"
+  },
   "#leadership": {
     background: "linear-gradient(135deg, rgba(151, 208, 255, 0.58), rgba(85, 162, 245, 0.96))",
     shadow: "0 0 18px rgba(151, 208, 255, 0.48), 0 0 10px rgba(255, 255, 255, 0.2) inset"
   },
-  "#programs": {
-    background: "linear-gradient(135deg, rgba(127, 219, 255, 0.54), rgba(40, 155, 236, 0.96))",
-    shadow: "0 0 18px rgba(127, 219, 255, 0.46), 0 0 10px rgba(255, 255, 255, 0.2) inset"
-  },
-  "#conferences": {
+  "#facilitators": {
     background: "linear-gradient(135deg, rgba(161, 226, 255, 0.58), rgba(77, 175, 248, 0.96))",
     shadow: "0 0 18px rgba(161, 226, 255, 0.46), 0 0 10px rgba(255, 255, 255, 0.2) inset"
   },
-  "#alumni": {
+  "#events": {
     background: "linear-gradient(135deg, rgba(110, 196, 255, 0.56), rgba(31, 138, 229, 0.96))",
     shadow: "0 0 18px rgba(110, 196, 255, 0.46), 0 0 10px rgba(255, 255, 255, 0.2) inset"
+  },
+  "#students": {
+    background: "linear-gradient(135deg, rgba(137, 212, 255, 0.6), rgba(52, 150, 242, 0.96))",
+    shadow: "0 0 18px rgba(137, 212, 255, 0.48), 0 0 10px rgba(255, 255, 255, 0.2) inset"
   },
   "#repository": {
     background: "linear-gradient(135deg, rgba(137, 212, 255, 0.6), rgba(52, 150, 242, 0.96))",

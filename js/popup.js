@@ -1,7 +1,7 @@
 (() => {
     const STORAGE_KEY = "kephsa-popup-dismissed";
     const STUDENTS_API_URL = "https://script.google.com/macros/s/AKfycbwN5F5d_nDGaPavl6FgiigJrJY1VAoEnYOu9QIMS66Ge0WINuPfXRRHIBUqN3z40vbc1w/exec";
-    const EVENTS_API_URL = "https://script.google.com/macros/s/AKfycbyVHUlybyAt8RdE2qu1iWH5_ff46jWWCH7hJg5l50K6XKaGQj3nHdO9TpYw-t0Vr6f9dQ/exec";
+    const EVENTS_API_URL = "https://script.google.com/macros/s/AKfycbzYU-YreXi3OVdE4v5dLLvEFAo_vzmgH_aGtp4AihuWpzMZBWKOXyox7Ojv35C2YAAN/exec";
 
     const slugify = (value) => String(value || "")
         .trim()
