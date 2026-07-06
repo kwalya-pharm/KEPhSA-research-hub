@@ -135,8 +135,26 @@
         return [];
     };
 
+    const getEventField = (event, keys, fallback = "") => {
+        for (const key of keys) {
+            if (!key) {
+                continue;
+            }
+
+            const value = event?.[key];
+            if (value !== undefined && value !== null) {
+                const text = String(value).trim();
+                if (text) {
+                    return text;
+                }
+            }
+        }
+
+        return fallback;
+    };
+
     const getEventImageSrc = (event) => {
-        const rawValue = String(event?.Image || event?.image || "").trim();
+        const rawValue = getEventField(event, ["Image", "image", "imageUrl", "ImageUrl"], "").trim();
         if (!rawValue) {
             return "media/logo.png";
         }
@@ -171,9 +189,9 @@
                     .filter(Boolean)
                     .slice(0, 3)
                     .map((event) => ({
-                        title: event?.Title || event?.title || "Upcoming event",
-                        description: event?.Description || event?.description || event?.Venue || event?.Venue || "More details coming soon",
-                        image: event?.Image || event?.image || ""
+                        title: getEventField(event, ["Title", "title", "name"], "Upcoming event"),
+                        description: getEventField(event, ["Description", "description", "Venue", "venue"], "More details coming soon"),
+                        image: getEventField(event, ["Image", "image", "imageUrl", "ImageUrl"], "")
                     }));
                 window.__KEPHSA_EVENTS_DATA__ = events;
                 return events;
