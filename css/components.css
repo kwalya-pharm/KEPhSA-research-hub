@@ -609,11 +609,12 @@
     width: clamp(132px, 18vw, 220px);
     aspect-ratio: 4 / 5;
     flex-shrink: 0;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     display: block;
     border-radius: 18px;
     border: none;
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .leader-overlay {

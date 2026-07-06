@@ -329,9 +329,10 @@ section:not(#home) > p {
 .student-avatar img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 18px;
     border: none;
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .student-meta {

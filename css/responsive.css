@@ -407,7 +407,9 @@
     .leader-image {
         width: 100%;
         height: auto;
-        max-height: 220px;
+        max-height: none;
+        aspect-ratio: auto;
+        object-fit: contain;
         border-radius: 14px;
     }
 
@@ -443,8 +445,10 @@
 
     .student-avatar {
         width: 100%;
-        max-width: 220px;
-        aspect-ratio: 4 / 5;
+        max-width: none;
+        aspect-ratio: auto;
+        height: auto;
+        min-height: 220px;
     }
 
     .repository-grid,
