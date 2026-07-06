@@ -286,12 +286,20 @@
     }
 
     .popup-modal {
-        padding: 18px;
-        border-radius: 18px;
+        padding: 20px;
+        border-radius: 12px;
+        width: calc(100% - 32px);
+        max-width: 100%;
+        margin: 0 auto;
+        max-height: 92vh;
+        box-sizing: border-box;
     }
 
     .popup-shell {
         grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
     }
 
     .popup-header {
@@ -300,21 +308,70 @@
     }
 
     .popup-card {
-        padding: 14px;
+        padding: 16px;
+        box-sizing: border-box;
     }
 
     .popup-spotlight {
+        display: flex;
+        gap: 12px;
         align-items: flex-start;
-    }
-
-    .popup-spotlight {
         flex-direction: column;
     }
 
     .popup-image {
-        width: 100%;
-        max-width: 120px;
+        width: 96px;
         height: 96px;
+        max-width: 96px;
+        border-radius: 12px;
+        flex-shrink: 0;
+    }
+
+    .popup-fab {
+        width: 64px;
+        height: 64px;
+        right: 14px;
+        bottom: 14px;
+    }
+
+    .popup-close {
+        top: 10px;
+        right: 10px;
+        width: 48px;
+        height: 48px;
+        font-size: 1.25rem;
+    }
+
+    .popup-card {
+        border-radius: 12px;
+    }
+
+    .popup-event-image {
+        width: 64px;
+        height: 64px;
+    }
+
+    .popup-event-item {
+        padding: 10px 0;
+    }
+
+    /* Place events card above spotlight on narrow screens */
+    .popup-card-events {
+        order: -1;
+    }
+
+    .popup-events-list {
+        gap: 12px;
+    }
+
+    .popup-card-title-row {
+        gap: 8px;
+        align-items: center;
+    }
+
+    .popup-header {
+        align-items: flex-start;
+        gap: 8px;
     }
 
     .hero-copy {
@@ -412,5 +469,23 @@
     .repository-grid,
     .repository-video-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Also ensure popup stacks on slightly larger narrow screens (tablets / high-DPR phones) */
+@media (max-width: 720px) {
+    .popup-shell {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 14px;
+    }
+
+    .popup-card-events {
+        order: -1 !important;
+    }
+
+    .popup-spotlight {
+        flex-direction: column !important;
+        align-items: flex-start !important;
     }
 }

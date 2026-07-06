@@ -1,7 +1,7 @@
 import { HIDE_OVERLAY_DURATION } from "./config.js";
 
-// Pulse the preload logo for a fixed duration (ms), then hide overlay.
-const PULSE_DURATION = 5000;
+// Shrink-and-fade duration for preload logo (ms). After this the overlay hides.
+const SHRINK_DURATION = 3000;
 
 export const initPreload = ({ overlay, continueButton }) => {
   if (!overlay) {
@@ -27,16 +27,38 @@ export const initPreload = ({ overlay, continueButton }) => {
     continueButton.addEventListener("click", handleContinue);
   }
 
-  // Start pulse animation if logo exists
+  // Start shrink-and-fade animation if logo exists
   if (logo) {
-    // ensure class is present to trigger CSS animation
-    logo.classList.add("pulse");
+    // remove pulse if previously applied
+    logo.classList.remove("pulse");
 
-    // After the pulse duration, stop animation and hide overlay
-    window.setTimeout(() => {
-      if (logo) logo.classList.remove("pulse");
+    const text = overlay.querySelector('.preload-text');
+
+    // Trigger shrink + fade via a dedicated class which uses CSS transitions
+    // Respect reduced-motion: if user prefers reduced motion, skip animation
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
       hideOverlay();
-    }, PULSE_DURATION);
+      return;
+    }
+
+    // Force reflow to ensure transition will run
+    // eslint-disable-next-line no-unused-expressions
+    logo.offsetWidth;
+    logo.classList.add("shrink-hide");
+    if (text) {
+      // ensure text transitions alongside the logo
+      // force reflow for the text as well
+      // eslint-disable-next-line no-unused-expressions
+      text.offsetWidth;
+      text.classList.add('shrink-hide');
+    }
+
+    // After transition duration, remove overlay so the site is fully visible at ~3s
+    window.setTimeout(() => {
+      // remove overlay immediately (no extra fade) so total delay ~= SHRINK_DURATION
+      overlay.remove();
+    }, SHRINK_DURATION);
   } else {
     // If no logo, hide overlay quickly
     window.setTimeout(hideOverlay, 300);
