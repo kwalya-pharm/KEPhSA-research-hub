@@ -12,27 +12,8 @@
 
     <div class="preload-overlay" role="status" aria-live="polite" aria-label="Loading site">
         <div class="preload-content">
-            <img src="media/logo.jpeg" alt="KEPhSA Research Hub logo" class="preload-logo">
-            <div class="spinner" aria-hidden="true">
-                <div class="spinnerin"></div>
-            </div>
-            <button type="button" class="Btn-Container preload-continue">
-                <span class="text">Click me!</span>
-                <span class="icon-Container" aria-hidden="true">
-                    <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="1.61321" cy="1.61321" r="1.5" fill="black"></circle>
-                        <circle cx="5.73583" cy="1.61321" r="1.5" fill="black"></circle>
-                        <circle cx="5.73583" cy="5.5566" r="1.5" fill="black"></circle>
-                        <circle cx="9.85851" cy="5.5566" r="1.5" fill="black"></circle>
-                        <circle cx="9.85851" cy="9.5" r="1.5" fill="black"></circle>
-                        <circle cx="13.9811" cy="9.5" r="1.5" fill="black"></circle>
-                        <circle cx="5.73583" cy="13.4434" r="1.5" fill="black"></circle>
-                        <circle cx="9.85851" cy="13.4434" r="1.5" fill="black"></circle>
-                        <circle cx="1.61321" cy="17.3868" r="1.5" fill="black"></circle>
-                        <circle cx="5.73583" cy="17.3868" r="1.5" fill="black"></circle>
-                    </svg>
-                </span>
-            </button>
+            <img src="media/logo.jpeg" alt="KEPhSA Research Hub logo" class="preload-logo" aria-hidden="false">
+            <p class="preload-text" aria-live="polite">Please wait..</p>
         </div>
     </div>
 
@@ -89,126 +70,51 @@
         <div class="overlay"></div>
         <div class="hero-content">
 
-        <p class="hero-eyebrow">Research, innovation, and collaboration for pharmacy students</p>
-
-        <img src="media/logo.jpeg" class="hero-logo">
-
-        <h1>Ignite Your Research Journey</h1>
-
-        <p class="hero-copy">
-            Affiliated with the Kenya Pharmaceutical Students' Association,
-            empowering pharmacy students through research,
-            innovation and collaboration.
-        </p>
-
-        <div class="hero-actions">
-            <a href="#about" class="btn primary">
-                <span class="btn-text">Learn More</span>
-                <span class="btn-shine" aria-hidden="true"></span>
-                <span class="btn-corner btn-corner-tl" aria-hidden="true"></span>
-                <span class="btn-corner btn-corner-tr" aria-hidden="true"></span>
-                <span class="btn-corner btn-corner-bl" aria-hidden="true"></span>
-                <span class="btn-corner btn-corner-br" aria-hidden="true"></span>
-            </a>
-            <a href="#repository" class="btn secondary">
-                <span class="btn-text">Explore Repository</span>
-                <span class="btn-shine" aria-hidden="true"></span>
-                <span class="btn-corner btn-corner-tl" aria-hidden="true"></span>
-                <span class="btn-corner btn-corner-tr" aria-hidden="true"></span>
-                <span class="btn-corner btn-corner-bl" aria-hidden="true"></span>
-                <span class="btn-corner btn-corner-br" aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div class="hero-metrics" aria-label="Key highlights">
-            <div class="hero-metric">
-                <strong>Mentorship</strong>
-                <span>Guided research support</span>
-            </div>
-            <div class="hero-metric">
-                <strong>Innovation</strong>
-                <span>Projects and collaboration</span>
-            </div>
-            <div class="hero-metric">
-                <strong>Community</strong>
-                <span>Students, alumni, and mentors</span>
-            </div>
-        </div>
+            <img src="media/logo.jpeg" class="hero-logo" alt="KEPhSA Research Hub logo">
+            <h1 class="visually-hidden">Ignite Your Research Journey</h1>
 
         </div>
     </section>
 
     
     <!-- ================= ABOUT ================= -->
-    <section id="about" aria-labelledby="about-title">
+    <section id="about" aria-labelledby="about-title" class="about-section">
 
-        <h2 id="about-title">About Us</h2>
+        <div class="about-section-bg">
+            <h2 id="about-title">About Us</h2>
 
-        <div class="about-story">
-            <div class="about-sequence" aria-label="About us timeline sequence">
-                <span class="about-sequence-title">ABOUT US</span>
-                <span class="about-sequence-dot">●</span>
-                <span class="about-sequence-item">Preamble</span>
-                <span class="about-sequence-divider">││</span>
-                <span class="about-sequence-dot">●</span>
-                <span class="about-sequence-item">Goals</span>
-                <span class="about-sequence-divider">││</span>
-                <span class="about-sequence-dot">●</span>
-                <span class="about-sequence-item">Mission</span>
-                <span class="about-sequence-divider">││</span>
-                <span class="about-sequence-dot">●</span>
-                <span class="about-sequence-item">Vision</span>
-            </div>
+            <div class="about-story">
+                <p class="about-intro">
+                    The KEPhSA Research Hub is the research and innovation arm of the Kenya Pharmaceutical Students' Association (KEPhSA). It was established to cultivate a strong culture of research among pharmacy students by providing access to mentorship, research opportunities, collaborations, conferences, grants, and professional development.
+                </p>
 
-            <div class="about-timeline" data-about-timeline>
-                <span class="about-rail" aria-hidden="true"></span>
-
-                <article class="about-step about-step-left" data-about-step>
-                    <span class="about-step-badge" aria-hidden="true">01</span>
-                    <div class="about-step-marker" aria-hidden="true"></div>
-                    <div class="about-step-card">
+                <div class="about-details">
+                    <div class="about-detail">
                         <h3>Preamble</h3>
-                        <p>The KEPhSA Research Hub is the research and innovation arm of the Kenya Pharmaceutical Students' Association (KEPhSA). It was established to cultivate a strong culture of research among pharmacy students by providing access to mentorship, research opportunities, collaborations, conferences, grants, and professional development.</p>
-                        <p>Our goal is to empower pharmacy students to become innovative researchers capable of addressing healthcare challenges through evidence-based solutions while building lasting academic and professional networks.</p>
+                        <p>We empower pharmacy students to become innovative researchers capable of addressing healthcare challenges through evidence-based solutions while building lasting academic and professional networks.</p>
                     </div>
-                </article>
 
-                <article class="about-step about-step-right" data-about-step>
-                    <span class="about-step-badge" aria-hidden="true">02</span>
-                    <div class="about-step-marker" aria-hidden="true"></div>
-                    <div class="about-step-card">
+                    <div class="about-detail">
                         <h3>Goals</h3>
                         <ul>
                             <li>Build research capacity among pharmacy students.</li>
                             <li>Promote innovation in pharmaceutical sciences.</li>
-                            <li>Enhance student learning experiences through practical research.</li>
-                            <li>Provide access to research training and workshops.</li>
                             <li>Connect students with experienced research mentors.</li>
                             <li>Support conference participation and scientific presentations.</li>
-                            <li>Share grant, scholarship, and funding opportunities.</li>
                             <li>Develop a national network of young Kenyan researchers.</li>
-                            <li>Promote collaboration between students, universities, and professionals.</li>
                         </ul>
                     </div>
-                </article>
 
-                <article class="about-step about-step-left" data-about-step>
-                    <span class="about-step-badge" aria-hidden="true">03</span>
-                    <div class="about-step-marker" aria-hidden="true"></div>
-                    <div class="about-step-card">
+                    <div class="about-detail">
                         <h3>Mission</h3>
                         <p>To provide pharmacy students with a dynamic platform where they can explore, innovate, collaborate, and excel in pharmaceutical research.</p>
                     </div>
-                </article>
 
-                <article class="about-step about-step-right" data-about-step>
-                    <span class="about-step-badge" aria-hidden="true">04</span>
-                    <div class="about-step-marker" aria-hidden="true"></div>
-                    <div class="about-step-card">
+                    <div class="about-detail">
                         <h3>Vision</h3>
                         <p>To inspire and empower the next generation of pharmacy researchers and healthcare innovators in Kenya through impactful research, collaboration, and professional excellence.</p>
                     </div>
-                </article>
+                </div>
             </div>
         </div>
 
@@ -218,44 +124,36 @@
     <section id="offer" aria-labelledby="offer-title">
         <h2 id="offer-title">What We Offer</h2>
 
-        <div class="offer-grid">
+        <div class="offer-grid simple-list">
             <div class="offer-item">
-                <div class="offer-icon" aria-hidden="true">👥</div>
                 <h3>Research Mentorship</h3>
                 <p>Guided research support from experienced mentors</p>
             </div>
             <div class="offer-item">
-                <div class="offer-icon" aria-hidden="true">🔬</div>
                 <h3>Research Facilities</h3>
                 <p>Access to research labs and equipment</p>
             </div>
             <div class="offer-item">
-                <div class="offer-icon" aria-hidden="true">📊</div>
                 <h3>Data Analysis</h3>
                 <p>Statistical and data analysis support</p>
             </div>
             <div class="offer-item">
-                <div class="offer-icon" aria-hidden="true">✍️</div>
                 <h3>Writing Guidance</h3>
                 <p>Proposal writing and publication support</p>
             </div>
             <div class="offer-item">
-                <div class="offer-icon" aria-hidden="true">🤝</div>
                 <h3>Collaborations</h3>
                 <p>Research collaborations and networking</p>
             </div>
             <div class="offer-item">
-                <div class="offer-icon" aria-hidden="true">📚</div>
                 <h3>Workshops</h3>
                 <p>Scientific writing and skills workshops</p>
             </div>
             <div class="offer-item">
-                <div class="offer-icon" aria-hidden="true">🎤</div>
                 <h3>Conferences</h3>
                 <p>Conference participation and presentations</p>
             </div>
             <div class="offer-item">
-                <div class="offer-icon" aria-hidden="true">💡</div>
                 <h3>Innovation Lab</h3>
                 <p>Innovation incubation and project support</p>
             </div>
@@ -330,20 +228,6 @@
                         <p class="leader-institution">KEMU</p>
                     </div>
                 </div>
-
-                <div class="leader-card" data-leader-card>
-                    <img src="media/leaders/patron.jpg" alt="Patron - Coming Soon" class="leader-image" decoding="async">
-                    <div class="leader-overlay" aria-hidden="true"></div>
-                    <div class="leader-info">
-                        <p class="leader-position">Patron</p>
-                        <h3 class="leader-name">Prof. Ermias Terefe</h3>
-                        <p class="leader-institution">USIU-AFRICA</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
         <p class="leadership-note">Leadership details will be updated as they are confirmed. Click or swipe to navigate.</p>
 
     </section>
@@ -488,42 +372,13 @@
 
 <!-- ================= CURRENT STUDENTS ================= -->
 
-<section id="students" aria-labelledby="students-title">
-
+<section id="students" class="student-directory" aria-labelledby="students-title">
     <div class="students-section-heading">
-        <span class="section-kicker">Student network</span>
-        <h2 id="students-title">Meet the students shaping research in pharmacy</h2>
-        <p>Explore current student researchers, their interests, and the growing projects that are defining the KEPhSA Research Hub.</p>
+        <span class="card-eyebrow">Student spotlight</span>
+        <h2 id="students-title">Current students</h2>
+        <p>Meet the emerging researchers and innovators driving KEPhSA’s research community forward.</p>
     </div>
-
-    <div class="students-toolbar" role="search" aria-label="Search and filter student profiles">
-
-        <label class="students-search" for="studentSearch">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="6"></circle>
-                <path d="m20 20-4.2-4.2"></path>
-            </svg>
-            <input
-                type="search"
-                id="studentSearch"
-                placeholder="Search students..."
-                autocomplete="off"
-                aria-label="Search students by name, interests, or career goals">
-        </label>
-
-        <select id="yearFilter" aria-label="Filter students by year">
-            <option value="">All Years</option>
-            <option>First Year</option>
-            <option>Second Year</option>
-            <option>Third Year</option>
-            <option>Fourth Year</option>
-            <option>Fifth Year</option>
-        </select>
-
-    </div>
-
-    <div id="studentsGrid" aria-live="polite" aria-label="Student profiles"></div>
-
+    <div id="studentsContainer" aria-live="polite"></div>
 </section>
 
 

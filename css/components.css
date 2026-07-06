@@ -29,9 +29,77 @@
 }
 
 .preload-logo {
-    width: min(180px, 42vw);
+    width: min(220px, 48vw);
     height: auto;
-    filter: drop-shadow(0 0 18px rgba(125, 189, 255, 0.35));
+    filter: drop-shadow(0 0 22px rgba(125, 189, 255, 0.35));
+    transform-origin: center center;
+    will-change: transform, opacity;
+    transition: transform 2.4s cubic-bezier(.22,.9,.32,1), opacity 2.4s cubic-bezier(.22,.9,.32,1);
+}
+
+@keyframes preloadPulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 18px rgba(125,189,255,0.22));
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 40px rgba(125,189,255,0.5));
+        opacity: 0.995;
+    }
+    100% {
+        transform: scale(1.02);
+        filter: drop-shadow(0 0 20px rgba(125,189,255,0.3));
+        opacity: 1;
+    }
+}
+
+.preload-logo.pulse {
+    animation-name: preloadPulse;
+    animation-duration: 2.6s; /* slower and deliberate */
+    animation-timing-function: cubic-bezier(.28,.14,.29,.98);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .preload-logo.pulse {
+        animation: none !important;
+        transform: none !important;
+    }
+}
+
+.preload-text {
+    margin: 0;
+    color: rgba(236, 241, 255, 0.92);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    letter-spacing: 0.02em;
+    opacity: 0.95;
+}
+
+/* Shrink/expand the hero logo when user scrolls away from the hero.
+   Use a deliberate, slow transition so the effect feels intentional. */
+.hero-logo.shrunk {
+    transform-origin: center center;
+    transform: scale(0.18);
+    opacity: 0;
+    transition: transform 2.4s cubic-bezier(.22,.9,.32,1), opacity 2.4s cubic-bezier(.22,.9,.32,1);
+}
+
+/* Scroll-driven shrink animation (progress controlled from JS). */
+@keyframes shrinkProgress {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.18); opacity: 0; }
+}
+
+.hero-logo.scroll-anim {
+    animation-name: shrinkProgress;
+    animation-duration: 6s; /* long duration; JS plays/pauses to control progress */
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
 }
 
 .Btn-Container {
@@ -416,7 +484,7 @@
 .popup-event-item {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
     padding: 10px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
@@ -427,23 +495,26 @@
 }
 
 .popup-event-image {
-    width: 54px;
-    height: 54px;
+    width: 62px;
+    height: 62px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 14px;
     flex-shrink: 0;
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
 }
 
 .popup-event-copy {
     display: grid;
-    gap: 3px;
+    gap: 4px;
     min-width: 0;
 }
 
 .popup-events-list strong {
     color: var(--color-text);
+    font-size: 0.96rem;
+    line-height: 1.35;
 }
 
 .popup-events-list span,
@@ -451,6 +522,11 @@
 .popup-spotlight p,
 .popup-spotlight blockquote {
     color: #dcecff;
+}
+
+.popup-events-list span {
+    line-height: 1.55;
+    font-size: 0.9rem;
 }
 
 .popup-spotlight {
@@ -519,8 +595,8 @@
 }
 
 .hero-logo {
-    width: clamp(110px, 14vw, 160px);
-    margin: 4px 0 8px;
+    width: clamp(150px, 20vw, 280px);
+    margin: 6px 0 12px;
     filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.25));
 }
 
@@ -1011,67 +1087,35 @@
 
 .offer-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: 28px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 20px;
 }
 
 .offer-item {
-    position: relative;
-    padding: 22px 18px;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(212, 237, 249, 0.14);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    backdrop-filter: blur(10px);
-    text-align: center;
-    transition: all 0.35s ease;
-    overflow: hidden;
+    padding: 8px 6px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    text-align: left;
+    transition: none;
+    overflow: visible;
 }
 
-.offer-item::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto;
-    height: 2px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
-    transform: scaleX(0.6);
-    transform-origin: center;
-    transition: transform 0.35s ease;
-}
-
-.offer-item:hover {
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(43, 147, 255, 0.28);
-    box-shadow: 0 12px 32px rgba(43, 147, 255, 0.18);
-    transform: translateY(-4px);
-}
-
-.offer-item:hover::before {
-    transform: scaleX(1);
-}
-
-.offer-icon {
-    font-size: 2.4rem;
-    line-height: 1;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 56px;
-}
+.offer-item::before { display: none; }
+.offer-icon { display: none; }
 
 .offer-item h3 {
     font-size: 1rem;
     font-weight: 700;
-    margin: 0 0 8px;
+    margin: 0 0 6px;
     color: var(--color-text);
-    letter-spacing: -0.01em;
 }
 
 .offer-item p {
-    font-size: 0.85rem;
-    color: #d9e6f7;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
     line-height: 1.6;
     margin: 0;
 }

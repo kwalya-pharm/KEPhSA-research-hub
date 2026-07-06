@@ -21,6 +21,13 @@
         return fallback;
     };
 
+    const escapeHtml = (value) => String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+
     const normalizeStudentsPayload = (payload) => {
         if (Array.isArray(payload)) {
             return payload;
@@ -153,8 +160,32 @@
         return fallback;
     };
 
-    const getEventImageSrc = (event) => {
-        const rawValue = getEventField(event, ["Image", "image", "imageUrl", "ImageUrl"], "").trim();
+    const getDriveFileId = (value) => {
+        if (!value) {
+            return "";
+        }
+
+        const rawValue = String(value || "").split(",")[0].trim();
+        if (!rawValue) {
+            return "";
+        }
+
+        const directIdMatch = rawValue.match(/^[A-Za-z0-9_-]{10,}$/);
+        if (directIdMatch) {
+            return directIdMatch[0];
+        }
+
+        const linkMatch = rawValue.match(/(?:\/d\/|id=)([A-Za-z0-9_-]{10,})/i);
+        if (linkMatch && linkMatch[1]) {
+            return linkMatch[1];
+        }
+
+        return "";
+    };
+
+    const resolveEventImageSrc = (value = "") => {
+        const rawValue = String(value ?? "").trim();
+
         if (!rawValue) {
             return "media/logo.png";
         }
@@ -163,9 +194,42 @@
             return rawValue;
         }
 
+        const fileId = getDriveFileId(rawValue);
+        if (fileId) {
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        }
+
         const cleanedValue = rawValue.replace(/^\.\//, "").replace(/^\/+/, "");
         const hasLocalPrefix = cleanedValue.startsWith("media/events/");
         return hasLocalPrefix ? cleanedValue : `media/events/${cleanedValue}`;
+    };
+
+    const getEventImageSrc = (event) => {
+        return resolveEventImageSrc(getEventField(event, ["Image", "image", "imageUrl", "ImageUrl"], ""));
+    };
+
+    const parseEventDate = (event) => {
+        const value = getEventField(event, ["Date", "date", "Event Date", "event_date"], "");
+        const parsed = Date.parse(value);
+        return Number.isNaN(parsed) ? Number.POSITIVE_INFINITY : parsed;
+    };
+
+    const getClosestUpcomingEvent = (events) => {
+        const now = Date.now();
+        const sorted = [...events].sort((a, b) => {
+            const aDate = parseEventDate(a);
+            const bDate = parseEventDate(b);
+            const aDiff = Math.max(aDate - now, 0);
+            const bDiff = Math.max(bDate - now, 0);
+
+            if (aDiff !== bDiff) {
+                return aDiff - bDiff;
+            }
+
+            return aDate - bDate;
+        });
+
+        return sorted.find((event) => parseEventDate(event) !== Number.POSITIVE_INFINITY) || sorted[0] || null;
     };
 
     const getEventData = async () => {
@@ -187,11 +251,11 @@
             .then((payload) => {
                 const events = normalizeEventsPayload(payload)
                     .filter(Boolean)
-                    .slice(0, 3)
                     .map((event) => ({
                         title: getEventField(event, ["Title", "title", "name"], "Upcoming event"),
                         description: getEventField(event, ["Description", "description", "Venue", "venue"], "More details coming soon"),
-                        image: getEventField(event, ["Image", "image", "imageUrl", "ImageUrl"], "")
+                        image: getEventField(event, ["Image", "image", "imageUrl", "ImageUrl"], ""),
+                        date: getEventField(event, ["Date", "date", "Event Date", "event_date"], "")
                     }));
                 window.__KEPHSA_EVENTS_DATA__ = events;
                 return events;
@@ -259,22 +323,32 @@
         }
 
         if (eventsListEl) {
-            const html = (events.length ? events : [{
+            const fallbackEvent = {
                 title: "No upcoming updates",
-                description: "Check back later."
-            }])
-                .map((event) => `
-                    <li class="popup-event-item">
-                        <img class="popup-event-image" src="${getEventImageSrc(event)}" alt="${event.title}">
-                        <div class="popup-event-copy">
-                            <strong>${event.title}</strong>
-                            <span>${event.description}</span>
-                        </div>
-                    </li>
-                `)
-                .join("");
+                description: "Check back later for fresh community events.",
+                image: ""
+            };
+            const nextEvent = events.length ? getClosestUpcomingEvent(events) : fallbackEvent;
+            const title = nextEvent?.title || "Upcoming event";
+            const description = nextEvent?.description || "More details coming soon";
+            const imageAlt = title;
+            const imageSrc = getEventImageSrc(nextEvent);
 
-            eventsListEl.innerHTML = html;
+            eventsListEl.innerHTML = `
+                <li class="popup-event-item popup-event-single">
+                    <img class="popup-event-image" src="${imageSrc}" alt="${escapeHtml(imageAlt)}">
+                    <div class="popup-event-copy">
+                        <strong>${escapeHtml(title)}</strong>
+                        <span>${escapeHtml(description)}</span>
+                    </div>
+                </li>
+            `;
+
+            const image = eventsListEl.querySelector(".popup-event-image");
+            if (image?.complete && image?.naturalWidth) {
+                image.classList.add("loaded");
+            }
+            image?.addEventListener("load", () => image.classList.add("loaded"));
         }
     };
 

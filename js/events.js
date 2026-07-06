@@ -30,19 +30,53 @@
         return [];
     };
 
-    const getImageSrc = (event) => {
-        const rawValue = String(event?.Image || event?.image || "").trim();
+    const getDriveFileId = (value) => {
+        if (!value) {
+            return "";
+        }
+
+        const rawValue = String(value || "").split(",")[0].trim();
         if (!rawValue) {
-            return DEFAULT_IMAGE;
+            return "";
+        }
+
+        const directIdMatch = rawValue.match(/^[A-Za-z0-9_-]{10,}$/);
+        if (directIdMatch) {
+            return directIdMatch[0];
+        }
+
+        const linkMatch = rawValue.match(/(?:\/d\/|id=)([A-Za-z0-9_-]{10,})/i);
+        if (linkMatch && linkMatch[1]) {
+            return linkMatch[1];
+        }
+
+        return "";
+    };
+
+    const resolveEventImageUrl = (value) => {
+        const rawValue = String(value ?? "").trim();
+
+        if (!rawValue) {
+            return "";
         }
 
         if (/^https?:\/\//i.test(rawValue)) {
             return rawValue;
         }
 
+        const fileId = getDriveFileId(rawValue);
+        if (fileId) {
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        }
+
         const cleanedValue = rawValue.replace(/^\.\//, "").replace(/^\/+/, "");
         const hasLocalPrefix = cleanedValue.startsWith("media/events/");
         return hasLocalPrefix ? cleanedValue : `media/events/${cleanedValue}`;
+    };
+
+    const getImageSrc = (event) => {
+        const resolvedValue = resolveEventImageUrl(event?.Image || event?.image || "");
+        return resolvedValue || DEFAULT_IMAGE;
     };
 
     const formatMeta = (event) => {
@@ -52,25 +86,54 @@
 
     const createEventCard = (event) => {
         const article = document.createElement("article");
-        article.className = "event-card image-card image-card-large";
+        article.className = "event-card";
+
+        const title = event?.Title || "Upcoming event";
+        const description = event?.Description || "Stay tuned for updates from the KEPhSA community.";
+        const meta = formatMeta(event) || "More details coming soon";
+        const imageSrc = getImageSrc(event);
+
         article.innerHTML = `
-            <div class="image-card-bg" aria-hidden="true"></div>
-            <div class="image-card-overlay" aria-hidden="true"></div>
-            <div class="event-image-wrap">
-                <img class="event-image" src="${getImageSrc(event)}" alt="${escapeHtml(event?.Title || "Upcoming event")}" loading="lazy">
+            <div class="event-media" aria-label="${escapeHtml(title)}">
+                <img class="event-image" src="${imageSrc}" alt="${escapeHtml(title)}" loading="lazy" decoding="async">
             </div>
-            <div class="image-card-content">
-                <div class="image-card-icon">📅</div>
-                <h3>${escapeHtml(event?.Title || "Upcoming event")}</h3>
-                <p class="event-meta">${escapeHtml(formatMeta(event) || "More details coming soon")}</p>
-                <p>${escapeHtml(event?.Description || "Stay tuned for updates from the KEPhSA community.")}</p>
-                <a href="#conferences" class="image-card-btn">View Event</a>
+            <div class="event-copy">
+                <p class="event-meta">${escapeHtml(meta)}</p>
+                <h3>${escapeHtml(title)}</h3>
+                <p class="event-description">${escapeHtml(description)}</p>
+                <a href="#conferences" class="event-read-more">Read more</a>
             </div>
         `;
 
         const image = article.querySelector(".event-image");
+        const markLoaded = async () => {
+            try {
+                await image.decode();
+            } catch (error) {
+                // Ignore decode failures, still show the image.
+            }
+            image.classList.add("loaded");
+        };
+
+        image?.addEventListener("load", markLoaded);
+        if (image?.complete && image?.naturalWidth) {
+            markLoaded();
+        }
+
         image?.addEventListener("error", () => {
-            image.src = DEFAULT_IMAGE;
+            if (image.src !== DEFAULT_IMAGE) {
+                image.src = DEFAULT_IMAGE;
+            }
+        });
+
+        const descriptionEl = article.querySelector(".event-description");
+        const readMoreEl = article.querySelector(".event-read-more");
+        readMoreEl?.addEventListener("click", (event) => {
+            event.preventDefault();
+            const isExpanded = descriptionEl?.classList.toggle("is-expanded");
+            if (readMoreEl) {
+                readMoreEl.textContent = isExpanded ? "Show less" : "Read more";
+            }
         });
 
         return article;
@@ -94,6 +157,12 @@
         container.append(...skeletons);
     };
 
+    const parseEventDate = (event) => {
+        const raw = String(event?.Date || event?.date || "").trim();
+        const parsed = Date.parse(raw);
+        return Number.isNaN(parsed) ? Number.POSITIVE_INFINITY : parsed;
+    };
+
     const renderEvents = (events) => {
         const normalized = normalizeEventsPayload(events).filter(Boolean);
         container.innerHTML = "";
@@ -108,6 +177,8 @@
             container.appendChild(emptyState);
             return;
         }
+
+        normalized.sort((a, b) => parseEventDate(a) - parseEventDate(b));
 
         const fragment = document.createDocumentFragment();
         normalized.forEach((event) => {

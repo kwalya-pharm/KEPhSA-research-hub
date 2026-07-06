@@ -23,9 +23,11 @@
     }
 
     .site-nav-links {
-        left: auto;
+        left: 0;
         right: 0;
-        width: min(320px, calc(100vw - 2rem));
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
     }
 
     .glass-glider {
@@ -95,7 +97,7 @@
     }
 
     .hero-logo {
-        width: min(104px, 34vw);
+        width: min(160px, 44vw);
     }
 
     .hero-content h1 {
@@ -184,56 +186,28 @@
         padding-top: 4px;
     }
 
-    .about-sequence {
-        gap: 4px 6px;
-        margin: 4px 0 16px;
-        font-size: 0.64rem;
-        line-height: 1.4;
+    .about-section-bg {
+        padding: 28px 24px;
     }
 
-    .about-sequence-dot {
-        font-size: 0.72rem;
+    .about-story {
+        gap: 24px;
     }
 
-    .about-timeline {
-        gap: 14px;
-        padding: 2px 0 0 16px;
+    .about-intro {
+        font-size: 1rem;
     }
 
-    .about-rail {
-        left: 6px;
-        width: 2px;
-        transform: none;
+    .about-details {
+        gap: 22px;
     }
 
-    .about-step,
-    .about-step-left {
-        width: 100%;
-        margin: 0;
-        padding-left: 18px;
-        transform: translateX(0);
+    .about-detail h3 {
+        font-size: 1.05rem;
     }
 
-    .about-step-marker,
-    .about-step-left .about-step-marker {
-        left: 0;
-        right: auto;
-        width: 12px;
-        height: 12px;
-        top: 16px;
-    }
-
-    .about-step-badge {
-        top: -8px;
-        left: 14px;
-        min-width: 30px;
-        padding: 0.34rem 0.5rem;
-        font-size: 0.64rem;
-    }
-
-    .about-step-right .about-step-badge {
-        right: auto;
-        left: 14px;
+    .about-detail ul {
+        padding-left: 1rem;
     }
 
     .about-step-card {
@@ -268,20 +242,19 @@
     }
 
     .image-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 16px;
     }
 
     .image-card {
         height: 240px;
-    }
+        padding: 10px 8px;
 
-    .image-card-content {
+        text-align: left;
         padding: 20px 18px;
         gap: 10px;
     }
-
-    .image-card-icon {
+        display: none;
         font-size: 2rem;
     }
 

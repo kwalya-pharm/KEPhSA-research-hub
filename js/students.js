@@ -1,20 +1,9 @@
-const API =
-    "https://script.google.com/macros/s/AKfycbwN5F5d_nDGaPavl6FgiigJrJY1VAoEnYOu9QIMS66Ge0WINuPfXRRHIBUqN3z40vbc1w/exec";
+const API_URL ="https://script.google.com/macros/s/AKfycbwN5F5d_nDGaPavl6FgiigJrJY1VAoEnYOu9QIMS66Ge0WINuPfXRRHIBUqN3z40vbc1w/exec";
 
-const grid = document.getElementById("studentsGrid");
-const searchInput = document.getElementById("studentSearch");
-const yearFilter = document.getElementById("yearFilter");
-
-let students = [];
-let activeStudentList = [];
-let renderedStudentCount = 0;
-let isRenderingStudentBatch = false;
-let studentObserver = null;
-const STUDENT_CHUNK_SIZE = 12;
-const BACKEND_SORT_KEYS = ["sort", "sortOrder", "order", "position", "sequence", "index", "priority"];
+const container = document.getElementById("studentsContainer");
 
 function escapeHtml(value = "") {
-    return String(value ?? "")
+    return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -22,416 +11,243 @@ function escapeHtml(value = "") {
         .replace(/'/g, "&#39;");
 }
 
-function getText(student, key, fallback = "") {
-    return (student?.[key] ?? fallback).toString().trim();
-}
-
-function getStudentField(student, keys, fallback = "") {
-    for (const key of keys) {
-        if (!key) {
-            continue;
-        }
-
-        const value = student?.[key];
-        if (value !== undefined && value !== null) {
-            const text = String(value).trim();
-            if (text) {
-                return text;
-            }
-        }
+function ensureStudentModal() {
+    if (document.getElementById("studentModal")) {
+        return document.getElementById("studentModal");
     }
 
-    return fallback;
-}
-
-function normalizeStudentsPayload(payload) {
-    if (Array.isArray(payload)) {
-        return payload;
-    }
-
-    if (payload && typeof payload === "object") {
-        for (const key of ["students", "data", "records", "items"]) {
-            if (Array.isArray(payload[key])) {
-                return payload[key];
-            }
-        }
-    }
-
-    return [];
-}
-
-function resolvePhotoUrl(value = "") {
-    const raw = String(value || "").trim();
-
-    if (!raw) {
-        return "";
-    }
-
-    if (/^https?:\/\//i.test(raw)) {
-        if (/drive\.google\.com/i.test(raw)) {
-            const match = raw.match(/(?:^|[?&])id=([^&]+)/i) || raw.match(/\/file\/d\/([^/]+)/i);
-            if (match?.[1]) {
-                return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
-            }
-        }
-
-        return raw;
-    }
-
-    const normalized = raw.replace(/^\.?\//, "");
-    const match = normalized.match(/([A-Za-z0-9_-]{10,})/);
-    if (match?.[1] && !normalized.includes(" ")) {
-        return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
-    }
-
-    return raw;
-}
-
-function getBackendSortValue(student) {
-    for (const key of BACKEND_SORT_KEYS) {
-        if (!key) {
-            continue;
-        }
-
-        const value = student?.[key];
-        if (value === undefined || value === null || value === "") {
-            continue;
-        }
-
-        const numericValue = Number(value);
-        if (!Number.isNaN(numericValue)) {
-            return numericValue;
-        }
-
-        return String(value).trim().toLowerCase();
-    }
-
-    return null;
-}
-
-function sortStudentsByBackendOrder(list) {
-    return list
-        .map((student, index) => ({ student, index }))
-        .sort((left, right) => {
-            const leftSort = getBackendSortValue(left.student);
-            const rightSort = getBackendSortValue(right.student);
-
-            if (leftSort !== null && rightSort !== null) {
-                if (typeof leftSort === "number" && typeof rightSort === "number") {
-                    if (leftSort !== rightSort) {
-                        return leftSort - rightSort;
-                    }
-                } else {
-                    const textCompare = String(leftSort).localeCompare(String(rightSort), undefined, { sensitivity: "base" });
-                    if (textCompare !== 0) {
-                        return textCompare;
-                    }
-                }
-            }
-
-            return left.index - right.index;
-        })
-        .map(({ student }) => student);
-}
-
-function normalizeStudent(student) {
-    const name = getStudentField(student, ["name", "Full Name", "full name", "Student Name", "student_name"], "Student profile");
-    const photo = resolvePhotoUrl(getStudentField(student, ["photo", "Upload your photo", "Photo", "Profile Photo", "image", "Image"], ""));
-    const year = getStudentField(student, ["year", "Year of Study", "Year", "Study Year"], "Year of study");
-    const career = getStudentField(student, ["career", "Career Ambitions", "Career", "Career Goals"], "Research-focused pharmacy student");
-    const interests = getStudentField(student, ["interests", "Research Interests", "Research Interest", "Areas of Interest"], "");
-    const linkedIn = getStudentField(student, ["linkedin", "LinkedIn Profile", "LinkedIn", "Linkedin"], "");
-    const projects = getStudentField(student, ["projects", "Current Research Project(s)", "Current Research Projects", "Research Projects"], "");
-    const publications = getStudentField(student, ["publications", "Research Publications", "Publications"], "");
-
-    return {
-        name,
-        photo,
-        year,
-        career,
-        interests,
-        linkedIn,
-        projects,
-        publications,
-        __backendSortValue: getBackendSortValue(student),
-    };
-}
-
-function getInitials(name) {
-    const parts = String(name || "").split(/\s+/).filter(Boolean);
-
-    if (!parts.length) {
-        return "ST";
-    }
-
-    if (parts.length === 1) {
-        return parts[0].slice(0, 2).toUpperCase();
-    }
-
-    return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
-}
-
-function renderLoadingState() {
-    grid.innerHTML = "";
-
-    for (let i = 0; i < 4; i += 1) {
-        const skeleton = document.createElement("article");
-        skeleton.className = "student-card student-card--skeleton";
-        skeleton.innerHTML = `
-            <div class="student-skeleton-line"></div>
-            <div class="student-skeleton-line short"></div>
-            <div class="student-skeleton-line"></div>
-            <div class="student-skeleton-line short"></div>
-        `;
-        grid.appendChild(skeleton);
-    }
-}
-
-function isMobileViewport() {
-    return window.matchMedia("(max-width: 768px)").matches;
-}
-
-function createDescriptionModal(student) {
-    const overlay = document.createElement("div");
-    overlay.className = "popup-overlay is-open";
-    overlay.setAttribute("role", "dialog");
-    overlay.setAttribute("aria-modal", "true");
-    overlay.setAttribute("aria-label", `${student.name} profile`);
-
-    overlay.innerHTML = `
-        <div class="popup-modal">
-            <button type="button" class="popup-close" aria-label="Close profile">×</button>
-            <div class="student-description-modal">
-                <p class="popup-kicker">Student profile</p>
-                <h2 class="student-name">${escapeHtml(student.name || "Student profile")}</h2>
-                <span class="student-year">${escapeHtml(student.year || "Year of study")}</span>
-                <p>${escapeHtml(student.career || "Research-focused pharmacy student")}</p>
-                ${student.interests ? `<p><strong>Interests:</strong> ${escapeHtml(student.interests)}</p>` : ""}
-                ${student.projects ? `<p><strong>Projects:</strong> ${escapeHtml(student.projects)}</p>` : ""}
-                ${student.publications ? `<p><strong>Publications:</strong> ${escapeHtml(student.publications)}</p>` : ""}
-                ${student.linkedIn ? `<p><a href="${escapeHtml(student.linkedIn)}" target="_blank" rel="noreferrer">View profile</a></p>` : ""}
-            </div>
+    const modal = document.createElement("div");
+    modal.id = "studentModal";
+    modal.className = "student-modal";
+    modal.innerHTML = `
+        <div class="student-modal-backdrop" data-close="true"></div>
+        <div class="student-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="studentModalTitle">
+            <button class="student-modal-close" type="button" aria-label="Close student details">×</button>
+            <div class="student-modal-body"></div>
         </div>
     `;
 
-    const close = () => overlay.remove();
-    overlay.addEventListener("click", (event) => {
-        if (event.target === overlay) {
-            close();
+    modal.querySelector(".student-modal-close").addEventListener("click", closeStudentModal);
+    modal.querySelector(".student-modal-backdrop").addEventListener("click", closeStudentModal);
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeStudentModal();
         }
     });
 
-    overlay.querySelector(".popup-close").addEventListener("click", close);
-    document.body.appendChild(overlay);
+    document.body.appendChild(modal);
+    return modal;
 }
 
-function disconnectStudentObserver() {
-    if (studentObserver) {
-        studentObserver.disconnect();
-        studentObserver = null;
-    }
-}
+function openStudentModal(student) {
+    const modal = ensureStudentModal();
+    const body = modal.querySelector(".student-modal-body");
 
-function attachStudentObserver() {
-    disconnectStudentObserver();
-
-    const sentinel = document.createElement("div");
-    sentinel.className = "student-scroll-sentinel";
-    sentinel.setAttribute("aria-hidden", "true");
-    grid.appendChild(sentinel);
-
-    studentObserver = new IntersectionObserver((entries) => {
-        const shouldLoadMore = entries.some((entry) => entry.isIntersecting);
-
-        if (shouldLoadMore && !isRenderingStudentBatch) {
-            renderStudentBatch();
-        }
-    }, {
-        rootMargin: "240px 0px 240px 0px"
-    });
-
-    studentObserver.observe(sentinel);
-}
-
-function renderStudents(list) {
-    activeStudentList = Array.isArray(list) ? list : [];
-    renderedStudentCount = 0;
-    isRenderingStudentBatch = false;
-    disconnectStudentObserver();
-    grid.innerHTML = "";
-
-    if (!activeStudentList.length) {
-        const empty = document.createElement("div");
-        empty.className = "student-empty";
-        empty.innerHTML = "No student profiles matched your search yet. Try a different keyword or year.";
-        grid.appendChild(empty);
-        return;
-    }
-
-    attachStudentObserver();
-    renderStudentBatch();
-}
-
-function renderStudentBatch() {
-    if (isRenderingStudentBatch || renderedStudentCount >= activeStudentList.length) {
-        disconnectStudentObserver();
-        return;
-    }
-
-    isRenderingStudentBatch = true;
-
-    const nextCount = Math.min(activeStudentList.length, renderedStudentCount + STUDENT_CHUNK_SIZE);
-    const nextStudents = activeStudentList.slice(renderedStudentCount, nextCount);
-
-    nextStudents.forEach((student) => {
-        const card = document.createElement("article");
-        card.className = "student-card";
-
-        const photo = student.photo || "";
-        const name = student.name || "Student profile";
-        const year = student.year || "Year of study";
-        const career = student.career || "Research-focused pharmacy student";
-        const interests = student.interests || "";
-        const linkedIn = student.linkedIn || "";
-        const projectCount = student.projects ? 1 : 0;
-        const publicationCount = student.publications ? 1 : 0;
-        const collapsedCareer = career.length > 140 ? `${career.slice(0, 140).trimEnd()}…` : career;
-        const showReadToggle = career.length > 140;
-
-        const tags = interests
-            .split(",")
-            .map((tag) => tag.trim())
-            .filter(Boolean)
-            .slice(0, 4);
-
-        const facts = [];
-
-        if (projectCount) {
-            facts.push("Active project");
-        }
-
-        if (publicationCount) {
-            facts.push("Publication");
-        }
-
-        card.innerHTML = `
-            <div class="student-card-header">
-                <div class="student-card-media">
-                    <div class="student-avatar">
-                        ${photo
-                            ? `<img src="${escapeHtml(photo)}" alt="${escapeHtml(name)}" decoding="async">`
-                            : escapeHtml(getInitials(name))}
-                    </div>
-                    <div class="student-profile-copy">
-                        <span class="student-year">${escapeHtml(year)}</span>
-                        <h3 class="student-name">${escapeHtml(name)}</h3>
-                    </div>
-                </div>
-                <div class="student-meta">
-                    <div class="student-career-shell">
-                        <p class="student-career ${showReadToggle ? "student-career--collapsed" : ""}" data-full-text="${escapeHtml(career)}" data-collapsed-text="${escapeHtml(collapsedCareer)}">${escapeHtml(showReadToggle ? collapsedCareer : career)}</p>
-                    </div>
-                    ${facts.length ? `<div class="student-facts">${facts.map((fact) => `<span>${escapeHtml(fact)}</span>`).join("")}</div>` : ""}
-                    <div class="student-tags">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
-                    <div class="student-actions">
-                        ${showReadToggle ? `<button type="button" class="student-read-toggle" aria-expanded="false">Read more</button>` : ""}
-                        ${linkedIn ? `<div class="student-links"><a href="${escapeHtml(linkedIn)}" target="_blank" rel="noreferrer">View profile</a></div>` : ""}
-                    </div>
-                </div>
+    body.innerHTML = `
+        <div class="student-modal-header">
+            <div class="student-modal-image">
+                <img src="${student.photo || "images/avatar.png"}" alt="${escapeHtml(student.name || "Student")}">
             </div>
-        `;
+            <div class="student-modal-heading">
+                <p class="student-modal-eyebrow">Student profile</p>
+                <h3 id="studentModalTitle">${escapeHtml(student.name || "Unnamed Student")}</h3>
+                <span class="student-year">${escapeHtml(student.year || "")}</span>
+            </div>
+        </div>
 
-        const readToggle = card.querySelector(".student-read-toggle");
-        if (readToggle) {
-            readToggle.addEventListener("click", () => {
-                createDescriptionModal({
-                    name,
-                    year,
-                    career,
-                    interests,
-                    projects: student.projects || "",
-                    publications: student.publications || "",
-                    linkedIn
-                });
-            });
-        }
+        ${student.career ? `
+            <div class="student-section">
+                <h4>Career Ambitions</h4>
+                <p>${escapeHtml(student.career)}</p>
+            </div>
+        ` : ""}
 
-        grid.appendChild(card);
-    });
+        ${student.interests ? `
+            <div class="student-section">
+                <h4>Research Interests</h4>
+                <p>${escapeHtml(student.interests)}</p>
+            </div>
+        ` : ""}
 
-    renderedStudentCount = nextCount;
-    isRenderingStudentBatch = false;
+        ${student.projects ? `
+            <div class="student-section">
+                <h4>Current Projects</h4>
+                <p>${escapeHtml(student.projects)}</p>
+            </div>
+        ` : ""}
 
-    if (renderedStudentCount >= activeStudentList.length) {
-        disconnectStudentObserver();
-    }
+        ${student.publications ? `
+            <div class="student-section">
+                <h4>Publications</h4>
+                <p>${escapeHtml(student.publications)}</p>
+            </div>
+        ` : ""}
+
+        <div class="student-links">
+            ${student.linkedin ? `<a href="${formatLink(student.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ""}
+            ${student.orcid ? `<a href="${formatLink(student.orcid)}" target="_blank" rel="noopener">ORCID</a>` : ""}
+        </div>
+    `;
+
+    modal.classList.add("is-open");
+    document.body.classList.add("modal-open");
 }
 
-function applyFilters() {
-    const query = searchInput.value.trim().toLowerCase();
-    const year = yearFilter.value.trim();
+function closeStudentModal() {
+    const modal = document.getElementById("studentModal");
+    if (!modal) {
+        return;
+    }
 
-    const filtered = students.filter((student) => {
-        const name = student.name.toLowerCase();
-        const career = student.career.toLowerCase();
-        const interests = student.interests.toLowerCase();
-        const studyYear = student.year;
-
-        const matchesQuery = !query || [name, career, interests].some((value) => value.includes(query));
-        const matchesYear = !year || studyYear === year;
-
-        return matchesQuery && matchesYear;
-    });
-
-    renderStudents(filtered);
+    modal.classList.remove("is-open");
+    document.body.classList.remove("modal-open");
 }
 
 async function loadStudents() {
-    if (Array.isArray(window.__KEPHSA_STUDENTS_DATA__)) {
-        students = window.__KEPHSA_STUDENTS_DATA__;
-        applyFilters();
-        return;
+    container.innerHTML = `
+        <div class="students-loading">
+            Loading students...
+        </div>
+    `;
+
+    try {
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch data.");
+        }
+
+        const students = await response.json();
+
+        renderStudents(students);
+
+    } catch (error) {
+
+        container.innerHTML = `
+            <div class="students-error">
+                Unable to load student profiles.
+            </div>
+        `;
+
+        console.error(error);
     }
-
-    if (window.__KEPHSA_STUDENTS_LOAD_PROMISE__) {
-        renderLoadingState();
-        window.__KEPHSA_STUDENTS_LOAD_PROMISE__
-            .then((data) => {
-                students = data;
-                applyFilters();
-            })
-            .catch(() => {
-                renderStudents([]);
-            });
-        return;
-    }
-
-    renderLoadingState();
-
-    window.__KEPHSA_STUDENTS_LOAD_PROMISE__ = fetch(API, { cache: "no-store" })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`Request failed with status ${response.status}`);
-            }
-            return response.json();
-        })
-        .then((data) => {
-            students = sortStudentsByBackendOrder(normalizeStudentsPayload(data).map(normalizeStudent));
-            window.__KEPHSA_STUDENTS_DATA__ = students;
-            return students;
-        })
-        .catch((error) => {
-            console.error("Failed to load students:", error);
-            students = [];
-            window.__KEPHSA_STUDENTS_DATA__ = [];
-            return [];
-        })
-        .finally(() => {
-            applyFilters();
-        });
 }
 
-searchInput.addEventListener("input", applyFilters);
-yearFilter.addEventListener("change", applyFilters);
+function renderStudents(students) {
+    if (!students.length) {
+        container.innerHTML = `
+            <div class="students-empty">
+                No student profiles available.
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="students-carousel" aria-live="polite">
+            <div class="students-track"></div>
+        </div>
+        <div class="students-carousel-controls" aria-label="Student carousel controls">
+            <button class="students-carousel-btn" type="button" data-action="prev" aria-label="Previous student">←</button>
+            <span class="students-carousel-status"></span>
+            <button class="students-carousel-btn" type="button" data-action="next" aria-label="Next student">→</button>
+        </div>
+    `;
+
+    const track = container.querySelector(".students-track");
+    const status = container.querySelector(".students-carousel-status");
+    const cards = students.map(student => createCard(student));
+    track.innerHTML = cards.join("");
+
+    let currentIndex = 0;
+    let timerId = null;
+
+    const showSlide = (index) => {
+        currentIndex = (index + cards.length) % cards.length;
+        const slides = Array.from(track.children);
+        slides.forEach((slide, slideIndex) => {
+            slide.classList.toggle("is-active", slideIndex === currentIndex);
+        });
+        if (status) {
+            status.textContent = `${currentIndex + 1} / ${cards.length}`;
+        }
+    };
+
+    const startAutoPlay = () => {
+        clearInterval(timerId);
+        timerId = window.setInterval(() => {
+            showSlide(currentIndex + 1);
+        }, 5000);
+    };
+
+    const goToSlide = (index) => {
+        showSlide(index);
+        startAutoPlay();
+    };
+
+    container.querySelectorAll(".students-carousel-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+            const action = button.dataset.action;
+            goToSlide(action === "next" ? currentIndex + 1 : currentIndex - 1);
+        });
+    });
+
+    container.querySelectorAll(".student-more-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+            const student = JSON.parse(decodeURIComponent(button.dataset.student || "{}"));
+            openStudentModal(student);
+        });
+    });
+
+    showSlide(0);
+    startAutoPlay();
+    container.addEventListener("mouseenter", () => clearInterval(timerId));
+    container.addEventListener("mouseleave", startAutoPlay);
+}
+
+function createCard(student) {
+    const summary = student.interests || student.career || student.projects || student.publications || "";
+
+    return `
+
+    <article class="student-card">
+
+        <div class="student-image">
+            <img
+                src="${student.photo || "images/avatar.png"}"
+                alt="${escapeHtml(student.name || "Student") }"
+                loading="lazy"
+            >
+        </div>
+
+        <div class="student-content">
+            <div class="student-top">
+                <h3>${escapeHtml(student.name || "Unnamed Student")}</h3>
+                <span class="student-year">${escapeHtml(student.year || "")}</span>
+            </div>
+
+            ${summary ? `<p class="student-summary">${escapeHtml(summary)}</p>` : ""}
+
+            <button class="student-more-btn" type="button" data-student="${encodeURIComponent(JSON.stringify(student))}">
+                More
+            </button>
+        </div>
+
+    </article>
+
+    `;
+}
+
+function formatLink(url) {
+
+    if (!url) return "#";
+
+    if (url.startsWith("http")) {
+        return url;
+    }
+
+    return "https://" + url;
+}
 
 loadStudents();
