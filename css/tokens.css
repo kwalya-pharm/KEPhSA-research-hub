@@ -1,0 +1,38 @@
+/* =========================
+   01. Design Tokens
+========================= */
+:root {
+    --color-primary: #e50914;
+    --color-primary-dark: #b20710;
+    --color-accent: #2b93ff;
+    --color-accent-soft: #77c8ff;
+    --color-surface: rgba(255, 255, 255, 0.06);
+    --color-surface-strong: rgba(255, 255, 255, 0.1);
+    --color-surface-2: rgba(255, 255, 255, 0.08);
+    --color-text: #f8fcff;
+    --color-text-muted: #d9e6f7;
+    --color-text-dim: #a8bfdc;
+    --color-border: rgba(212, 237, 249, 0.14);
+    --color-border-strong: rgba(255, 255, 255, 0.16);
+    --color-glow: rgba(229, 9, 20, 0.35);
+    --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-emphasis: cubic-bezier(0.22, 1, 0.36, 1);
+    --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.24);
+    --radius-sm: 0.8rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.3rem;
+    --radius-xl: 1.6rem;
+    --radius-pill: 999px;
+    --space-2xs: 0.35rem;
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4.5rem;
+    --content-max: 1200px;
+    --section-space: clamp(4.5rem, 7vw, 6.5rem);
+}

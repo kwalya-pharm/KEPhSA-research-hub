@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KEPhSA Research Hub</title>
     <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="css/students.css">
-    <link rel="stylesheet" href="css/events.css">
     <script src="https://cdn.jsdelivr.net/npm/vanta@0.9.24/dist/vanta.net.min.js"></script>
 </head>
 
@@ -40,9 +38,9 @@
 
     <!-- ================= HEADER ================= -->
     <header class="site-header">
-        <div class="logo">
+        <a class="logo" href="#home" aria-label="KEPhSA Research Hub home">
             KEPhSA Research Hub
-        </div>
+        </a>
 
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-links" aria-label="Toggle primary navigation">
             <span></span>
@@ -52,7 +50,7 @@
 
         <nav class="site-nav" aria-label="Primary navigation">
             <div class="site-nav-links" id="site-nav-links">
-                <div class="glass-radio-group nav-glass">
+                <div class="nav-glass">
                     <input type="radio" name="site-nav" id="nav-home" data-target="#home" checked />
                     <label for="nav-home">Home</label>
 
@@ -85,10 +83,8 @@
 
     <!-- ================= HERO ================= -->
     <section id="home">
-
-    <div class="overlay"></div>
-
-    <div class="hero-content">
+        <div class="overlay"></div>
+        <div class="hero-content">
 
         <p class="hero-eyebrow">Research, innovation, and collaboration for pharmacy students</p>
 
@@ -136,15 +132,14 @@
             </div>
         </div>
 
-    </div>
-
-</section>
+        </div>
+    </section>
 
     
     <!-- ================= ABOUT ================= -->
-    <section id="about">
+    <section id="about" aria-labelledby="about-title">
 
-        <h2>About Us</h2>
+        <h2 id="about-title">About Us</h2>
 
         <div class="about-story">
             <div class="about-sequence" aria-label="About us timeline sequence">
@@ -217,9 +212,8 @@
     </section>
 
     <!-- ================= WHAT WE OFFER ================= -->
-    <section id="offer">
-
-        <h2>What We Offer</h2>
+    <section id="offer" aria-labelledby="offer-title">
+        <h2 id="offer-title">What We Offer</h2>
 
         <div class="offer-grid">
             <div class="offer-item">
@@ -267,9 +261,8 @@
     </section>
 
     <!-- ================= LEADERSHIP ================= -->
-    <section id="leadership">
-
-        <h2 class="leadership-title" data-leadership-title>Leadership</h2>
+    <section id="leadership" aria-labelledby="leadership-title">
+        <h2 class="leadership-title" id="leadership-title" data-leadership-title>Leadership</h2>
         <p class="leadership-subtitle">Meet the visionary minds driving KEPhSA Research Hub</p>
 
         <div class="leadership-carousel-wrapper">
@@ -353,9 +346,8 @@
     </section>
 
     <!-- ================= FACILITATORS ================= -->
-    <section id="facilitators">
-
-        <h2>Facilitators</h2>
+    <section id="facilitators" aria-labelledby="facilitators-title">
+        <h2 id="facilitators-title">Facilitators</h2>
         <p class="leadership-subtitle">Meet the facilitators guiding our programs and workshops</p>
 
         <div class="leadership-carousel-wrapper">
@@ -581,9 +573,8 @@
     </section>
 
     <!-- ================= CONTACT ================= -->
-    <section id="contact">
-
-        <h2>KEPhSA Research Hub</h2>
+    <section id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">KEPhSA Research Hub</h2>
 
         <p>KEPhSA Research Hub</p>
 
@@ -597,8 +588,7 @@
     </section>
 
     <!-- ================= FOOTER ================= -->
-    <footer>
-
+    <footer class="site-footer">
         <div class="footer-links">
 
             <h3>Quick Links</h3>
@@ -646,11 +636,10 @@
 <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.net.min.js"></script>
 
 <!-- Your Script -->
-<script src="home.js"></script>
+<script type="module" src="js/home/index.js"></script>
 <script src="js/events.js"></script>
 <script src="js/students.js?v=20260706"></script>
 <script src="js/popup.js?v=20260706"></script>
-
 
 </body>
 </html>

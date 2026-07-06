@@ -1,5 +1,5 @@
 (() => {
-    const API_URL = "https://script.google.com/macros/s/AKfycbyVHUlybyAt8RdE2qu1iWH5_ff46jWWCH7hJg5l50K6XKaGQj3nHdO9TpYw-t0Vr6f9dQ/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzYU-YreXi3OVdE4v5dLLvEFAo_vzmgH_aGtp4AihuWpzMZBWKOXyox7Ojv35C2YAAN/exec";
     const DEFAULT_IMAGE = "media/logo.png";
     const container = document.getElementById("events-container");
 
