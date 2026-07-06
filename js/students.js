@@ -190,15 +190,15 @@ function renderStudents(list) {
                 <div class="student-meta">
                     <h3 class="student-name">${escapeHtml(name)}</h3>
                     <span class="student-year">${escapeHtml(year)}</span>
+                    <div class="student-career-shell">
+                        <p class="student-career ${showReadToggle ? "student-career--collapsed" : ""}" data-full-text="${escapeHtml(career)}" data-collapsed-text="${escapeHtml(collapsedCareer)}">${escapeHtml(showReadToggle ? collapsedCareer : career)}</p>
+                        ${showReadToggle ? `<button type="button" class="student-read-toggle" aria-expanded="false">... Read More</button>` : ""}
+                    </div>
+                    ${facts.length ? `<div class="student-facts">${facts.map((fact) => `<span>${escapeHtml(fact)}</span>`).join("")}</div>` : ""}
+                    <div class="student-tags">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+                    ${linkedIn ? `<div class="student-links"><a href="${escapeHtml(linkedIn)}" target="_blank" rel="noreferrer">View profile</a></div>` : ""}
                 </div>
             </div>
-            <div class="student-career-shell">
-                <p class="student-career ${showReadToggle ? "student-career--collapsed" : ""}" data-full-text="${escapeHtml(career)}" data-collapsed-text="${escapeHtml(collapsedCareer)}">${escapeHtml(showReadToggle ? collapsedCareer : career)}</p>
-                ${showReadToggle ? `<button type="button" class="student-read-toggle" aria-expanded="false">... Read More</button>` : ""}
-            </div>
-            ${facts.length ? `<div class="student-facts">${facts.map((fact) => `<span>${escapeHtml(fact)}</span>`).join("")}</div>` : ""}
-            <div class="student-tags">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
-            ${linkedIn ? `<div class="student-links"><a href="${escapeHtml(linkedIn)}" target="_blank" rel="noreferrer">View profile</a></div>` : ""}
         `;
 
         const readToggle = card.querySelector(".student-read-toggle");

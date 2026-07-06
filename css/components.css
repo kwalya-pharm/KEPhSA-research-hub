@@ -569,131 +569,123 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    min-height: 460px;
+    min-height: auto;
 }
 
 .leadership-carousel {
-    display: flex;
-    align-items: center;
-    gap: 40px;
+    display: grid;
+    gap: 1.35rem;
     padding: 0;
-    transition: transform 0.9s var(--ease-standard);
-    will-change: transform;
+    transition: none;
+    will-change: auto;
 }
 
 .leader-card {
-    flex: 0 0 260px;
-    width: 260px;
     position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.35rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 0 1.4rem;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
     overflow: visible;
     cursor: pointer;
-    transform: scale(0.86);
-    filter: brightness(0.35);
-    transition: transform 0.8s var(--ease-standard), filter 0.8s var(--ease-standard), box-shadow 0.8s ease;
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    transform: none;
+    filter: none;
+    transition: none;
 }
 
-.leader-card.active {
-    transform: scale(1);
-    filter: brightness(1);
-    z-index: 100;
+.leader-card + .leader-card {
+    padding-top: 1.45rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .leader-image {
-    width: 100%;
-    height: 320px;
+    width: clamp(132px, 18vw, 220px);
+    aspect-ratio: 4 / 5;
+    flex-shrink: 0;
     object-fit: cover;
     object-position: center;
     display: block;
-    border-radius: 20px;
+    border-radius: 18px;
+    border: none;
 }
 
 .leader-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(4, 10, 24, 0.12) 0%, rgba(4, 10, 24, 0.42) 100%);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transition: background 0.8s ease;
-    z-index: 2;
-    border-radius: 20px;
-    pointer-events: none;
-}
-
-.leader-card.active .leader-overlay {
-    background: rgba(0, 0, 0, 0);
+    display: none;
 }
 
 .leader-info {
     position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
     width: 100%;
     color: var(--color-text);
     z-index: 3;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
-    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-}
-
-.leader-card.active .leader-info {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateY(0);
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    text-shadow: none;
 }
 
 .leader-position {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #b0d4ff;
-    margin: 0 0 6px;
+    color: #8fd0ff;
+    margin: 0 0 0.15rem;
 }
 
 .leader-name {
-    font-size: 1.2rem;
+    font-size: clamp(1.12rem, 1.6vw, 1.45rem);
     font-weight: 700;
-    margin: 0 0 4px;
+    margin: 0;
     line-height: 1.2;
 }
 
 .leader-topic {
-    font-size: 0.84rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #8dd3ff;
-    margin: 0 0 6px;
+    margin: 0;
     line-height: 1.4;
 }
 
 .leader-description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #dcecff;
-    margin: 0 0 8px;
-    line-height: 1.5;
+    margin: 0;
+    line-height: 1.7;
+    max-width: 68ch;
 }
 
 .leader-institution {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     color: #d9e6f7;
-    margin: 0 0 6px;
+    margin: 0;
+    line-height: 1.5;
 }
 
 .leader-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.82rem;
+    font-size: 0.86rem;
     font-weight: 700;
     color: #8dd3ff;
     text-decoration: none;
-    margin-top: 4px;
+    margin-top: 0.2rem;
+    width: fit-content;
 }
 
 .leader-link:hover,
@@ -715,9 +707,9 @@
 
 .leadership-note {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     color: var(--color-text-dim);
-    margin: 0;
+    margin: 0.8rem 0 0;
 }
 
 .image-grid {

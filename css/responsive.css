@@ -189,51 +189,22 @@
     }
 
     .leadership-carousel {
-        display: grid;
         gap: 16px;
-        transform: none !important;
-        will-change: auto;
-    }
-
-    .leadership-carousel.is-mobile-layout {
-        grid-template-columns: minmax(0, 1fr);
     }
 
     .leader-card {
-        width: 100%;
-        max-width: 100%;
-        flex: 0 0 auto;
-        transform: none !important;
-        filter: none !important;
-        border-radius: 22px;
-        background: rgba(4, 16, 31, 0.82);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
-        overflow: hidden;
-    }
-
-    .leader-card.active {
-        transform: none !important;
-        box-shadow: 0 20px 42px rgba(0, 0, 0, 0.26);
+        align-items: flex-start;
+        padding: 0 0 1.1rem;
     }
 
     .leader-image {
-        width: 100%;
-        height: 250px;
-        border-radius: 22px 22px 0 0;
-    }
-
-    .leader-overlay {
-        border-radius: 22px 22px 0 0;
+        width: 104px;
+        height: auto;
+        border-radius: 16px;
     }
 
     .leader-info {
-        display: block;
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: none;
-        padding: 16px 16px 18px;
+        padding: 0;
     }
 
     .about-sequence {
@@ -419,7 +390,7 @@
 
     .leadership-carousel-wrapper {
         overflow: hidden;
-        min-height: 240px;
+        min-height: auto;
     }
 
     .leadership-carousel {
@@ -428,80 +399,52 @@
     }
 
     .leader-card {
-        flex: 0 0 152px;
-        width: 152px;
-        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        transform: scale(0.84);
-        filter: brightness(0.45);
-        box-shadow: none;
-        overflow: visible;
-        background: transparent;
-        border: none;
-    }
-
-    .leader-card.active {
-        transform: scale(1);
-        filter: brightness(1);
-        box-shadow: none;
-        border: none;
-    }
-
-    .leader-overlay {
-        position: absolute;
-        inset: 0;
-        border-radius: 16px;
-        background: linear-gradient(180deg, rgba(4,10,24,0.14) 0%, rgba(4,10,24,0.5) 100%);
+        align-items: stretch;
+        padding: 0 0 1rem;
     }
 
     .leader-image {
-        height: 220px;
-        border-radius: 16px;
+        width: 100%;
+        height: auto;
+        max-height: 220px;
+        border-radius: 14px;
     }
 
     .leader-info {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        right: auto;
-        margin-top: 0;
-        padding: 0 2px;
-        border-radius: 0;
-        background: transparent;
-        backdrop-filter: none;
-        color: #f5f7ff;
-        text-shadow: none;
-    }
-
-    .leader-card.active .leader-info {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        background: transparent;
+        gap: 0.35rem;
     }
 
     .leader-position {
         font-size: 0.56rem;
-        margin-bottom: 3px;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        opacity: 0.9;
     }
 
     .leader-name {
-        font-size: 0.84rem;
-        font-weight: 700;
+        font-size: 0.92rem;
         line-height: 1.22;
-        margin-bottom: 2px;
     }
 
+    .leader-description,
     .leader-institution {
-        font-size: 0.68rem;
-        margin-top: 2px;
-        opacity: 0.95;
-        line-height: 1.4;
+        font-size: 0.8rem;
+        line-height: 1.55;
+    }
+
+    .student-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .student-card-header {
+        align-items: flex-start;
+    }
+
+    .student-avatar {
+        width: 100%;
+        max-width: 220px;
+        aspect-ratio: 4 / 5;
     }
 
     .repository-grid,
