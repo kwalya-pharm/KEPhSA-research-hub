@@ -493,15 +493,15 @@
 
 <!-- ================= CURRENT STUDENTS ================= -->
 
-<section id="students">
+<section id="students" aria-labelledby="students-title">
 
     <div class="students-section-heading">
         <span class="section-kicker">Student network</span>
-        <h2>Meet the students shaping research in pharmacy</h2>
+        <h2 id="students-title">Meet the students shaping research in pharmacy</h2>
         <p>Explore current student researchers, their interests, and the growing projects that are defining the KEPhSA Research Hub.</p>
     </div>
 
-    <div class="students-toolbar">
+    <div class="students-toolbar" role="search" aria-label="Search and filter student profiles">
 
         <label class="students-search" for="studentSearch">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -511,10 +511,12 @@
             <input
                 type="search"
                 id="studentSearch"
-                placeholder="Search students...">
+                placeholder="Search students..."
+                autocomplete="off"
+                aria-label="Search students by name, interests, or career goals">
         </label>
 
-        <select id="yearFilter">
+        <select id="yearFilter" aria-label="Filter students by year">
             <option value="">All Years</option>
             <option>First Year</option>
             <option>Second Year</option>
@@ -525,7 +527,7 @@
 
     </div>
 
-    <div id="studentsGrid" aria-live="polite"></div>
+    <div id="studentsGrid" aria-live="polite" aria-label="Student profiles"></div>
 
 </section>
 
