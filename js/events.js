@@ -180,12 +180,100 @@
 
         normalized.sort((a, b) => parseEventDate(a) - parseEventDate(b));
 
-        const fragment = document.createDocumentFragment();
-        normalized.forEach((event) => {
-            fragment.appendChild(createEventCard(event));
+        // Save full list for pagination and future re-renders
+        window.__KEPHSA_EVENTS_DATA__ = normalized;
+
+        // Pagination state
+        let pageSize = window.matchMedia('(max-width: 560px)').matches ? 1 : 2;
+        let currentPage = 0;
+        const totalPages = () => Math.max(1, Math.ceil(window.__KEPHSA_EVENTS_DATA__.length / pageSize));
+
+        // Ensure paginated layout class is applied
+        container.classList.add('events-paginated');
+
+        // Create pagination controls
+        let paginationEl = document.querySelector('.events-pagination');
+        if (!paginationEl) {
+            paginationEl = document.createElement('div');
+            paginationEl.className = 'events-pagination';
+            paginationEl.innerHTML = `
+                <button type="button" class="events-prev" aria-label="Previous events">Prev</button>
+                <div class="events-page-indicator" aria-hidden="true"></div>
+                <button type="button" class="events-next" aria-label="Next events">Next</button>
+            `;
+            container.after(paginationEl);
+        }
+
+        const prevBtn = paginationEl.querySelector('.events-prev');
+        const nextBtn = paginationEl.querySelector('.events-next');
+        const pageIndicator = paginationEl.querySelector('.events-page-indicator');
+
+        const renderPage = (pageIndex) => {
+            const items = window.__KEPHSA_EVENTS_DATA__ || [];
+            pageSize = window.matchMedia('(max-width: 560px)').matches ? 1 : 2;
+            const pages = totalPages();
+            currentPage = Math.max(0, Math.min(pageIndex, pages - 1));
+
+            container.innerHTML = '';
+            const start = currentPage * pageSize;
+            const fragment = document.createDocumentFragment();
+            const pageItems = items.slice(start, start + pageSize);
+            pageItems.forEach(ev => fragment.appendChild(createEventCard(ev)));
+            container.appendChild(fragment);
+
+            // Update controls
+            if (pages <= 1) {
+                paginationEl.style.display = 'none';
+            } else {
+                paginationEl.style.display = '';
+                prevBtn.disabled = currentPage === 0;
+                nextBtn.disabled = currentPage === (pages - 1);
+                pageIndicator.textContent = `${currentPage + 1} / ${pages}`;
+            }
+        };
+
+        prevBtn.addEventListener('click', () => renderPage(currentPage - 1));
+        nextBtn.addEventListener('click', () => renderPage(currentPage + 1));
+
+        // Keyboard navigation for desktop
+        const onKey = (e) => {
+            if (e.key === 'ArrowLeft') renderPage(currentPage - 1);
+            if (e.key === 'ArrowRight') renderPage(currentPage + 1);
+        };
+        window.addEventListener('keydown', onKey);
+
+        // Touch / swipe support for mobile
+        let touchStartX = null;
+        container.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        container.addEventListener('touchend', (e) => {
+            if (touchStartX === null) return;
+            const dx = (e.changedTouches[0].clientX - touchStartX);
+            if (Math.abs(dx) > 40) {
+                if (dx < 0) renderPage(currentPage + 1);
+                else renderPage(currentPage - 1);
+            }
+            touchStartX = null;
         });
 
-        container.appendChild(fragment);
+        // Recalculate on resize (switch between 1 and 2 per page)
+        let resizeTimer = null;
+        const onResize = () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const oldSize = pageSize;
+                pageSize = window.matchMedia('(max-width: 560px)').matches ? 1 : 2;
+                // If page size changed, clamp currentPage and re-render
+                if (oldSize !== pageSize) {
+                    renderPage(0);
+                } else {
+                    renderPage(currentPage);
+                }
+            }, 120);
+        };
+        window.addEventListener('resize', onResize);
+
+        // Initial render
+        renderPage(0);
     };
 
     const loadEvents = async () => {
