@@ -10,7 +10,8 @@ import { useState, useEffect } from 'react'
 
 // ─── Image paths ─────────────────────────────────────────────────────────────
 // Drop files into the media/ folder and update the paths below:
-//   Logo:         media/repository/logo.jpeg
+//   Logo:         media/logo.jpeg
+//   Favicon:      media/favicon.ico
 //   Leaders:      media/leaders/<name>.jpg
 //   Facilitators: media/Facilitators/<name>.<ext>
 //   Events:       media/events/<slug>.<ext>
@@ -274,7 +275,7 @@ function Navbar() {
         <a href="#" className="flex items-center gap-3">
           {!logoError ? (
             <img
-              src="/repository/logo.jpeg"
+              src="/logo.jpeg"
               alt="KEPhSA Research Hub"
               className="h-10 w-auto rounded"
               onError={() => setLogoError(true)}
@@ -874,7 +875,7 @@ function Footer() {
             <div className="flex items-center gap-3 mb-4">
               {!logoError ? (
                 <img
-                  src="/repository/logo.jpeg"
+                  src="/logo.jpeg"
                   alt="KEPhSA Research Hub"
                   className="h-9 w-auto"
                   onError={() => setLogoError(true)}
