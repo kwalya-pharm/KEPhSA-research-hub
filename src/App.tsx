@@ -9,11 +9,11 @@ import { useState, useEffect } from 'react'
 // White:                #ffffff
 
 // ─── Image paths ─────────────────────────────────────────────────────────────
-// Drop files into public/images/ subfolders and update the paths below:
-//   Logo:         public/images/logo/logo.png
-//   Leaders:      public/images/leaders/<name>.jpg
-//   Facilitators: public/images/facilitators/<name>.jpg
-//   Events:       public/images/events/<slug>.jpg
+// Drop files into the media/ folder and update the paths below:
+//   Logo:         media/repository/logo.jpeg
+//   Leaders:      media/leaders/<name>.jpg
+//   Facilitators: media/Facilitators/<name>.<ext>
+//   Events:       media/events/<slug>.<ext>
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -42,33 +42,36 @@ const LEADERSHIP = [
     name: 'Kenerdy Owino',
     institution: 'Kisii University',
     status: 'confirmed',
-    // Drop photo at: public/images/leaders/kenerdy-owino.jpg
-    photo: '/images/leaders/kenerdy-owino.jpg',
+    photo: '/leaders/Kenerdy.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&auto=format',
+    quote: 'Good pharmacy research bridges laboratory innovation with real-world patient impact.',
   },
   {
     role: 'Vice Chairperson',
     name: 'Ian Gitau',
     institution: 'University of Nairobi',
     status: 'confirmed',
-    photo: '/images/leaders/ian-gitau.jpg',
+    photo: '/leaders/Ian Gitau.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&auto=format',
+    quote: 'The future of pharmacy is written in every clinical question we choose to investigate.',
   },
   {
     role: 'Secretary General',
-    name: 'TBA',
-    institution: 'Institution TBA',
-    status: 'pending',
-    photo: '',
-    fallbackPhoto: '',
+    name: 'Prudence Akinyi',
+    institution: 'KEPhSA Research Hub',
+    status: 'confirmed',
+    photo: '/leaders/Prudence Akinyi.jpg',
+    fallbackPhoto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&auto=format',
+    quote: 'Research empowers pharmacists to turn evidence into safer, smarter care.',
   },
   {
     role: 'Treasurer',
     name: 'Ruth Gachie',
     institution: 'USIU Africa',
     status: 'confirmed',
-    photo: '/images/leaders/ruth-gachie.jpg',
+    photo: '/leaders/Ruth.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&auto=format',
+    quote: 'Pharmacy research turns data into treatments and ambition into health outcomes.',
   },
   {
     role: 'Project Coordinator',
@@ -77,14 +80,16 @@ const LEADERSHIP = [
     status: 'pending',
     photo: '',
     fallbackPhoto: '',
+    quote: 'This leadership role will soon guide our hub’s research vision.',
   },
   {
     role: 'Media & Publicity Officer',
     name: 'Gloria Sofiya',
     institution: 'KEMU',
     status: 'confirmed',
-    photo: '/images/leaders/gloria-sofiya.jpg',
+    photo: '/leaders/Gloria Sofiya.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&auto=format',
+    quote: 'Public health research makes every medicine story more meaningful.',
   },
 ]
 
@@ -96,7 +101,7 @@ const FACILITATORS = [
     institution: 'USIU-Africa',
     dept: 'Pharmacology',
     linkedin: true,
-    photo: '/images/facilitators/ermia-terefe.jpg',
+    photo: '/Facilitators/Prof. Ermias Terefe.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&h=120&fit=crop&auto=format',
   },
   {
@@ -106,7 +111,7 @@ const FACILITATORS = [
     institution: 'USIU-Africa',
     dept: 'Pharmacy',
     linkedin: false,
-    photo: '/images/facilitators/chris-muraguri.jpg',
+    photo: '/Facilitators/Dr. Chris Muraguri.jfif',
     fallbackPhoto: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&auto=format',
   },
   {
@@ -116,7 +121,7 @@ const FACILITATORS = [
     institution: 'Robert Gordon University',
     dept: 'Pharmacology',
     linkedin: false,
-    photo: '/images/facilitators/nortan-hashad.jpg',
+    photo: '/Facilitators/Dr.Nortan Hashad.png',
     fallbackPhoto: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&h=120&fit=crop&auto=format',
   },
   {
@@ -126,7 +131,7 @@ const FACILITATORS = [
     institution: 'Kisii University',
     dept: 'Mathematics & Actuarial Sciences',
     linkedin: true,
-    photo: '/images/facilitators/fred-monari.jpg',
+    photo: '/Facilitators/Dr. Fred Monari.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&auto=format',
   },
   {
@@ -136,7 +141,7 @@ const FACILITATORS = [
     institution: 'University of Nairobi',
     dept: 'Biochemistry',
     linkedin: false,
-    photo: '/images/facilitators/victor-mobegi.jpg',
+    photo: '/Facilitators/Dr. victor Mobegi.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=120&h=120&fit=crop&auto=format',
   },
   {
@@ -146,7 +151,7 @@ const FACILITATORS = [
     institution: 'University of Nigeria',
     dept: 'Medicine',
     linkedin: true,
-    photo: '/images/facilitators/godswill-uzoechina.jpg',
+    photo: '/Facilitators/Dr. Godwill Ozoechina.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=120&h=120&fit=crop&auto=format',
   },
   {
@@ -156,7 +161,7 @@ const FACILITATORS = [
     institution: 'IJMRRS',
     dept: 'Research',
     linkedin: false,
-    photo: '/images/facilitators/vani-dhaka.jpg',
+    photo: '',
     fallbackPhoto: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=120&h=120&fit=crop&auto=format',
   },
   {
@@ -166,7 +171,7 @@ const FACILITATORS = [
     institution: 'University of Nigeria',
     dept: 'Medicinal Chemistry',
     linkedin: false,
-    photo: '/images/facilitators/sunday-okafor.jpg',
+    photo: '/Facilitators/Dr. Sunday Okafor.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=120&h=120&fit=crop&auto=format',
   },
   {
@@ -176,12 +181,12 @@ const FACILITATORS = [
     institution: 'JKUAT',
     dept: 'IP & Law',
     linkedin: false,
-    photo: '/images/facilitators/jenner-akwale.jpg',
+    photo: '/Facilitators/Jenner Akwale.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&auto=format',
   },
 ]
 
-// Drop event images at: public/images/events/<slug>.jpg
+// Drop event images at: media/events/<slug>.<ext>
 const EVENTS = [
   {
     title: 'Research Bootcamp 2026',
@@ -189,7 +194,7 @@ const EVENTS = [
     location: 'USIU-Africa, Nairobi',
     type: 'Bootcamp',
     desc: 'An intensive three-day research training bootcamp covering methodology, data analysis, and scientific writing for pharmacy students.',
-    photo: '/images/events/bootcamp-2026.jpg',
+    photo: '/events/bootcamp-2026.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&h=400&fit=crop&auto=format',
     upcoming: true,
   },
@@ -199,7 +204,7 @@ const EVENTS = [
     location: 'Kisii University',
     type: 'Innovation',
     desc: 'Students pitch pharmaceutical innovation projects to a panel of industry experts and potential collaborators.',
-    photo: '/images/events/pitch-night-2026.jpg',
+    photo: '/events/pitch-night-2026.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&h=400&fit=crop&auto=format',
     upcoming: true,
   },
@@ -209,7 +214,7 @@ const EVENTS = [
     location: 'University of Nairobi',
     type: 'Conference',
     desc: 'Annual student research symposium featuring poster presentations, oral abstracts, and keynote speakers from the pharmaceutical sciences.',
-    photo: '/images/events/symposium-2026.jpg',
+    photo: '/events/symposium-2026.jpg',
     fallbackPhoto: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop&auto=format',
     upcoming: true,
   },
@@ -269,7 +274,7 @@ function Navbar() {
         <a href="#" className="flex items-center gap-3">
           {!logoError ? (
             <img
-              src="/images/logo/logo.png"
+              src="/repository/logo.jpeg"
               alt="KEPhSA Research Hub"
               className="h-9 w-auto"
               onError={() => setLogoError(true)}
@@ -584,22 +589,9 @@ function LeadershipSection() {
         </div>
 
         <div
-          className="mt-px p-8 border-t-4 flex items-center gap-6"
+          className="mt-px p-8 border-t-4"
           style={{ backgroundColor: '#0d1f3c', borderColor: '#c41e3a' }}
         >
-          {leader.status !== 'pending' && (
-            <div
-              className="w-16 h-16 shrink-0 overflow-hidden"
-              style={{ backgroundColor: '#091525' }}
-            >
-              <PersonPhoto
-                photo={leader.photo}
-                fallbackPhoto={leader.fallbackPhoto}
-                name={leader.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
           <div>
             <div className="font-mono-label text-xs uppercase tracking-widest mb-1" style={{ color: '#c41e3a' }}>
               {leader.role}
@@ -610,6 +602,11 @@ function LeadershipSection() {
             <div className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.55)' }}>
               {leader.institution}
             </div>
+            {leader.quote && (
+              <div className="mt-6 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.72)' }}>
+                “{leader.quote}”
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -771,9 +768,19 @@ function RepositorySection() {
           <div className="font-mono-label text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.40)' }}>
             Featured Media
           </div>
-          <p className="font-display text-lg font-light italic" style={{ color: 'rgba(255,255,255,0.45)' }}>
-            Highlights from the KEPhSA Research Hub — media content will appear here as the hub grows.
-          </p>
+          <div className="aspect-[16/9] overflow-hidden rounded-xl border" style={{ borderColor: 'rgba(255,255,255,0.10)' }}>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/jDr3SmdPzxo?si=693teTJdFGoXCIFV"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -864,7 +871,7 @@ function Footer() {
             <div className="flex items-center gap-3 mb-4">
               {!logoError ? (
                 <img
-                  src="/images/logo/logo.png"
+                  src="/repository/logo.jpeg"
                   alt="KEPhSA Research Hub"
                   className="h-9 w-auto"
                   onError={() => setLogoError(true)}
