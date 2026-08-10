@@ -276,27 +276,25 @@ function Navbar() {
             <img
               src="/repository/logo.jpeg"
               alt="KEPhSA Research Hub"
-              className="h-9 w-auto"
+              className="h-10 w-auto rounded"
               onError={() => setLogoError(true)}
             />
           ) : (
-            <div className="flex items-center gap-2">
-              <div
-                className="w-8 h-8 flex items-center justify-center border"
-                style={{ borderColor: scrolled ? 'rgba(196,30,58,0.5)' : 'rgba(196,30,58,0.7)' }}
-              >
-                <span className="font-mono-label text-xs font-medium" style={{ color: '#c41e3a' }}>K</span>
-              </div>
-              <div>
-                <div className="font-display text-sm font-medium leading-tight" style={{ color: scrolled ? '#ffffff' : '#0d1f3c' }}>
-                  KEPhSA
-                </div>
-                <div className="font-mono-label text-xs opacity-70" style={{ color: scrolled ? '#ffffff' : '#0d1f3c' }}>
-                  Research Hub
-                </div>
-              </div>
+            <div
+              className="w-10 h-10 flex items-center justify-center rounded border"
+              style={{ borderColor: scrolled ? 'rgba(196,30,58,0.5)' : 'rgba(196,30,58,0.7)' }}
+            >
+              <span className="font-mono-label text-sm font-medium" style={{ color: '#c41e3a' }}>K</span>
             </div>
           )}
+          <div className="hidden sm:flex flex-col leading-tight">
+            <span className="font-display text-sm font-medium" style={{ color: scrolled ? '#ffffff' : '#0d1f3c' }}>
+              KEPhSA
+            </span>
+            <span className="font-mono-label text-[10px] uppercase tracking-[0.18em]" style={{ color: scrolled ? 'rgba(255,255,255,0.75)' : 'rgba(13,31,60,0.6)' }}>
+              Research Hub
+            </span>
+          </div>
         </a>
 
         <nav className="hidden md:flex items-center gap-7">
@@ -548,19 +546,20 @@ function LeadershipSection() {
           Meet the visionary minds driving KEPhSA Research Hub. Details confirmed as they are announced.
         </p>
 
-        <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-px" style={{ backgroundColor: 'rgba(13,31,60,0.10)' }}>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px" style={{ backgroundColor: 'rgba(13,31,60,0.10)' }}>
           {LEADERSHIP.map(({ role, name, institution, status, photo, fallbackPhoto }, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
-              className="text-left p-5 transition-all duration-200"
+              aria-pressed={active === i}
+              className="text-left p-4 transition-all duration-200 text-left"
               style={{
                 backgroundColor: active === i ? '#0d1f3c' : '#ffffff',
                 color: active === i ? '#ffffff' : '#0d1f3c',
               }}
             >
               <div
-                className="w-full aspect-square mb-4 overflow-hidden"
+                className="w-full aspect-square mb-4 overflow-hidden rounded-xl"
                 style={{ backgroundColor: active === i ? '#091525' : '#eef2f8' }}
               >
                 {status === 'pending' ? (
@@ -579,34 +578,38 @@ function LeadershipSection() {
                   />
                 )}
               </div>
-              <div className="font-mono-label text-xs mb-1 opacity-60 uppercase tracking-wider">{role}</div>
+              <div className="font-mono-label text-[10px] mb-1 uppercase tracking-[0.24em]" style={{ color: active === i ? 'rgba(255,255,255,0.65)' : 'rgba(13,31,60,0.65)' }}>
+                {role}
+              </div>
               <div className="font-display text-sm font-light leading-snug mb-1">
                 {status === 'pending' ? 'Coming Soon' : name}
               </div>
-              <div className="text-xs opacity-60">{institution}</div>
+              <div className="text-[11px] opacity-70">{institution}</div>
             </button>
           ))}
         </div>
 
         <div
-          className="mt-px p-8 border-t-4"
-          style={{ backgroundColor: '#0d1f3c', borderColor: '#c41e3a' }}
+          className="mt-4 rounded-3xl p-6 shadow-[0_30px_80px_-55px_rgba(0,0,0,0.35)]"
+          style={{ backgroundColor: '#0d1f3c' }}
         >
-          <div>
-            <div className="font-mono-label text-xs uppercase tracking-widest mb-1" style={{ color: '#c41e3a' }}>
-              {leader.role}
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="font-mono-label text-[11px] uppercase tracking-[0.28em] mb-2" style={{ color: '#c41e3a' }}>
+                {leader.role}
+              </div>
+              <div className="font-display text-3xl font-light" style={{ color: '#ffffff' }}>
+                {leader.status === 'pending' ? 'Position to be announced' : leader.name}
+              </div>
             </div>
-            <div className="font-display text-2xl font-light" style={{ color: '#ffffff' }}>
-              {leader.status === 'pending' ? 'Position to be announced' : leader.name}
-            </div>
-            <div className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.55)' }}>
+            <div className="text-sm text-right" style={{ color: 'rgba(255,255,255,0.65)' }}>
               {leader.institution}
             </div>
-            {leader.quote && (
-              <div className="mt-6 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.72)' }}>
-                “{leader.quote}”
-              </div>
-            )}
+          </div>
+          <div className="mt-6 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.78)' }}>
+            {leader.status === 'pending'
+              ? 'This leadership role will soon guide our hub’s research vision.'
+              : leader.quote}
           </div>
         </div>
       </div>
