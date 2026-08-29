@@ -76,11 +76,11 @@ const LEADERSHIP = [
   },
   {
     role: 'Project Coordinator',
-    name: 'TBA',
+    name: 'Shadrack Mayaka',
     institution: 'KEMU',
-    status: 'pending',
-    photo: '',
-    fallbackPhoto: '',
+    status: 'confirmed',
+    photo: '/leaders/shadrack.jpg',
+    fallbackPhoto: '/leaders/shadrack.jpg',
     quote: 'This leadership role will soon guide our hub’s research vision.',
   },
   {
@@ -736,29 +736,32 @@ function RepositorySection() {
               title: 'Student Projects',
               desc: 'Browse student-led research projects, posters, and publications stored in the publications folder.',
               cta: 'Open Publications',
-              href: '#',
+              href: '/repository/publications/index.html',
             },
             {
               icon: '📊',
               title: 'Annual Reports',
               desc: 'Explore annual reports and hub updates that document our growth, partnerships, and achievements.',
               cta: 'Open Reports',
-              href: '#',
+              href: '/repository/reports/index.html',
             },
             {
-              icon: '✉',
-              title: 'Submit Your Work',
-              desc: 'Send your project summary, abstract, or publication to the hub for review and visibility.',
-              cta: 'Email the Hub',
-              href: 'mailto:kephsa.research.hub@gmail.com',
+              icon: '📜',
+              title: 'Constitution',
+              desc: 'Read the KEPhSA Research Hub constitution and governance framework guiding the association’s work.',
+              cta: 'Open Constitution',
+              href: '/constitution.pdf',
+              target: '_blank',
             },
-          ].map(({ icon, title, desc, cta, href }) => (
+          ].map(({ icon, title, desc, cta, href, target }) => (
             <div key={title} className="p-8" style={{ backgroundColor: '#0d1f3c' }}>
               <div className="text-2xl mb-5">{icon}</div>
               <h3 className="font-display text-xl font-light mb-3" style={{ color: '#ffffff' }}>{title}</h3>
               <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.55)' }}>{desc}</p>
               <a
                 href={href}
+                target={target}
+                rel={target ? 'noopener noreferrer' : undefined}
                 className="inline-flex items-center gap-2 font-mono-label text-xs uppercase tracking-widest transition-all hover:gap-4"
                 style={{ color: '#c41e3a' }}
               >
