@@ -94,6 +94,103 @@ const LEADERSHIP = [
   },
 ]
 
+const LEADERSHIP_YEAR_OPTIONS = [
+  { year: '2026/27', status: 'pending', label: 'Coming Soon' },
+  { year: '2025/26', status: 'current', label: 'Current' },
+  { year: '2024/25', status: 'archive', label: 'Archive' },
+  { year: '2023/24', status: 'archive', label: 'Archive' },
+]
+
+const LEADERSHIP_ARCHIVE = [
+  {
+    year: '2024/25',
+    photo: '/leaders/2025-leaders.png',
+    fallbackPhoto: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=900&fit=crop&auto=format',
+    caption: 'Leadership team for the 2024/25 cycle.',
+  },
+  {
+    year: '2023/24',
+    photo: '/leaders/2024-leaders.png',
+    fallbackPhoto: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=1200&h=900&fit=crop&auto=format',
+    caption: 'Leadership team for the 2023/24 cycle.',
+  },
+]
+
+const FACILITATORS_2024_SUMMARY = [
+  {
+    name: 'Dr. Gareth Dyke',
+    topic: 'Introduction to Research',
+    summary:
+      'Dr. Dyke delivered an insightful session on the foundations of academic research. He began by outlining the basics of research, emphasizing its importance in generating new knowledge and driving innovation. The session explored how to formulate clear and focused research questions, a critical step in ensuring the relevance and direction of a study. He also discussed various types of study designs, highlighting how the choice of design depends on the research objectives, available data, and resources. Finally, Dr. Dyke provided a comprehensive overview of the research process lifecycle, from identifying a research problem to designing the methodology, collecting and analyzing data, interpreting results, and disseminating findings. The talk served as a valuable introduction for those new to research and reinforced key principles for more experienced attendees.',
+  },
+  {
+    name: 'Dr. Norhayati M. Farm',
+    topic: 'Literature Review',
+    summary:
+      'Dr. Norhayati delivered a comprehensive session on conducting an effective literature review. She began by emphasizing the importance of identifying credible and relevant sources, guiding participants on how to evaluate the reliability of academic publications, databases, and other scholarly materials. The session also covered strategies for synthesizing existing research, highlighting the need to identify patterns, gaps, and emerging themes across studies. Dr. Norhayati introduced tools and techniques for citation management, including the use of reference managers to organize and format citations efficiently. Finally, she explained how to develop a coherent review structure, ensuring that the literature review flows logically and supports the overarching research question. The session provided both theoretical insights and practical tools essential for producing a well-structured and academically rigorous literature review.',
+  },
+  {
+    name: 'Dr. Semira Beshir',
+    topic: 'Systematic Review',
+    summary:
+      'Dr. Semira Beshir conducted a detailed and informative session on the process of conducting a systematic review. She began by explaining the significance of protocol development, stressing the importance of establishing a clear and structured plan before beginning the review to ensure transparency and reproducibility. She then introduced the PRISMA guidelines, outlining how they provide a comprehensive framework for reporting systematic reviews. Dr. Semira also covered techniques for evidence synthesis, discussing how to critically analyze and integrate findings from multiple studies to draw meaningful conclusions. In addition, she provided practical guidance on database searching strategies, including how to develop effective search strings, select appropriate databases, and manage search results systematically. The session offered valuable insights for researchers aiming to conduct high-quality, evidence-based reviews.',
+  },
+  {
+    name: 'Dr. Samuel Mungai',
+    topic: 'Sampling and Data Collection',
+    summary:
+      'Dr. Samuel Mungai delivered an engaging session focused on the practical and ethical aspects of sampling and data collection in research. He began by outlining various sampling techniques, including probability and non-probability methods, and emphasized how selecting the right sampling approach is crucial for ensuring the validity and generalizability of research findings. The session also explored different data collection methods, such as surveys, interviews, focus groups, and observations, with a focus on choosing methods that align with research objectives. Dr. Mungai highlighted the importance of ethical considerations in data handling, including informed consent, confidentiality, and responsible data storage and sharing. Additionally, he addressed strategies for ensuring data quality, such as pilot testing instruments, training data collectors, and implementing quality control measures throughout the data collection process. The session provided essential guidance for conducting robust, ethical, and high-quality research.',
+  },
+]
+
+const FACILITATORS_2023_SUMMARY = [
+  {
+    date: '16th Nov 2023',
+    topic: 'Introduction to research and developing a feasible research',
+    speaker: 'Dr. Palmer Imbenzi',
+  },
+  {
+    date: '16th Mar 2024',
+    topic: 'Literature review, citations and referencing',
+    speaker: 'Dr. David Olpengs',
+  },
+  {
+    date: '23rd Mar 2024',
+    topic: 'Clinical Research studies',
+    speaker: 'Dr. Emish Ondiek',
+  },
+  {
+    date: '4th Jun 2024',
+    topic: 'Literature review',
+    speaker: 'Professor Naumih Noah',
+  },
+  {
+    date: '6th Jun 2023',
+    topic: 'Clinical Research studies',
+    speaker: 'Dr. Gabriel Kilonzo',
+  },
+  {
+    date: '11th Jun 2024',
+    topic: 'Sampling methods',
+    speaker: 'Dr. Samuel Mungai',
+  },
+  {
+    date: '18th Jun 2024',
+    topic: 'Ethical considerations in research',
+    speaker: 'Prof. Juliana Namada',
+  },
+  {
+    date: '2nd July 2024',
+    topic: 'Data Analysis',
+    speaker: 'Dr. Obat Rhoda',
+  },
+  {
+    date: '18th July 2024',
+    topic: 'Data presentation and dissemination of result findings',
+    speaker: 'Professor Ermias Terefe',
+  },
+]
+
 const FACILITATORS = [
   {
     name: 'Prof. Ermia Terefe',
@@ -531,7 +628,10 @@ function ServicesSection() {
 // ─── Leadership ───────────────────────────────────────────────────────────────
 function LeadershipSection() {
   const [active, setActive] = useState(0)
+  const [selectedYear, setSelectedYear] = useState('2025/26')
+  const [archiveModal, setArchiveModal] = useState<string | null>(null)
   const leader = LEADERSHIP[active]
+  const archive = LEADERSHIP_ARCHIVE.find((entry) => entry.year === selectedYear)
 
   return (
     <section id="leadership" className="py-24 md:py-32" style={{ backgroundColor: '#ffffff' }}>
@@ -543,84 +643,166 @@ function LeadershipSection() {
         <h2 className="font-display text-3xl md:text-5xl font-light leading-snug mb-4" style={{ color: '#0d1f3c' }}>
           Leadership
         </h2>
-        <p className="text-sm mb-14" style={{ color: '#4a5568' }}>
+        <p className="text-sm mb-8" style={{ color: '#4a5568' }}>
           Meet the visionary minds driving KEPhSA Research Hub. Details confirmed as they are announced.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px" style={{ backgroundColor: 'rgba(13,31,60,0.10)' }}>
-          {LEADERSHIP.map(({ role, name, institution, status, photo, fallbackPhoto }, i) => (
+        <div className="mb-8 grid gap-2 sm:gap-3 grid-cols-2 md:grid-cols-4">
+          {LEADERSHIP_YEAR_OPTIONS.map(({ year, status, label }) => (
             <button
-              key={i}
-              onClick={() => setActive(i)}
-              aria-pressed={active === i}
-              className="text-left p-4 transition-all duration-200 text-left"
+              key={year}
+              type="button"
+              onClick={() => setSelectedYear(year)}
+              className="px-3 md:px-4 py-3 md:py-4 text-left border transition-all duration-200"
               style={{
-                backgroundColor: active === i ? '#0d1f3c' : '#ffffff',
-                color: active === i ? '#ffffff' : '#0d1f3c',
+                backgroundColor: selectedYear === year ? '#0d1f3c' : '#f7f9fc',
+                borderColor: selectedYear === year ? '#0d1f3c' : 'rgba(13,31,60,0.10)',
+                color: selectedYear === year ? '#ffffff' : '#0d1f3c',
               }}
             >
-              <div
-                className="w-full aspect-square mb-4 overflow-hidden rounded-xl"
-                style={{ backgroundColor: active === i ? '#091525' : '#eef2f8' }}
-              >
-                {status === 'pending' ? (
-                  <div
-                    className="w-full h-full flex items-center justify-center font-display text-3xl font-light"
-                    style={{ color: active === i ? 'rgba(255,255,255,0.25)' : 'rgba(13,31,60,0.2)' }}
-                  >
-                    ?
-                  </div>
-                ) : (
-                  <PersonPhoto
-                    photo={photo}
-                    fallbackPhoto={fallbackPhoto}
-                    name={name}
-                    className="w-full h-full object-cover"
-                  />
-                )}
+              <div className="font-mono-label text-[8px] md:text-[10px] uppercase tracking-[0.16em] md:tracking-[0.22em] mb-1 md:mb-2" style={{ color: selectedYear === year ? 'rgba(255,255,255,0.7)' : '#c41e3a' }}>
+                {status === 'current' ? 'Current' : status === 'pending' ? 'Upcoming' : 'Archive'}
               </div>
-              <div className="font-mono-label text-[10px] mb-1 uppercase tracking-[0.24em]" style={{ color: active === i ? 'rgba(255,255,255,0.65)' : 'rgba(13,31,60,0.65)' }}>
-                {role}
+              <div className="font-display text-lg md:text-2xl font-light leading-none">{year}</div>
+              <div className="mt-1 md:mt-2 text-[9px] md:text-[11px] uppercase tracking-[0.12em] md:tracking-[0.18em]" style={{ color: selectedYear === year ? 'rgba(255,255,255,0.7)' : 'rgba(13,31,60,0.65)' }}>
+                {status === 'pending' ? label : status === 'current' ? 'Active' : 'Archive'}
               </div>
-              <div className="font-display text-sm font-light leading-snug mb-1">
-                {status === 'pending' ? 'Coming Soon' : name}
-              </div>
-              <div className="text-[11px] opacity-70">{institution}</div>
             </button>
           ))}
         </div>
 
-        <div
-          className="mt-4 rounded-3xl p-6 shadow-[0_30px_80px_-55px_rgba(0,0,0,0.35)]"
-          style={{ backgroundColor: '#0d1f3c' }}
-        >
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <div className="font-mono-label text-[11px] uppercase tracking-[0.28em] mb-2" style={{ color: '#c41e3a' }}>
-                {leader.role}
-              </div>
-              <div className="font-display text-3xl font-light" style={{ color: '#ffffff' }}>
-                {leader.status === 'pending' ? 'Position to be announced' : leader.name}
-              </div>
-            </div>
-            <div className="text-sm text-right" style={{ color: 'rgba(255,255,255,0.65)' }}>
-              {leader.institution}
-            </div>
+        {selectedYear === '2026/27' && (
+          <div className="rounded-3xl p-8 shadow-[0_30px_80px_-55px_rgba(0,0,0,0.35)]" style={{ backgroundColor: '#0d1f3c' }}>
+            <div className="font-mono-label text-[11px] uppercase tracking-[0.28em] mb-3" style={{ color: '#c41e3a' }}>2026/27</div>
+            <div className="font-display text-3xl md:text-4xl font-light mb-3" style={{ color: '#ffffff' }}>Leadership team</div>
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.78)' }}>
+              The next leadership cycle will be announced soon.
+            </p>
           </div>
-          <div className="mt-6 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.78)' }}>
-            {leader.status === 'pending'
-              ? 'This leadership role will soon guide our hub’s research vision.'
-              : leader.quote}
+        )}
+
+        {selectedYear === '2025/26' && (
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px" style={{ backgroundColor: 'rgba(13,31,60,0.10)' }}>
+              {LEADERSHIP.map(({ role, name, institution, status, photo, fallbackPhoto }, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  aria-pressed={active === i}
+                  className="text-left p-2 md:p-4 transition-all duration-200 text-left"
+                  style={{
+                    backgroundColor: active === i ? '#0d1f3c' : '#ffffff',
+                    color: active === i ? '#ffffff' : '#0d1f3c',
+                  }}
+                >
+                  <div
+                    className="w-full aspect-square mb-2 md:mb-4 overflow-hidden rounded-lg md:rounded-xl"
+                    style={{ backgroundColor: active === i ? '#091525' : '#eef2f8' }}
+                  >
+                    {status === 'pending' ? (
+                      <div
+                        className="w-full h-full flex items-center justify-center font-display text-2xl md:text-3xl font-light"
+                        style={{ color: active === i ? 'rgba(255,255,255,0.25)' : 'rgba(13,31,60,0.2)' }}
+                      >
+                        ?
+                      </div>
+                    ) : (
+                      <PersonPhoto
+                        photo={photo}
+                        fallbackPhoto={fallbackPhoto}
+                        name={name}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                  </div>
+                  <div className="font-mono-label text-[8px] md:text-[10px] mb-0.5 md:mb-1 uppercase tracking-[0.16em] md:tracking-[0.24em]" style={{ color: active === i ? 'rgba(255,255,255,0.65)' : 'rgba(13,31,60,0.65)' }}>
+                    {role}
+                  </div>
+                  <div className="font-display text-xs md:text-sm font-light leading-snug mb-0.5 md:mb-1">
+                    {status === 'pending' ? 'Coming Soon' : name}
+                  </div>
+                  <div className="text-[9px] md:text-[11px] opacity-70 leading-tight">{institution}</div>
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+
+        {archive && (
+          <div className="rounded-3xl overflow-hidden" style={{ backgroundColor: '#eef2f8' }}>
+            <div className="px-4 pt-4 pb-2">
+              <div className="font-mono-label text-[11px] uppercase tracking-[0.28em]" style={{ color: '#c41e3a' }}>{archive.year}</div>
+            </div>
+            <div className="px-4 pb-3">
+              <button
+                type="button"
+                onClick={() => setArchiveModal(archive.photo)}
+                className="group block w-full max-w-[260px] text-left"
+                aria-label={`Open ${archive.year} leadership image`}
+              >
+                <div className="overflow-hidden rounded-xl bg-white/60 transition-transform duration-200 group-hover:scale-[1.01]">
+                  <img
+                    src={archive.photo}
+                    alt={`${archive.year} KEPhSA leadership`}
+                    className="block w-full h-[180px] object-cover cursor-pointer"
+                    onError={(event) => {
+                      event.currentTarget.src = archive.fallbackPhoto
+                    }}
+                  />
+                </div>
+                <div className="mt-2 text-[11px] uppercase tracking-[0.18em]" style={{ color: '#0d1f3c' }}>
+                  Click here to view
+                </div>
+              </button>
+            </div>
+            <div className="px-4 pb-4 text-sm" style={{ color: '#4a5568' }}>{archive.caption}</div>
+          </div>
+        )}
+      </div>
+
+      {archiveModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-3 md:p-4"
+          onClick={() => setArchiveModal(null)}
+        >
+          <div className="relative w-full max-w-5xl">
+            <button
+              type="button"
+              aria-label="Close image"
+              onClick={() => setArchiveModal(null)}
+              className="absolute -top-4 right-0 md:-top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-xl md:text-2xl leading-none text-[#0d1f3c] shadow-lg hover:bg-white transition-colors"
+              style={{ fontSize: '1.5rem' }}
+            >
+              ×
+            </button>
+            <img
+              src={archiveModal}
+              alt="Leadership archive popup"
+              className="w-full h-auto max-h-[90vh] md:max-h-[85vh] object-contain rounded-lg"
+              onClick={(event) => event.stopPropagation()}
+            />
           </div>
         </div>
-      </div>
+      )}
     </section>
   )
 }
 
 // ─── Facilitators ─────────────────────────────────────────────────────────────
 function FacilitatorsSection() {
+  const [selectedYear, setSelectedYear] = useState('2025/26')
   const [expanded, setExpanded] = useState<number | null>(null)
+
+  const yearOptions = ['2026/27', '2025/26', '2024/25', '2023/24']
+
+  const currentFacilitators =
+    selectedYear === '2026/27'
+      ? []
+      : selectedYear === '2025/26'
+        ? FACILITATORS
+        : selectedYear === '2024/25'
+          ? FACILITATORS_2024_SUMMARY
+          : FACILITATORS_2023_SUMMARY
 
   return (
     <section id="facilitators" className="py-24 md:py-32" style={{ backgroundColor: '#eef2f8' }}>
@@ -629,7 +811,7 @@ function FacilitatorsSection() {
           <span className="font-mono-label text-xs" style={{ color: '#c41e3a' }}>§ 004</span>
           <div className="h-px flex-1" style={{ backgroundColor: 'rgba(13,31,60,0.15)' }} />
         </div>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <h2 className="font-display text-3xl md:text-5xl font-light leading-snug" style={{ color: '#0d1f3c' }}>
             Facilitators
           </h2>
@@ -638,75 +820,164 @@ function FacilitatorsSection() {
           </p>
         </div>
 
+        <div className="mb-8 grid gap-2 sm:gap-3 grid-cols-3">
+          {yearOptions.map((year) => (
+            <button
+              key={year}
+              type="button"
+              onClick={() => {
+                setSelectedYear(year)
+                setExpanded(null)
+              }}
+              className="px-2 md:px-4 py-2 md:py-4 text-left border transition-all duration-200"
+              style={{
+                backgroundColor: selectedYear === year ? '#0d1f3c' : '#ffffff',
+                borderColor: selectedYear === year ? '#0d1f3c' : 'rgba(13,31,60,0.10)',
+                color: selectedYear === year ? '#ffffff' : '#0d1f3c',
+              }}
+            >
+              <div className="font-mono-label text-[8px] md:text-[10px] uppercase tracking-[0.16em] md:tracking-[0.22em] mb-1" style={{ color: selectedYear === year ? 'rgba(255,255,255,0.7)' : '#c41e3a' }}>
+                {year === '2026/27' ? 'Coming' : year === '2025/26' ? 'Current' : 'Archive'}
+              </div>
+              <div className="font-display text-lg md:text-2xl font-light leading-none">{year}</div>
+            </button>
+          ))}
+        </div>
+
         <div className="space-y-px">
-          {FACILITATORS.map((f, i) => (
-            <div key={i} style={{ backgroundColor: '#ffffff' }}>
-              <button
-                className="w-full text-left px-6 py-5 flex items-center gap-5 transition-colors group"
-                onClick={() => setExpanded(expanded === i ? null : i)}
-              >
-                <span className="font-mono-label text-xs w-6 shrink-0" style={{ color: '#c41e3a' }}>
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div
-                  className="w-10 h-10 shrink-0 overflow-hidden"
-                  style={{ backgroundColor: '#eef2f8' }}
+          {selectedYear === '2026/27' && (
+            <div className="rounded-3xl p-8 shadow-[0_30px_80px_-55px_rgba(0,0,0,0.35)]" style={{ backgroundColor: '#0d1f3c' }}>
+              <div className="font-mono-label text-[11px] uppercase tracking-[0.28em] mb-3" style={{ color: '#c41e3a' }}>2026/27</div>
+              <div className="font-display text-3xl md:text-4xl font-light mb-3" style={{ color: '#ffffff' }}>Facilitators</div>
+              <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.78)' }}>
+                Our 2026/27 facilitator team will be announced soon. Stay tuned for updates on workshop leaders and research mentors for the upcoming cycle.
+              </p>
+            </div>
+          )}
+          {selectedYear === '2025/26' &&
+            FACILITATORS.map((f, i) => (
+              <div key={i} style={{ backgroundColor: '#ffffff' }}>
+                <button
+                  className="w-full text-left px-4 md:px-6 py-4 md:py-5 flex items-center gap-3 md:gap-5 transition-colors group"
+                  onClick={() => setExpanded(expanded === i ? null : i)}
                 >
-                  <PersonPhoto
-                    photo={f.photo}
-                    fallbackPhoto={f.fallbackPhoto}
-                    name={f.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="flex-1 grid md:grid-cols-3 gap-2 items-center">
-                  <div className="font-display text-base font-light" style={{ color: '#0d1f3c' }}>{f.name}</div>
-                  <div className="font-mono-label text-xs col-span-2" style={{ color: '#4a5568' }}>{f.module}</div>
-                </div>
-                <span
-                  className="w-5 h-5 shrink-0 flex items-center justify-center border transition-transform duration-200"
-                  style={{
-                    borderColor: 'rgba(13,31,60,0.2)',
-                    transform: expanded === i ? 'rotate(45deg)' : 'none',
-                  }}
-                >
-                  <span className="font-mono-label text-xs">+</span>
-                </span>
-              </button>
-              {expanded === i && (
-                <div className="px-6 pb-7 pt-4 border-t" style={{ borderColor: 'rgba(13,31,60,0.08)' }}>
-                  <div className="grid md:grid-cols-4 gap-6">
-                    <div
-                      className="aspect-square overflow-hidden"
-                      style={{ backgroundColor: '#eef2f8' }}
-                    >
-                      <PersonPhoto
-                        photo={f.photo}
-                        fallbackPhoto={f.fallbackPhoto}
-                        name={f.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <div className="font-display text-lg font-light mb-2" style={{ color: '#0d1f3c' }}>{f.name}</div>
-                      <p className="text-sm leading-relaxed mb-4" style={{ color: '#4a5568' }}>{f.bio}</p>
-                      {f.linkedin && (
-                        <span className="font-mono-label text-xs px-3 py-1" style={{ backgroundColor: '#0d1f3c', color: '#ffffff' }}>
-                          LinkedIn Available
-                        </span>
-                      )}
-                    </div>
-                    <div>
-                      <div className="font-mono-label text-xs uppercase tracking-wider mb-1" style={{ color: '#c41e3a' }}>Institution</div>
-                      <div className="text-sm font-medium mb-3" style={{ color: '#0d1f3c' }}>{f.institution}</div>
-                      <div className="font-mono-label text-xs uppercase tracking-wider mb-1" style={{ color: '#c41e3a' }}>Department</div>
-                      <div className="text-sm" style={{ color: '#4a5568' }}>{f.dept}</div>
+                  <span className="font-mono-label text-xs w-5 md:w-6 shrink-0" style={{ color: '#c41e3a' }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div
+                    className="hidden md:block w-10 h-10 shrink-0 overflow-hidden"
+                    style={{ backgroundColor: '#eef2f8' }}
+                  >
+                    <PersonPhoto
+                      photo={f.photo}
+                      fallbackPhoto={f.fallbackPhoto}
+                      name={f.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 grid md:grid-cols-3 gap-2 items-center min-w-0">
+                    <div className="font-display text-sm md:text-base font-light truncate" style={{ color: '#0d1f3c' }}>{f.name}</div>
+                    <div className="font-mono-label text-[9px] md:text-xs col-span-2 line-clamp-1" style={{ color: '#4a5568' }}>{f.module}</div>
+                  </div>
+                  <span
+                    className="w-5 h-5 shrink-0 flex items-center justify-center border transition-transform duration-200"
+                    style={{
+                      borderColor: 'rgba(13,31,60,0.2)',
+                      transform: expanded === i ? 'rotate(45deg)' : 'none',
+                    }}
+                  >
+                    <span className="font-mono-label text-xs">+</span>
+                  </span>
+                </button>
+                {expanded === i && (
+                  <div className="px-4 md:px-6 pb-5 md:pb-7 pt-4 border-t" style={{ borderColor: 'rgba(13,31,60,0.08)' }}>
+                    <div className="grid md:grid-cols-4 gap-4 md:gap-6">
+                      <div
+                        className="hidden md:block aspect-square overflow-hidden"
+                        style={{ backgroundColor: '#eef2f8' }}
+                      >
+                        <PersonPhoto
+                          photo={f.photo}
+                          fallbackPhoto={f.fallbackPhoto}
+                          name={f.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <div className="font-display text-base md:text-lg font-light mb-2" style={{ color: '#0d1f3c' }}>{f.name}</div>
+                        <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4" style={{ color: '#4a5568' }}>{f.bio}</p>
+                        {f.linkedin && (
+                          <span className="font-mono-label text-[9px] md:text-xs px-2 md:px-3 py-1" style={{ backgroundColor: '#0d1f3c', color: '#ffffff' }}>
+                            LinkedIn Available
+                          </span>
+                        )}
+                      </div>
+                      <div>
+                        <div className="font-mono-label text-[8px] md:text-xs uppercase tracking-wider mb-1" style={{ color: '#c41e3a' }}>Institution</div>
+                        <div className="text-xs md:text-sm font-medium mb-2 md:mb-3" style={{ color: '#0d1f3c' }}>{f.institution}</div>
+                        <div className="font-mono-label text-[8px] md:text-xs uppercase tracking-wider mb-1" style={{ color: '#c41e3a' }}>Department</div>
+                        <div className="text-xs md:text-sm" style={{ color: '#4a5568' }}>{f.dept}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            ))}
+
+                {
+                  selectedYear !== '2025/26' &&
+                  currentFacilitators.map((item, i) => (
+                    <div key={selectedYear + '-' + i} style={{ backgroundColor: '#ffffff' }}>
+                      <button
+                        className="w-full text-left px-4 md:px-6 py-4 md:py-5 flex items-center gap-3 md:gap-5 transition-colors group"
+                        onClick={() => setExpanded(expanded === i ? null : i)}
+                      >
+                        <span className="font-mono-label text-xs w-5 md:w-6 shrink-0" style={{ color: '#c41e3a' }}>
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-display text-sm md:text-base font-light truncate" style={{ color: '#0d1f3c' }}>
+                            {selectedYear === '2024/25' ? (item as { name: string; topic: string }).name : (item as { date: string; topic: string; speaker: string }).date}
+                          </div>
+                          <div className="font-mono-label text-[8px] md:text-xs uppercase tracking-[0.12em] md:tracking-[0.18em] mt-1 line-clamp-1" style={{ color: '#4a5568' }}>
+                            {selectedYear === '2024/25'
+                              ? (item as { name: string; topic: string }).topic
+                              : `${(item as { topic: string; speaker: string }).topic}`}
+                          </div>
+                        </div>
+                        <span
+                          className="w-5 h-5 shrink-0 flex items-center justify-center border transition-transform duration-200"
+                          style={{
+                            borderColor: 'rgba(13,31,60,0.2)',
+                            transform: expanded === i ? 'rotate(45deg)' : 'none',
+                          }}
+                        >
+                          <span className="font-mono-label text-xs">+</span>
+                        </span>
+                      </button>
+                      {expanded === i && (
+                        <div className="px-4 md:px-6 pb-5 md:pb-7 pt-4 border-t" style={{ borderColor: 'rgba(13,31,60,0.08)' }}>
+                          {selectedYear === '2024/25' ? (
+                            <div>
+                              <div className="font-mono-label text-[8px] md:text-xs uppercase tracking-[0.12em] md:tracking-[0.18em] mb-2" style={{ color: '#c41e3a' }}>
+                                Topic: {(item as { topic: string }).topic}
+                              </div>
+                              <p className="text-xs md:text-sm leading-relaxed" style={{ color: '#4a5568' }}>
+                                {(item as { summary: string }).summary}
+                              </p>
+                            </div>
+                          ) : (
+                            <div className="space-y-2 text-xs md:text-sm leading-relaxed" style={{ color: '#4a5568' }}>
+                              <div><strong style={{ color: '#0d1f3c' }}>Date:</strong> {(item as { date: string }).date}</div>
+                              <div><strong style={{ color: '#0d1f3c' }}>Topic:</strong> {(item as { topic: string }).topic}</div>
+                              <div><strong style={{ color: '#0d1f3c' }}>Speaker:</strong> {(item as { speaker: string }).speaker}</div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))
+                }
         </div>
       </div>
     </section>
